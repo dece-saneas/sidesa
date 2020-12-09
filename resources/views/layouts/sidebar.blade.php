@@ -14,27 +14,65 @@
 		</div>
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+				<li class="nav-header">MENU UTAMA</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-copy"></i><p>Permintaan Surat</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-chart-bar"></i><p>Laporan Keuangan</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-bullhorn"></i><p>Aspirasi</p>
+					</a>
+				</li>
 				<li class="nav-item menu-open">
-					<a href="#" class="nav-link active">
-						<i class="nav-icon fas fa-tachometer-alt"></i><p>Starter Pages<i class="right fas fa-angle-left"></i></p>
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-user-tie"></i><p>Jurnalistik<i class="right fas fa-angle-left"></i></p>
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link active">
-								<i class="far fa-circle nav-icon"></i><p>Active Page</p>
+							<a href="#" class="nav-link">
+								<i class="fas fa-newspaper nav-icon"></i><p>Berita</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i><p>Inactive Page</p>
+								<i class="fas fa-user nav-icon"></i><p>Jurnalis</p>
 							</a>
 						</li>
 					</ul>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item menu-open">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-th"></i><p>Simple Link<span class="right badge badge-danger">New</span></p>
+						<i class="nav-icon fas fa-users"></i><p>Kependudukan<i class="right fas fa-angle-left"></i></p>
 					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-user nav-icon"></i><p>Dusun</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-user nav-icon"></i><p>Rukun Warga ( RW )</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-user nav-icon"></i><p>Rukun Tetangga ( RT )</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-user nav-icon"></i><p>Penduduk</p>
+							</a>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</nav>
