@@ -33,11 +33,11 @@ class CreateNomorIndukKependudukanTable extends Migration
             $table->timestamps();
 			
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$table->foreign('father_id')->references('id')->on('users')->onDelete('cascade');
-			$table->foreign('mother_id')->references('id')->on('users')->onDelete('cascade');
-			$table->foreign('dusun_id')->references('id')->on('data_dusun')->onDelete('cascade');
-			$table->foreign('rukun_warga_id')->references('id')->on('data_rukun_warga')->onDelete('cascade');
-			$table->foreign('rukun_tetangga_id')->references('id')->on('data_rukun_tetangga')->onDelete('cascade');
+			$table->foreign('father_id')->references('id')->on('users')->onDelete('set null');
+			$table->foreign('mother_id')->references('id')->on('users')->onDelete('set null');
+			$table->foreign('dusun_id')->references('id')->on('data_dusun')->onDelete('set null');
+			$table->foreign('rukun_warga_id')->references('id')->on('data_rukun_warga')->onDelete('set null');
+			$table->foreign('rukun_tetangga_id')->references('id')->on('data_rukun_tetangga')->onDelete('set null');
         });
     }
 

@@ -20,7 +20,7 @@ class CreateDataRukunWargaTable extends Migration
             $table->bigInteger('user_id')->nullable()->unsigned();
             $table->timestamps();
 			
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
 			$table->foreign('dusun_id')->references('id')->on('data_dusun')->onDelete('cascade');
         });
     }
