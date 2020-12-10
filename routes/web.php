@@ -17,8 +17,9 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-
 Route::get('/dashboard/penduduk', 'UserController@penduduk')->name('penduduk');
+Route::get('/dashboard/penduduk/tambah', 'UserController@penduduk_create')->name('penduduk.create');
+Route::post('/dashboard/penduduk/tambah', 'UserController@penduduk_store')->name('penduduk.store');
 Route::delete('/dashboard/penduduk/{id}', 'UserController@penduduk_destroy')->name('penduduk.destroy');
 Route::get('/dashboard/penduduk/filter/warga-desa', 'UserController@penduduk_filter_warga')->name('penduduk.filter.warga');
 Route::get('/dashboard/penduduk/filter/warga-kurang-mampu', 'UserController@penduduk_filter_kurangmampu')->name('penduduk.filter.kurangmampu');

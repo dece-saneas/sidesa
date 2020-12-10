@@ -17,16 +17,16 @@
 		</div>
 	</div>
 	<!-- Main -->
-	<div class="content">
+	<div class="content pb-4">
 		<div class="container-fluid">
 			<div class="text-right mb-4">
-				<div class="btn-group">
+				<div class="btn-group mb-2">
 					<a href="{{ route('penduduk.filter.kurangmampu') }}" class="btn btn-dark"><i class="fas fa-caret-down mr-2"></i>Kurang Mampu</a>
 					<a href="{{ route('penduduk.filter.warga') }}" class="btn btn-dark"><i class="fas fa-caret-down mr-2"></i>Warga Desa</a>
 					<a href="" class="btn btn-dark"><i class="fas fa-caret-square-left mr-2"></i>Filter</a>
 				</div>
-				<div class="btn-group">
-					<a href="#" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>
+				<div class="btn-group mb-2">
+					<a href="{{ route('penduduk.create') }}" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>
 					<a href="{{ route('penduduk') }}" class="btn btn-dark"><i class="fas fa-sync-alt mr-2 refresh"></i>Refresh</a>
 				</div>
 			</div>
@@ -41,7 +41,8 @@
 								<th width="15%">Nama</th>
 								<th width="10%" class="text-center">Jenis Kelamin</th>
 								<th width="30%">Alamat</th>
-								<th width="20%" class="text-center">Status Penduduk</th>
+								<th width="10%" class="text-center">Status Penduduk</th>
+								<th width="10%" class="text-center">Warga Mampu</th>
 								<th width="10%" class="text-center">Action</th>
 							</tr>
 						</thead>
@@ -54,12 +55,19 @@
 								<td class="align-middle text-center">{{ $u->nik->gender }}</td>
 								<td class="align-middle">{{ $u->nik->address }}</td>
 								<td class="align-middle text-center">
-									@if( $u->hasRole('Warga') )
+									@if($u->hasRole('Warga'))
 									@else <span class="badge badge-dark">Non Warga</span>
 									@endif
 									@foreach ($u->getRoleNames() as $role) 
 									<span class="badge badge-primary">{{ $role }}</span>
 									@endforeach
+								</td>
+								<td class="align-middle text-center">
+                                    @if(!empty($u->warga_kurang_mampu))
+									<span class="badge badge-dark">Kurang Mampu</span>
+                                    @else
+                                    -
+                                    @endif
 								</td>
 								<td class="align-middle text-center">
 									<form action="{{ route('penduduk.destroy', $u->id) }}" method="POST">

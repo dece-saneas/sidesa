@@ -11,6 +11,9 @@
     <!-- Styles -->
 	<link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/daterangepicker.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/bootstrap-tempusdominus.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/sidesa.css') }}">
 	<!-- Favicon -->
@@ -28,6 +31,10 @@
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+	<script src="{{ asset('js/select2.min.js') }}"></script>
+	<script src="{{ asset('js/moment.min.js') }}"></script>
+	<script src="{{ asset('js/daterangepicker.js') }}"></script>
+	<script src="{{ asset('js/bootstrap-tempusdominus.min.js') }}"></script>
 	<script src="{{ asset('js/adminlte.min.js') }}"></script>
 	<script src="{{ asset('js/sidesa.js') }}"></script>
     @if (session('success'))
