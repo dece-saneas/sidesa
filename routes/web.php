@@ -19,6 +19,9 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 
 Route::get('/dashboard/penduduk', 'UserController@penduduk')->name('penduduk');
+Route::get('/dashboard/penduduk/filter/warga-desa', 'UserController@penduduk_filter_warga')->name('penduduk.filter.warga');
+Route::get('/dashboard/penduduk/filter/warga-kurang-mampu', 'UserController@penduduk_filter_kurangmampu')->name('penduduk.filter.kurangmampu');
+
 Route::get('/dashboard/rukun-tetangga', 'UserController@rt')->name('rt');
 Route::get('/dashboard/rukun-warga', 'UserController@rw')->name('rw');
 Route::get('/dashboard/dusun', 'UserController@dusun')->name('dusun');

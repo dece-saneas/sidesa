@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
     	return $this->hasOne('App\Models\Dusun');
     }
+    
+    public function warga_kurang_mampu()
+    {
+    	return $this->hasOne('App\Models\KurangMampu');
+    }
 }

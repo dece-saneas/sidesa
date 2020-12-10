@@ -7,6 +7,7 @@ use App\Models\user;
 use App\Models\RT;
 use App\Models\RW;
 use App\Models\Dusun;
+use App\Models\KurangMampu;
 
 class UserController extends Controller
 {
@@ -20,6 +21,20 @@ class UserController extends Controller
 		$user = User::paginate(10);
 		
 		return view('dashboard.penduduk.index',['user' => $user]);
+	}
+    
+    public function penduduk_filter_warga()
+	{
+		$user = User::role('Warga')->paginate(10);
+		
+		return view('dashboard.penduduk.index',['user' => $user]);
+	}
+    
+    public function penduduk_filter_kurangmampu()
+	{
+		$user = KurangMampu::paginate(10);
+		
+		return view('dashboard.penduduk.kurang-mampu',['user' => $user]);
 	}
 	
 	public function rt()
