@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Styles -->
 	<link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/sidesa.css') }}">
 	<!-- Favicon -->
@@ -26,6 +27,68 @@
     <!-- Scripts -->
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
 	<script src="{{ asset('js/adminlte.min.js') }}"></script>
 	<script src="{{ asset('js/sidesa.js') }}"></script>
+    @if (session('success'))
+	<script type="text/javascript">
+		$(function() {
+			const Toast = Swal.mixin({
+				toast: true,
+				position: "top-end",
+				showConfirmButton: false,
+				timer: 3000
+			});
+			Toast.fire({
+				icon: "success",
+				title: "{{ session('success') }}"
+			})
+		});
+	</script>
+	@elseif (session('error'))
+	<script type="text/javascript">
+		$(function() {
+			const Toast = Swal.mixin({
+				toast: true,
+				position: "top-end",
+				showConfirmButton: false,
+				timer: 3000
+			});
+			Toast.fire({
+				icon: "error",
+				title: "{{ session('error') }}"
+			})
+		});
+	</script>
+	@elseif (session('info'))
+	<script type="text/javascript">
+		$(function() {
+			const Toast = Swal.mixin({
+				toast: true,
+				position: "top-end",
+				showConfirmButton: false,
+				timer: 3000
+			});
+			Toast.fire({
+				icon: "info",
+				title: "{{ session('info') }}"
+			})
+		});
+	</script>
+	@elseif (session('warning'))
+	<script type="text/javascript">
+		$(function() {
+			const Toast = Swal.mixin({
+				toast: true,
+				position: "top-end",
+				showConfirmButton: false,
+				timer: 3000
+			});
+			Toast.fire({
+				icon: "warning",
+				title: "{{ session('warning') }}"
+			})
+		});
+	</script>
+	@endif
 </html>

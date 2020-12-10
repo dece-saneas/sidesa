@@ -23,6 +23,13 @@ class UserController extends Controller
 		return view('dashboard.penduduk.index',['user' => $user]);
 	}
     
+    public function penduduk_destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('penduduk')->with('success', 'Penduduk berhasil di hapus!');
+    }
+    
     public function penduduk_filter_warga()
 	{
 		$user = User::role('Warga')->paginate(10);

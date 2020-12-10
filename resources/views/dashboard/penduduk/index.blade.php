@@ -31,7 +31,6 @@
 				</div>
 			</div>
 			@if (count($user) > 0)
-			
 			<div class="card">
 				<div class="card-body table-responsive">
 					<table class="table table-sm table-hover">
@@ -49,7 +48,7 @@
 						<tbody>
 							@foreach ($user as $no => $u)
 							<tr>
-								<td class="align-middle text-center">{{ $no+1 }}</td>
+								<td class="align-middle text-center">{{ $no+1+(($user->currentpage()-1)*10) }}</td>
 								<td class="align-middle ">{{ $u->nik->code }}</td>
 								<td class="align-middle">{{ $u->name }}</td>
 								<td class="align-middle text-center">{{ $u->nik->gender }}</td>
@@ -63,7 +62,7 @@
 									@endforeach
 								</td>
 								<td class="align-middle text-center">
-									<form action="#" method="POST">
+									<form action="{{ route('penduduk.destroy', $u->id) }}" method="POST">
 										<input type="hidden" name="_method" value="DELETE">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="btn-group" role="group">
