@@ -38,4 +38,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+	
+	public function nik()
+    {
+    	return $this->hasOne('App\Models\NIK');
+    }
+	
+	public function rt()
+    {
+    	return $this->hasOne('App\Models\RT');
+    }
+	
+	public function rw()
+    {
+    	return $this->hasOne('App\Models\RW');
+    }
+	
+	public function dusun()
+    {
+    	return $this->hasOne('App\Models\Dusun');
+    }
 }

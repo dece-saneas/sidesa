@@ -1,3 +1,7 @@
 .s-container-title {
     padding: 1rem 2rem;
 }
+
+.no-result {
+	padding: 100px 0;
+}

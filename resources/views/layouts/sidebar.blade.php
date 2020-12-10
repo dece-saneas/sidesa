@@ -53,22 +53,22 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="{{ route('dusun') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Dusun</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="{{ route('rw') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Rukun Warga ( RW )</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="{{ route('rt') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Rukun Tetangga ( RT )</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="{{ route('penduduk') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Penduduk</p>
 							</a>
 						</li>
