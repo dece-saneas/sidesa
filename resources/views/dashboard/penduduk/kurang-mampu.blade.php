@@ -50,15 +50,15 @@
 							@foreach ($user as $no => $u)
 							<tr>
 								<td class="align-middle text-center">{{ $no+1 }}</td>
-								<td class="align-middle ">{{ $u->nik->code }}</td>
-								<td class="align-middle">{{ $u->name }}</td>
-								<td class="align-middle text-center">{{ $u->nik->gender }}</td>
-								<td class="align-middle">{{ $u->nik->address }}</td>
+								<td class="align-middle ">{{ $u->user->nik->code }}</td>
+								<td class="align-middle">{{ $u->user->name }}</td>
+								<td class="align-middle text-center">{{ $u->user->nik->gender }}</td>
+								<td class="align-middle">{{ $u->user->nik->address }}</td>
 								<td class="align-middle text-center">
-									@if( $u->hasRole('Warga') )
+									@if( $u->user->hasRole('Warga') )
 									@else <span class="badge badge-dark">Non Warga</span>
 									@endif
-									@foreach ($u->getRoleNames() as $role) 
+									@foreach ($u->user->getRoleNames() as $role) 
 									<span class="badge badge-primary">{{ $role }}</span>
 									@endforeach
 								</td>
