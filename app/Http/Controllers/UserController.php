@@ -138,6 +138,15 @@ class UserController extends Controller
 		return view('dashboard.rukun-tetangga.index',['user' => $user]);
 	}
 	
+	public function rt_destroy($id)
+    {
+        $rt = RT::find($id);
+		$user = User::find($rt->user_id);
+		$user->removeRole('Ketua RT');
+        $rt->delete();
+        return redirect()->route('rt')->with('success', 'RT berhasil di hapus!');
+    }
+	
 	public function rw()
 	{
 		$user = RW::paginate(10);

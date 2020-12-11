@@ -23,7 +23,6 @@
 				<div class="btn-group mb-2">
 					<a href="{{ route('penduduk.filter.kurangmampu') }}" class="btn btn-dark"><i class="fas fa-caret-down mr-2"></i>Kurang Mampu</a>
 					<a href="{{ route('penduduk.filter.warga') }}" class="btn btn-dark"><i class="fas fa-caret-down mr-2"></i>Warga Desa</a>
-					<a href="" class="btn btn-dark"><i class="fas fa-caret-square-left mr-2"></i>Filter</a>
 				</div>
 				<div class="btn-group mb-2">
 					<a href="{{ route('penduduk.create') }}" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>

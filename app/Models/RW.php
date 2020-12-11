@@ -21,4 +21,9 @@ class RW extends Model
     {
     	return $this->belongsTo('App\Models\Dusun');
     }
+	
+	public function rt()
+    {
+    	return $this->hasMany('App\Models\RT');
+    }
 }

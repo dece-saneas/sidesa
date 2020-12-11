@@ -1,15 +1,16 @@
 @extends('layouts.master')
-@section('title') RT @endsection
+@section('title') Rukun Tetangga  @endsection
 @section('content')
 <div class="content-wrapper">
 	<!-- Header -->
 	<div class="content-header">
 		<div class="container-fluid">
 			<div class="jumbotron s-container-title">
-				<h1 class="display-4">Dashboard</h1>
+				<h1 class="display-4">Rukun Tetangga</h1>
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+              			<li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Rukun Tetangga</li>
 					</ol>
 				</nav>
 			</div>
@@ -32,10 +33,11 @@
 						<thead>
 							<tr>
 								<th width="5%" class="text-center">No</th>
-								<th width="5%" class="text-center">RT</th>
+								<th width="5%">RW</th>
+								<th width="5%">RT</th>
 								<th width="15%">Ketua RT</th>
-								<th width="10%">Jenis Kelamin</th>
-								<th width="35%">Alamat</th>
+								<th width="10%" class="text-center">Jenis Kelamin</th>
+								<th width="30%">Alamat</th>
 								<th width="20%" class="text-center">Status Penduduk</th>
 								<th width="10%" class="text-center">Action</th>
 							</tr>
@@ -44,6 +46,7 @@
 							@foreach ($user as $no => $u)
 							<tr>
 								<td class="align-middle text-center">{{ $no+1 }}</td>
+								<td class="align-middle ">{{ $u->rukun_warga->name }}</td>
 								<td class="align-middle ">{{ $u->name }}</td>
 								<td class="align-middle">{{ $u->user->name }}</td>
 								<td class="align-middle text-center">{{ $u->user->nik->gender }}</td>
@@ -57,7 +60,7 @@
 									@endforeach
 								</td>
 								<td class="align-middle text-center">
-									<form action="#" method="POST">
+									<form action="{{ route('rt.destroy', $u->id) }}" method="POST">
 										<input type="hidden" name="_method" value="DELETE">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="btn-group" role="group">

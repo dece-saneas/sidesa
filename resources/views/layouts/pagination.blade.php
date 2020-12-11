@@ -18,15 +18,15 @@
 		@endif
 		
 		<!-- Page Link -->
-        @foreach(range(1, $paginator->lastPage()) as $i)
-            @if($i >= $paginator->currentPage() - 2 && $i <= $paginator->currentPage() + 2)
-                @if ($i == $paginator->currentPage())
+		@foreach(range(1, $paginator->lastPage()) as $i)
+			@if($i >= $paginator->currentPage() - 2 && $i <= $paginator->currentPage() + 2)
+				@if ($i == $paginator->currentPage())
 					<li class="page-item active" aria-current="page"><span class="page-link">{{ $i }}</span></li>
-                @else
-                    <li class="page-item"><a class="page-link" href="{{ $paginator->url($i) }}">{{ $i }}</a></li>
-                @endif
-            @endif
-        @endforeach
+				@else
+					<li class="page-item"><a class="page-link" href="{{ $paginator->url($i) }}">{{ $i }}</a></li>
+				@endif
+			@endif
+		@endforeach
 		
 		<!-- Next Page Link -->
 		@if ($paginator->hasMorePages())

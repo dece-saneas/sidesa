@@ -59,12 +59,12 @@
 						</li>
 						<li class="nav-item">
 							<a href="{{ route('rw') }}" class="nav-link">
-								<i class="fas fa-user nav-icon"></i><p>Rukun Warga ( RW )</p>
+								<i class="fas fa-user nav-icon"></i><p>Rukun Warga</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="{{ route('rt') }}" class="nav-link">
-								<i class="fas fa-user nav-icon"></i><p>Rukun Tetangga ( RT )</p>
+								<i class="fas fa-user nav-icon"></i><p>Rukun Tetangga</p>
 							</a>
 						</li>
 						<li class="nav-item">
