@@ -87,6 +87,7 @@ class UserController extends Controller
             'place' => 'required',
             'dob' => 'required',
             'address' => 'required',
+			'password' => 'nullable|confirmed',
         ]);
 
 		$user->name = $request->name;
@@ -100,6 +101,11 @@ class UserController extends Controller
 		$nik->gender=  $request->gender;
 		$nik->address=  $request->address;
 		$nik->save();
+		
+		if(!empty($request->password)) {
+			$user->password = Hash::make($request->password);
+			$user->save();
+		}
 		
         return redirect()->route('penduduk')->with('success', 'Data penduduk berhasil di ubah!');
 	}
