@@ -1,16 +1,15 @@
-$(document).ready(function(){
-  $("#refresh").click(function(){
-    $(".refresh").addClass("fa-spin");
-  });
+$(function(){
+	$("#refresh").click(function(){
+		$(".refresh").addClass("fa-spin"),
+	});
 });
-
 
 $(function () {
 	$('.selectGender').select2({
 		placeholder: 'Pilih Jenis Kelamin',
 		allowClear: true
-	})
-})
+	});
+});
 
 $(function () {
     $('#datetimeBirth').datetimepicker({

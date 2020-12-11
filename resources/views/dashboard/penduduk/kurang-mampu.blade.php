@@ -27,7 +27,7 @@
 				</div>
 				<div class="btn-group mb-2">
 					<a href="{{ route('penduduk.create') }}" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>
-					<a href="{{ route('penduduk') }}" class="btn btn-dark"><i class="fas fa-sync-alt mr-2 refresh"></i>Refresh</a>
+					<a href="{{ route('penduduk') }}" class="btn btn-dark" id="refresh"><i class="fas fa-sync-alt mr-2 refresh"></i>Refresh</a>
 				</div>
 			</div>
 			@if (count($user) > 0)

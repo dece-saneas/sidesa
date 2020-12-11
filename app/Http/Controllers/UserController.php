@@ -68,6 +68,41 @@ class UserController extends Controller
 
         return redirect()->route('penduduk')->with('success', 'Penduduk berhasil di tambahkan!');
 	}
+	
+	public function penduduk_edit($id)
+	{
+		$user = User::find($id);
+		return view('dashboard.penduduk.edit',['user' => $user]);
+	}
+	
+	public function penduduk_update(Request $request, $id)
+    {
+		$user = User::find($id);
+		
+        $this->validate($request,[
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$user->id,
+            'nik' => 'required|unique:nomor_induk_kependudukan,code,'.$user->nik->id,
+            'gender' => 'required',
+            'place' => 'required',
+            'dob' => 'required',
+            'address' => 'required',
+        ]);
+
+		$user->name = $request->name;
+		$user->email = $request->email;
+		$user->save();
+
+		$nik = NIK::where('user_id', $id)->first();
+		$nik->code=  $request->nik;
+		$nik->place_of_birth=  $request->place;
+		$nik->date_of_birth=  $request->dob;
+		$nik->gender=  $request->gender;
+		$nik->address=  $request->address;
+		$nik->save();
+		
+        return redirect()->route('penduduk')->with('success', 'Data penduduk berhasil di ubah!');
+	}
     
     public function penduduk_destroy($id)
     {
