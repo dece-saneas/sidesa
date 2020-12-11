@@ -27,6 +27,10 @@ Route::get('/dashboard/penduduk/filter/warga-desa', 'UserController@penduduk_fil
 Route::get('/dashboard/penduduk/filter/warga-kurang-mampu', 'UserController@penduduk_filter_kurangmampu')->name('penduduk.filter.kurangmampu');
 
 Route::get('/dashboard/rukun-tetangga', 'UserController@rt')->name('rt');
+Route::get('/dashboard/rukun-tetangga/tambah', 'UserController@rt_create')->name('rt.create');
+Route::post('/dashboard/rukun-tetangga/tambah', 'UserController@rt_store')->name('rt.store');
+Route::get('/dashboard/rukun-tetangga/{id}/ubah', 'UserController@rt_edit')->name('rt.edit');
+Route::put('/dashboard/rukun-tetangga/{id}', 'UserController@rt_update')->name('rt.update');
 Route::delete('/dashboard/rukun-tetangga/{id}', 'UserController@rt_destroy')->name('rt.destroy');
 
 Route::get('/dashboard/rukun-warga', 'UserController@rw')->name('rw');

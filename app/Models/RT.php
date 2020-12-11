@@ -9,7 +9,7 @@ class RT extends Model
     protected $table = "data_rukun_tetangga";
 	
     protected $fillable = [
-		'name', 'rukun_warga_id', 'user_id',
+		'number', 'rukun_warga_id', 'user_id',
 	];
 	
 	public function user()

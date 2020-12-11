@@ -21,12 +21,11 @@
 		<div class="container-fluid">
 			<div class="text-right mb-4">
 				<div class="btn-group">
-					<a href="#" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>
+					<a href="{{ route('rt.create') }}" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>
 					<a href="{{ route('rt') }}" class="btn btn-dark" id="refresh"><i class="fas fa-sync-alt mr-2 refresh"></i></i>Refresh</a>
 				</div>
 			</div>
-			@if (count($user) > 0)
-			
+			@if (count($rt) > 0)
 			<div class="card">
 				<div class="card-body table-responsive">
 					<table class="table table-sm table-hover">
@@ -43,28 +42,30 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($user as $no => $u)
+							@foreach ($rt as $no => $r)
 							<tr>
 								<td class="align-middle text-center">{{ $no+1 }}</td>
-								<td class="align-middle ">{{ $u->rukun_warga->name }}</td>
-								<td class="align-middle ">{{ $u->name }}</td>
-								<td class="align-middle">{{ $u->user->name }}</td>
-								<td class="align-middle text-center">{{ $u->user->nik->gender }}</td>
-								<td class="align-middle">{{ $u->user->nik->address }}</td>
+								<td class="align-middle ">{{ $r->rukun_warga->number }}</td>
+								<td class="align-middle ">{{ $r->number }}</td>
+								<td class="align-middle">@if($r->user_id > 0) {{$r->user->name}} @else - @endif</td>
+								<td class="align-middle text-center">@if($r->user_id > 0) {{$r->user->nik->gender}} @else - @endif</td>
+								<td class="align-middle">@if($r->user_id > 0) {{$r->user->nik->address}} @else - @endif</td>
 								<td class="align-middle text-center">
-									@if( $u->user->hasRole('Warga') )
+                                    @if($r->user_id > 0)
+									@if( $r->user->hasRole('Warga') )
 									@else <span class="badge badge-dark">Non Warga</span>
 									@endif
-									@foreach ($u->user->getRoleNames() as $role) 
+									@foreach ($r->user->getRoleNames() as $role) 
 									<span class="badge badge-primary">{{ $role }}</span>
 									@endforeach
+                                    @else - @endif
 								</td>
 								<td class="align-middle text-center">
-									<form action="{{ route('rt.destroy', $u->id) }}" method="POST">
+									<form action="{{ route('rt.destroy', $r->id) }}" method="POST">
 										<input type="hidden" name="_method" value="DELETE">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="btn-group" role="group">
-										<a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+										<a href="{{ route('rt.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
 										<button type="submit" class="btn btn-dark"><i class="fas fa-trash"></i></button>
 									</div>
 									</form>
@@ -75,7 +76,7 @@
 					</table>
 				</div>
 			</div>
-			{{ $user->links('layouts.pagination') }}
+			{{ $rt->links('layouts.pagination') }}
 			@else
 			<div class="row justify-content-center no-result">
 				<img src="{{ asset('img/no-results.gif')}}" alt="">

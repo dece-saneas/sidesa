@@ -354,13 +354,13 @@ INSERT INTO `data_dusun` (`id`, `name`, `user_id`, `created_at`, `updated_at`) V
 (1, 'Selatan', 3, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
 (2, 'Utara', 4, '2020-12-10 04:22:29', '2020-12-10 04:22:29');
 
-INSERT INTO `data_rukun_warga` (`id`, `name`, `dusun_id`, `user_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `data_rukun_warga` (`id`, `number`, `dusun_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, '001', 1, 5, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
 (2, '002', 1, 6, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
 (3, '001', 2, 7, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
 (4, '002', 2, 8, '2020-12-10 04:22:30', '2020-12-10 04:22:30');
 
-INSERT INTO `data_rukun_tetangga` (`id`, `name`, `rukun_warga_id`, `user_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `data_rukun_tetangga` (`id`, `number`, `rukun_warga_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, '001', 1, 9, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
 (2, '002', 1, 10, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
 (3, '001', 2, 11, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),

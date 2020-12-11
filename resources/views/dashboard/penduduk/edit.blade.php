@@ -11,7 +11,7 @@
 					<ol class="breadcrumb">
               			<li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Dashboard</a></li>
               			<li class="breadcrumb-item"><a href="{{ route('penduduk')}}">Penduduk</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Edit</li>
+						<li class="breadcrumb-item active" aria-current="page">Ubah Data</li>
 					</ol>
 				</nav>
 			</div>
@@ -24,7 +24,7 @@
 				<form action="{{ route('penduduk.update', $user->id) }}" method="POST">
 				@csrf @method('PUT')
 					<div class="card-header">
-						<h3 class="card-title">Edit Penduduk</h3>
+						<h3 class="card-title">Ubah Data Penduduk</h3>
 					</div>
 					<div class="card-body">
 						<div class="form-row">
@@ -129,7 +129,7 @@
 					<div class="card-footer text-right">
 						<div class="btn-group">
 							<a href="{{ route('penduduk') }}" class="btn btn-dark" type="submit"><i class="fas fa-angle-left mr-2"></i> Kembali</a>
-							<button class="btn btn-success" type="submit">Update <i class="fas fa-save ml-2"></i></button>
+							<button class="btn btn-success" type="submit">Simpan <i class="fas fa-save ml-2"></i></button>
 						</div>
 					</div>
 				</form>

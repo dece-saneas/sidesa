@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\user;
 use App\Models\NIK;
 use App\Models\RT;
@@ -18,6 +20,8 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 	
+/// -------------------------------------------------------------------------------------------------------------------------------------- PENDUDUK
+    
     public function penduduk()
 	{
 		$user = User::paginate(10);
@@ -68,8 +72,8 @@ class UserController extends Controller
 
         return redirect()->route('penduduk')->with('success', 'Penduduk berhasil di tambahkan!');
 	}
-	
-	public function penduduk_edit($id)
+    
+    public function penduduk_edit($id)
 	{
 		$user = User::find($id);
 		return view('dashboard.penduduk.edit',['user' => $user]);
@@ -130,23 +134,104 @@ class UserController extends Controller
 		
 		return view('dashboard.penduduk.kurang-mampu',['user' => $user]);
 	}
-	
-	public function rt()
+    
+/// -------------------------------------------------------------------------------------------------------------------------------------- RUKUN TETANGGA - RT
+    
+    public function rt()
 	{
-		$user = RT::paginate(10);
+		$rt = RT::paginate(10);
 		
-		return view('dashboard.rukun-tetangga.index',['user' => $user]);
+		return view('dashboard.rukun-tetangga.index',['rt' => $rt]);
+	}
+    
+    public function rt_create()
+	{
+        $rw = RW::all();
+        $user = User::all();
+		return view('dashboard.rukun-tetangga.create',['user' => $user, 'rw' => $rw]);
+	}
+    
+    public function rt_store(Request $request)
+    {
+        $this->validate($request,[
+            'number' => 'required',
+            'rw' => 'required',
+            'user' => 'required',
+        ]);
+        
+        $ID = NULL;
+        
+        if($request->user > 0) {
+            $user = User::find($request->user);
+            $user->assignRole('Ketua RT');
+            $ID = $request->user;
+        }
+        
+        $user = RT::create([
+            'number' => $request->number,
+            'rukun_warga_id' => $request->rw,
+            'user_id' => $ID,
+        ]);
+        
+        return redirect()->route('rt')->with('success', 'RT berhasil di tambahkan!');
+	}
+    
+    public function rt_edit($id)
+	{
+		$rt = RT::find($id);
+        $rw = RW::all();
+        $user = User::all();
+		return view('dashboard.rukun-tetangga.edit',['user' => $user, 'rw' => $rw, 'rt' => $rt]);
 	}
 	
+    public function rt_update(Request $request, $id)
+    {
+        $rt = RT::find($id);
+        
+		$this->validate($request,[
+            'number' => 'required',
+            'rw' => 'required',
+            'user' => 'required',
+        ]);
+        
+        $ID = NULL;
+        
+        if($request->user > 0) {
+            if($rt->user_id > 0) {
+                $user = User::find($rt->user_id);
+                $user->removeRole('Ketua RT');
+            }
+            $user = User::find($request->user);
+            $user->assignRole('Ketua RT');
+            $ID = $request->user;
+        }else {
+            if($rt->user_id > 0) {
+                $user = User::find($rt->user_id);
+                $user->removeRole('Ketua RT');
+            }
+        }
+
+		$rt->number = $request->number;
+		$rt->rukun_warga_id = $request->rw;
+		$rt->user_id = $ID;
+		$rt->save();
+		
+        return redirect()->route('rt')->with('success', 'Data RT berhasil di ubah!');
+	}
+    
 	public function rt_destroy($id)
     {
         $rt = RT::find($id);
-		$user = User::find($rt->user_id);
-		$user->removeRole('Ketua RT');
+        if($rt->user_id > 0) {
+            $user = User::find($rt->user_id);
+            $user->removeRole('Ketua RT');
+        }
         $rt->delete();
         return redirect()->route('rt')->with('success', 'RT berhasil di hapus!');
     }
-	
+
+/// -------------------------------------------------------------------------------------------------------------------------------------- RUKUN WARGA - RW
+    
 	public function rw()
 	{
 		$user = RW::paginate(10);
@@ -154,10 +239,14 @@ class UserController extends Controller
 		return view('dashboard.rukun-warga.index',['user' => $user]);
 	}
 	
+/// -------------------------------------------------------------------------------------------------------------------------------------- DUSUN
+    
 	public function dusun()
 	{
 		$user = Dusun::paginate(10);
 		
 		return view('dashboard.dusun.index',['user' => $user]);
 	}
+    
+    
 }

@@ -15,7 +15,7 @@ class CreateDataRukunTetanggaTable extends Migration
     {
         Schema::create('data_rukun_tetangga', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('number');
             $table->bigInteger('rukun_warga_id')->nullable()->unsigned();
             $table->bigInteger('user_id')->nullable()->unsigned();
             $table->timestamps();

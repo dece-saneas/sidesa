@@ -9,7 +9,7 @@ class RW extends Model
 	protected $table = "data_rukun_warga";
 	
     protected $fillable = [
-		'name', 'dusun_id', 'user_id',
+		'number', 'dusun_id', 'user_id',
 	];
 	
 	public function user()

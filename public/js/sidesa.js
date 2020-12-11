@@ -1,12 +1,22 @@
 $(function(){
 	$("#refresh").click(function(){
-		$(".refresh").addClass("fa-spin"),
+		$(".refresh").addClass("fa-spin")
 	});
 });
 
 $(function () {
 	$('.selectGender').select2({
 		placeholder: 'Pilih Jenis Kelamin',
+		allowClear: true
+	});
+    
+    $('.selectRW').select2({
+		placeholder: 'Pilih RW',
+		allowClear: true
+	});
+    
+    $('.selectKetuaRT').select2({
+		placeholder: 'Pilih Ketua RT',
 		allowClear: true
 	});
 });

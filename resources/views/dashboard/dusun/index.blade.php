@@ -25,7 +25,6 @@
 				</div>
 			</div>
 			@if (count($user) > 0)
-			
 			<div class="card">
 				<div class="card-body table-responsive">
 					<table class="table table-sm table-hover">
