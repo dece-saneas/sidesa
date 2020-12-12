@@ -15,38 +15,50 @@
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-header">MENU UTAMA</li>
+                @can('surat')
 				<li class="nav-item">
-					<a href="#" class="nav-link">
+					<a href="{{ route('surat') }}" class="nav-link">
 						<i class="nav-icon fas fa-copy"></i><p>Permintaan Surat</p>
 					</a>
 				</li>
+                @endcan
+                @can('anggaran')
 				<li class="nav-item">
-					<a href="#" class="nav-link">
+					<a href="{{ route('anggaran') }}" class="nav-link">
 						<i class="nav-icon fas fa-chart-bar"></i><p>Laporan Keuangan</p>
 					</a>
 				</li>
+                @endcan
+                @can('aspirasi')
 				<li class="nav-item">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-bullhorn"></i><p>Aspirasi</p>
 					</a>
 				</li>
+                @endcan
+                @hasanyrole('Admin|Jurnalis')
 				<li class="nav-item menu-open">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-user-tie"></i><p>Jurnalistik<i class="right fas fa-angle-left"></i></p>
 					</a>
 					<ul class="nav nav-treeview">
+                        @can('berita')
 						<li class="nav-item">
 							<a href="#" class="nav-link">
 								<i class="fas fa-newspaper nav-icon"></i><p>Berita</p>
 							</a>
 						</li>
+                        @endcan
+                        @can('jurnalis')
 						<li class="nav-item">
 							<a href="{{ route('jurnalis') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Jurnalis</p>
 							</a>
 						</li>
+                        @endcan
 					</ul>
 				</li>
+                @endhasanyrole
                 @hasanyrole('Admin|Kepala Dusun|Ketua RW|Ketua RT')
 				<li class="nav-item menu-open">
 					<a href="#" class="nav-link">

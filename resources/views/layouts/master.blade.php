@@ -30,6 +30,7 @@
 </body>
     <!-- Scripts -->
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
+	<script src="{{ asset('js/jquery-mask.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
 	<script src="{{ asset('js/select2.min.js') }}"></script>

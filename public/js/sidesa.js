@@ -39,6 +39,21 @@ $(function () {
 		placeholder: 'Pilih Jurnalis',
 		allowClear: true
 	});
+    
+    $('.selectTypeSurat').select2({
+		placeholder: 'Pilih Jenis Surat',
+		allowClear: true
+	});
+    
+    $('.selectTypeKas').select2({
+		placeholder: 'Pilih Jenis Arus',
+		allowClear: true
+	});
+    
+    $('.selectStatus').select2({
+		placeholder: 'Pilih Status',
+		allowClear: true
+	});
 });
 
 $(function () {
@@ -69,4 +84,8 @@ $(function () {
         modal.find('.modal-note').text(note)
         modal.find('.delete').attr('action', url)
     })
+})
+
+$(function () {
+    $('.rupiah').mask('000.000.000.000.000', {reverse: true});
 })

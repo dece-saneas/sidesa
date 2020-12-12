@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
     	return $this->hasOne('App\Models\Jurnalis');
     }
+    
+    public function news()
+    {
+    	return $this->hasMany('App\Models\Jurnalis');
+    }
 }

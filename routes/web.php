@@ -17,6 +17,26 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
+Route::get('/dashboard/surat/', 'SuratController@index')->name('surat');
+Route::get('/dashboard/surat/create', 'SuratController@create')->name('surat.create');
+Route::post('/dashboard/surat/create', 'SuratController@store')->name('surat.store');
+Route::get('/dashboard/surat/{id}/process', 'SuratController@process')->name('surat.process');
+Route::delete('/dashboard/surat/{id}', 'SuratController@destroy')->name('surat.destroy');
+
+Route::get('/dashboard/anggaran/', 'AnggaranController@index')->name('anggaran');
+Route::get('/dashboard/anggaran/create', 'AnggaranController@create')->name('anggaran.create');
+Route::post('/dashboard/anggaran/create', 'AnggaranController@store')->name('anggaran.store');
+Route::get('/dashboard/anggaran/{id}/edit', 'AnggaranController@edit')->name('anggaran.edit');
+Route::put('/dashboard/anggaran/{id}', 'AnggaranController@update')->name('anggaran.update');
+Route::delete('/dashboard/anggaran/{id}', 'AnggaranController@destroy')->name('anggaran.destroy');
+
+
+
+
+
+
+
+
 Route::get('/dashboard/penduduk', 'UserController@penduduk')->name('penduduk');
 Route::get('/dashboard/penduduk/tambah', 'UserController@penduduk_create')->name('penduduk.create');
 Route::post('/dashboard/penduduk/tambah', 'UserController@penduduk_store')->name('penduduk.store');
@@ -54,3 +74,6 @@ Route::get('/dashboard/jurnalis/tambah', 'UserController@jurnalis_create')->name
 Route::post('/dashboard/jurnalis/tambah', 'UserController@jurnalis_store')->name('jurnalis.store');
 Route::delete('/dashboard/jurnalis/{id}', 'UserController@jurnalis_destroy')->name('jurnalis.destroy');
 
+
+
+Route::get('/dashboard/berita/buat-berita', 'NewsController@create')->name('news.create');
