@@ -62,14 +62,11 @@
 									@endforeach
 								</td>
 								<td class="align-middle text-center">
-                                    @if(!empty($u->warga_kurang_mampu))
-									<span class="badge badge-dark">Kurang Mampu</span>
-                                    @else
-                                    -
-                                    @endif
+									<a href="{{ route('penduduk.toggle.kurangmampu', $u->id) }}"><span class="badge @if(!empty($u->warga_kurang_mampu)) badge-dark @else badge-primary @endif">@if(!empty($u->warga_kurang_mampu)) Kurang Mampu @else Mampu @endif</span></a>
 								</td>
 								<td class="align-middle text-center">
 									<div class="btn-group" role="group">
+										<a href="{{ route('penduduk.toggle.warga', $u->id) }}" class="btn btn-primary"><i class="fas fa-user"></i></a>
 										<a href="{{ route('penduduk.edit', $u->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Hapus Penduduk" data-note="Anda akan menghapus {{$u->name}}." data-url="{{ route('penduduk.destroy', $u->id) }}"><i class="fas fa-trash"></i></button>
 									</div>

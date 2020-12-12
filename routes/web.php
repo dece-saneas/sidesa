@@ -25,6 +25,8 @@ Route::put('/dashboard/penduduk/{id}', 'UserController@penduduk_update')->name('
 Route::delete('/dashboard/penduduk/{id}', 'UserController@penduduk_destroy')->name('penduduk.destroy');
 Route::get('/dashboard/penduduk/filter/warga-desa', 'UserController@penduduk_filter_warga')->name('penduduk.filter.warga');
 Route::get('/dashboard/penduduk/filter/warga-kurang-mampu', 'UserController@penduduk_filter_kurangmampu')->name('penduduk.filter.kurangmampu');
+Route::get('/dashboard/penduduk/toggle/warga-kurang-mampu/{id}', 'UserController@penduduk_toggle_kurangmampu')->name('penduduk.toggle.kurangmampu');
+Route::get('/dashboard/penduduk/toggle/warga/{id}', 'UserController@penduduk_toggle_warga')->name('penduduk.toggle.warga');
 
 Route::get('/dashboard/rukun-tetangga', 'UserController@rt')->name('rt');
 Route::get('/dashboard/rukun-tetangga/tambah', 'UserController@rt_create')->name('rt.create');
@@ -46,3 +48,9 @@ Route::post('/dashboard/dusun/tambah', 'UserController@dusun_store')->name('dusu
 Route::get('/dashboard/dusun/{id}/ubah', 'UserController@dusun_edit')->name('dusun.edit');
 Route::put('/dashboard/dusun/{id}', 'UserController@dusun_update')->name('dusun.update');
 Route::delete('/dashboard/dusun/{id}', 'UserController@dusun_destroy')->name('dusun.destroy');
+
+Route::get('/dashboard/jurnalis', 'UserController@jurnalis')->name('jurnalis');
+Route::get('/dashboard/jurnalis/tambah', 'UserController@jurnalis_create')->name('jurnalis.create');
+Route::post('/dashboard/jurnalis/tambah', 'UserController@jurnalis_store')->name('jurnalis.store');
+Route::delete('/dashboard/jurnalis/{id}', 'UserController@jurnalis_destroy')->name('jurnalis.destroy');
+

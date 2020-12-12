@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
     	return $this->hasOne('App\Models\KurangMampu');
     }
+    
+    public function jurnalis()
+    {
+    	return $this->hasOne('App\Models\Jurnalis');
+    }
 }

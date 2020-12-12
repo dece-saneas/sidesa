@@ -21,17 +21,6 @@
 	<div class="content pb-4">
 		<div class="container">
             <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                        </div>
-                        <div class="col text-right">
-                            <button class="btn btn-success">Warga Desa</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
 				<form action="{{ route('penduduk.update', $user->id) }}" method="POST">
 				@csrf @method('PUT')
 					<div class="card-header">

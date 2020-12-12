@@ -11,6 +11,7 @@ use App\Models\NIK;
 use App\Models\RT;
 use App\Models\RW;
 use App\Models\Dusun;
+use App\Models\Jurnalis;
 use App\Models\KurangMampu;
 
 class UserController extends Controller
@@ -51,6 +52,8 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make('12345678'),
         ]);
+        
+        $user->assignRole('Warga');
         
         NIK::create([
             'user_id' => $user->id,
@@ -118,7 +121,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect()->route('penduduk')->with('success', 'Penduduk berhasil di hapus!');
+        return redirect()->back()->with('success', 'Penduduk berhasil di hapus!');
     }
     
     public function penduduk_filter_warga()
@@ -133,6 +136,35 @@ class UserController extends Controller
 		$user = KurangMampu::paginate(10);
 		
 		return view('dashboard.penduduk.kurang-mampu',['user' => $user]);
+	}
+    
+    public function penduduk_toggle_warga($id)
+	{
+		$user = User::find($id);
+        
+        if($user->hasrole('Warga')) {
+            $user->removeRole('Warga');
+        }else {
+            $user->assignRole('Warga');
+        }
+		
+		return redirect()->back();
+	}
+    
+    public function penduduk_toggle_kurangmampu($id)
+	{
+        $data = KurangMampu::where('user_id', $id)->get();
+            
+        if(count($data) > 0) {
+            $data = KurangMampu::where('user_id', $id)->first();
+            $data->delete();
+        }else {
+            KurangMampu::create([
+                'user_id' => $id,
+            ]);
+        }
+		
+		return redirect()->back();
 	}
     
 /// -------------------------------------------------------------------------------------------------------------------------------------- RUKUN TETANGGA - RT
@@ -424,14 +456,55 @@ class UserController extends Controller
                 if(count($rt) > 0) {
                     foreach($rt as $r2) {
                         $user = User::find($r2->user_id);
-                        $user->removeRole('Ketua RT');
+                        $user->removeRole('Kepala Dusun');
                     }
                 }
                 $user = User::find($r->user_id);
-                $user->removeRole('Ketua RW');
+                $user->removeRole('Kepala Dusun');
             }
         }
         $dusun->delete();
         return redirect()->route('dusun')->with('success', 'Dusun berhasil di hapus!');
+    }
+    
+/// -------------------------------------------------------------------------------------------------------------------------------------- DUSUN
+    
+    public function jurnalis()
+	{
+		$jurnalis = Jurnalis::paginate(10);
+		
+		return view('dashboard.jurnalis.index',['jurnalis' => $jurnalis]);
+	}
+    
+    public function jurnalis_create()
+	{
+        $user = User::all();
+		return view('dashboard.jurnalis.create',['user' => $user]);
+	}
+    
+    public function jurnalis_store(Request $request)
+    {
+        $this->validate($request,[
+            'user' => 'required',
+        ]);
+        
+        $user = User::find($request->user);
+        $user->assignRole('Jurnalis');
+        
+        $jurnalis = Jurnalis::create([
+            'code' => 'BJ'.str_pad($request->user, 4, '0', STR_PAD_LEFT),
+            'user_id' =>  $request->user,
+        ]);
+        
+        return redirect()->route('jurnalis')->with('success', 'Jurnalis berhasil di tambahkan!');
+	}
+    
+    public function jurnalis_destroy($id)
+    {
+        $jurnalis = Jurnalis::find($id);
+        $user = User::find($jurnalis->user_id);
+        $user->removeRole('Jurnalis');
+        $jurnalis->delete();
+        return redirect()->route('jurnalis')->with('success', 'Jurnalis berhasil di hapus!');
     }
 }

@@ -69,14 +69,11 @@
                                     @endif
 								</td>
 								<td class="align-middle text-center">
-									<form action="{{ route('penduduk.destroy', $u->user->id) }}" method="POST">
-										<input type="hidden" name="_method" value="DELETE">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="btn-group" role="group">
+										<a href="{{ route('penduduk.toggle.warga', $u->user->id) }}" class="btn btn-primary"><i class="fas fa-user"></i></a>
 										<a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-										<button type="submit" class="btn btn-dark"><i class="fas fa-trash"></i></button>
+										<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Hapus Penduduk" data-note="Anda akan menghapus {{$u->name}}." data-url="{{ route('penduduk.destroy', $u->user->id) }}"><i class="fas fa-trash"></i></button>
 									</div>
-									</form>
 								</td>
 							</tr>
 							@endforeach

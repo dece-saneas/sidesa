@@ -34,6 +34,11 @@ $(function () {
 		placeholder: 'Pilih Kepala Dusun',
 		allowClear: true
 	});
+    
+    $('.selectJurnalis').select2({
+		placeholder: 'Pilih Jurnalis',
+		allowClear: true
+	});
 });
 
 $(function () {

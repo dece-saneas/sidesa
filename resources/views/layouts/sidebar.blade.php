@@ -9,7 +9,7 @@
 				<img src="{{ asset('img/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
-				<a href="#" class="d-block">Admin Pertama</a>
+				<a href="#" class="d-block">{{ Auth::user()->name }}</a>
 			</div>
 		</div>
 		<nav class="mt-2">
@@ -41,39 +41,49 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="{{ route('jurnalis') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Jurnalis</p>
 							</a>
 						</li>
 					</ul>
 				</li>
+                @hasanyrole('Admin|Kepala Dusun|Ketua RW|Ketua RT')
 				<li class="nav-item menu-open">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-users"></i><p>Kependudukan<i class="right fas fa-angle-left"></i></p>
 					</a>
 					<ul class="nav nav-treeview">
+                        @can('dusun')
 						<li class="nav-item">
 							<a href="{{ route('dusun') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Dusun</p>
 							</a>
 						</li>
+                        @endcan
+                        @can('rukun-warga')
 						<li class="nav-item">
 							<a href="{{ route('rw') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Rukun Warga</p>
 							</a>
 						</li>
+                        @endcan
+                        @can('rukun-tetangga')
 						<li class="nav-item">
 							<a href="{{ route('rt') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Rukun Tetangga</p>
 							</a>
 						</li>
+                        @endcan
+                        @can('penduduk')
 						<li class="nav-item">
 							<a href="{{ route('penduduk') }}" class="nav-link">
 								<i class="fas fa-user nav-icon"></i><p>Penduduk</p>
 							</a>
 						</li>
+                        @endcan
 					</ul>
 				</li>
+                @endhasanyrole
 			</ul>
 		</nav>
 	</div>
