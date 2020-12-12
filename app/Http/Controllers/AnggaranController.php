@@ -41,9 +41,17 @@ class AnggaranController extends Controller
             'description' => 'required',
             'status' => 'required',
         ]);
-
+        
+        $code = 'AKBJ0001';
+        
+        if (Anggaran::latest()->first() !== NULL) {
+            $data = Anggaran::latest()->first();
+            $number = trim($data->code,"AKBJ")+1;
+            $code = 'AKBJ'.str_pad($number, 4, '0', STR_PAD_LEFT);
+        }
+        
         $anggaran = Anggaran::create([
-            'code' => 'AKBJ'.str_pad(Auth::user()->id, 4, '0', STR_PAD_LEFT),
+            'code' => $code,
             'type' => $request->type,
             'category' => $request->category,
             'description' => $request->description,
