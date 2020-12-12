@@ -234,19 +234,204 @@ class UserController extends Controller
     
 	public function rw()
 	{
-		$user = RW::paginate(10);
+		$rw = RW::paginate(10);
 		
-		return view('dashboard.rukun-warga.index',['user' => $user]);
+		return view('dashboard.rukun-warga.index',['rw' => $rw]);
 	}
 	
+    public function rw_create()
+	{
+        $dusun = Dusun::all();
+        $user = User::all();
+		return view('dashboard.rukun-warga.create',['user' => $user, 'dusun' => $dusun]);
+	}
+    
+    public function rw_store(Request $request)
+    {
+        $this->validate($request,[
+            'number' => 'required',
+            'dusun' => 'required',
+            'user' => 'required',
+        ]);
+        
+        $ID = NULL;
+        
+        if($request->user > 0) {
+            $user = User::find($request->user);
+            $user->assignRole('Ketua RW');
+            $ID = $request->user;
+        }
+        
+        $user = RW::create([
+            'number' => $request->number,
+            'dusun_id' => $request->dusun,
+            'user_id' => $ID,
+        ]);
+        
+        return redirect()->route('rw')->with('success', 'RW berhasil di tambahkan!');
+	}
+    
+    public function rw_edit($id)
+	{
+		$rw = RW::find($id);
+        $dusun = Dusun::all();
+        $user = User::all();
+		return view('dashboard.rukun-warga.edit',['user' => $user, 'rw' => $rw, 'dusun' => $dusun]);
+	}
+    
+    public function rw_update(Request $request, $id)
+    {
+        $rw = RW::find($id);
+        
+		$this->validate($request,[
+            'number' => 'required',
+            'dusun' => 'required',
+            'user' => 'required',
+        ]);
+        
+        $ID = NULL;
+        
+        if($request->user > 0) {
+            if($rw->user_id > 0) {
+                $user = User::find($rw->user_id);
+                $user->removeRole('Ketua RW');
+            }
+            $user = User::find($request->user);
+            $user->assignRole('Ketua RW');
+            $ID = $request->user;
+        }else {
+            if($rw->user_id > 0) {
+                $user = User::find($rw->user_id);
+                $user->removeRole('Ketua RW');
+            }
+        }
+
+		$rw->number = $request->number;
+		$rw->dusun_id = $request->dusun;
+		$rw->user_id = $ID;
+		$rw->save();
+		
+        return redirect()->route('rw')->with('success', 'Data RW berhasil di ubah!');
+	}
+    
+    public function rw_destroy($id)
+    {
+        $rw = RW::find($id);
+        if($rw->user_id > 0) {
+            $user = User::find($rw->user_id);
+            $user->removeRole('Ketua RW');
+        }
+        $rt = RT::where('rukun_warga_id', $id)->get();
+        if(count($rt) > 0) {
+            foreach($rt as $r) {
+                $user = User::find($r->user_id);
+                $user->removeRole('Ketua RT');
+            }
+        }
+        $rw->delete();
+        return redirect()->route('rw')->with('success', 'RW berhasil di hapus!');
+    }
+    
 /// -------------------------------------------------------------------------------------------------------------------------------------- DUSUN
     
 	public function dusun()
 	{
-		$user = Dusun::paginate(10);
+		$dusun = Dusun::paginate(10);
 		
-		return view('dashboard.dusun.index',['user' => $user]);
+		return view('dashboard.dusun.index',['dusun' => $dusun]);
 	}
     
+    public function dusun_create()
+	{
+        $user = User::all();
+		return view('dashboard.dusun.create',['user' => $user]);
+	}
     
+    public function dusun_store(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required',
+            'user' => 'required',
+        ]);
+        
+        $ID = NULL;
+        
+        if($request->user > 0) {
+            $user = User::find($request->user);
+            $user->assignRole('Kepala Dusun');
+            $ID = $request->user;
+        }
+        
+        $user = Dusun::create([
+            'name' => $request->name,
+            'user_id' => $ID,
+        ]);
+        
+        return redirect()->route('dusun')->with('success', 'Dusun berhasil di tambahkan!');
+	}
+    
+    public function dusun_edit($id)
+	{
+		$dusun = Dusun::find($id);
+        $user = User::all();
+		return view('dashboard.dusun.edit',['user' => $user, 'dusun' => $dusun]);
+	}
+    
+    public function dusun_update(Request $request, $id)
+    {
+        $dusun = Dusun::find($id);
+        
+		$this->validate($request,[
+            'name' => 'required',
+            'user' => 'required',
+        ]);
+        
+        $ID = NULL;
+        
+        if($request->user > 0) {
+            if($dusun->user_id > 0) {
+                $user = User::find($dusun->user_id);
+                $user->removeRole('Kepala Dusun');
+            }
+            $user = User::find($request->user);
+            $user->assignRole('Kepala Dusun');
+            $ID = $request->user;
+        }else {
+            if($dusun->user_id > 0) {
+                $user = User::find($dusun->user_id);
+                $user->removeRole('Kepala Dusun');
+            }
+        }
+
+		$dusun->name = $request->name;
+		$dusun->user_id = $ID;
+		$dusun->save();
+		
+        return redirect()->route('dusun')->with('success', 'Data Dusun berhasil di ubah!');
+	}
+    
+    public function dusun_destroy($id)
+    {
+        $dusun = Dusun::find($id);
+        if($dusun->user_id > 0) {
+            $user = User::find($dusun->user_id);
+            $user->removeRole('Kepala Dusun');
+        }
+        $rw = RW::where('dusun_id', $id)->get();
+        if(count($rw) > 0) {
+            foreach($rw as $r) {
+                $rt = RT::where('rukun_warga_id', $r->id)->get();
+                if(count($rt) > 0) {
+                    foreach($rt as $r2) {
+                        $user = User::find($r2->user_id);
+                        $user->removeRole('Ketua RT');
+                    }
+                }
+                $user = User::find($r->user_id);
+                $user->removeRole('Ketua RW');
+            }
+        }
+        $dusun->delete();
+        return redirect()->route('dusun')->with('success', 'Dusun berhasil di hapus!');
+    }
 }

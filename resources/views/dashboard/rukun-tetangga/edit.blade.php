@@ -58,7 +58,7 @@
                                 <option></option>
                                 <option value="0" selected>-</option>
                                 @foreach ($user as $no => $u)
-                                @if($u->hasrole('Ketua RT'))
+                                @if($u->hasrole(['Admin', 'Ketua RT', 'Ketua RW', 'Kepala Dusun']))
                                 @if($u->id == $rt->user_id)
                                 <option value="{{ $u->id }}" selected>{{ $u->nik->code }} | {{ $u->name }}</option>
                                 @endif

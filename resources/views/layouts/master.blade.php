@@ -23,13 +23,14 @@
 	<div class="wrapper">
 		@include('layouts.header')
 		@include('layouts.sidebar')
+        @include('layouts.modal')
 		@yield('content')
 		@include('layouts.footer')
 	</div>
 </body>
     <!-- Scripts -->
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
-	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
 	<script src="{{ asset('js/select2.min.js') }}"></script>
 	<script src="{{ asset('js/moment.min.js') }}"></script>

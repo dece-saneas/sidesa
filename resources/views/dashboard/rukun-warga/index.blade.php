@@ -1,15 +1,16 @@
 @extends('layouts.master')
-@section('title') RW @endsection
+@section('title') Rukun Warga @endsection
 @section('content')
 <div class="content-wrapper">
 	<!-- Header -->
 	<div class="content-header">
 		<div class="container-fluid">
 			<div class="jumbotron s-container-title">
-				<h1 class="display-4">Dashboard</h1>
+				<h1 class="display-4">Rukun Warga</h1>
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+              			<li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Rukun Warga</li>
 					</ol>
 				</nav>
 			</div>
@@ -20,51 +21,50 @@
 		<div class="container-fluid">
 			<div class="text-right mb-4">
 				<div class="btn-group">
-					<a href="#" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>
+					<a href="{{ route('rw.create') }}" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>
 					<a href="{{ route('rw') }}" class="btn btn-dark" id="refresh"><i class="fas fa-sync-alt mr-2 refresh"></i></i>Refresh</a>
 				</div>
 			</div>
-			@if (count($user) > 0)
-			
+			@if (count($rw) > 0)
 			<div class="card">
 				<div class="card-body table-responsive">
 					<table class="table table-sm table-hover">
 						<thead>
 							<tr>
 								<th width="5%" class="text-center">No</th>
-								<th width="5%" class="text-center">RT</th>
+								<th width="10%">Dusun</th>
+								<th width="5%">RW</th>
 								<th width="15%">Ketua RW</th>
-								<th width="10%">Jenis Kelamin</th>
-								<th width="35%">Alamat</th>
+								<th width="10%" class="text-center">Jenis Kelamin</th>
+								<th width="25%">Alamat</th>
 								<th width="20%" class="text-center">Status Penduduk</th>
 								<th width="10%" class="text-center">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($user as $no => $u)
+							@foreach ($rw as $no => $r)
 							<tr>
-								<td class="align-middle text-center">{{ $no+1 }}</td>
-								<td class="align-middle ">{{ $u->name }}</td>
-								<td class="align-middle">{{ $u->user->name }}</td>
-								<td class="align-middle text-center">{{ $u->user->nik->gender }}</td>
-								<td class="align-middle">{{ $u->user->nik->address }}</td>
+								<td class="align-middle text-center">{{ $no+1+(($rw->currentpage()-1)*10) }}</td>
+								<td class="align-middle ">{{ $r->dusun->name}}</td>
+								<td class="align-middle ">{{ $r->number }}</td>
+								<td class="align-middle">@if($r->user_id > 0) {{$r->user->name}} @else - @endif</td>
+								<td class="align-middle text-center">@if($r->user_id > 0) {{$r->user->nik->gender}} @else - @endif</td>
+								<td class="align-middle">@if($r->user_id > 0) {{$r->user->nik->address}} @else - @endif</td>
 								<td class="align-middle text-center">
-									@if( $u->user->hasRole('Warga') )
+                                    @if($r->user_id > 0)
+									@if( $r->user->hasRole('Warga') )
 									@else <span class="badge badge-dark">Non Warga</span>
 									@endif
-									@foreach ($u->user->getRoleNames() as $role) 
+									@foreach ($r->user->getRoleNames() as $role) 
 									<span class="badge badge-primary">{{ $role }}</span>
 									@endforeach
+                                    @else - @endif
 								</td>
 								<td class="align-middle text-center">
-									<form action="#" method="POST">
-										<input type="hidden" name="_method" value="DELETE">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="btn-group" role="group">
-										<a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-										<button type="submit" class="btn btn-dark"><i class="fas fa-trash"></i></button>
+										<a href="{{ route('rw.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Hapus RW" data-note="Anda akan menghapus RW {{$r->number}} dari Dusun {{$r->dusun->name}}. Menghapus RW akan menghilangkan semua RT di bawahnya!" data-url="{{ route('rw.destroy', $r->id) }}"><i class="fas fa-trash"></i></button>
 									</div>
-									</form>
 								</td>
 							</tr>
 							@endforeach
@@ -72,7 +72,7 @@
 					</table>
 				</div>
 			</div>
-			{{ $user->links('layouts.pagination') }}
+			{{ $rw->links('layouts.pagination') }}
 			@else
 			<div class="row justify-content-center no-result">
 				<img src="{{ asset('img/no-results.gif')}}" alt="">

@@ -32,11 +32,12 @@
 						<thead>
 							<tr>
 								<th width="5%" class="text-center">No</th>
+								<th width="10%">Dusun</th>
 								<th width="5%">RW</th>
 								<th width="5%">RT</th>
 								<th width="15%">Ketua RT</th>
 								<th width="10%" class="text-center">Jenis Kelamin</th>
-								<th width="30%">Alamat</th>
+								<th width="20%">Alamat</th>
 								<th width="20%" class="text-center">Status Penduduk</th>
 								<th width="10%" class="text-center">Action</th>
 							</tr>
@@ -44,7 +45,8 @@
 						<tbody>
 							@foreach ($rt as $no => $r)
 							<tr>
-								<td class="align-middle text-center">{{ $no+1 }}</td>
+								<td class="align-middle text-center">{{ $no+1+(($rt->currentpage()-1)*10) }}</td>
+								<td class="align-middle ">{{ $r->rukun_warga->dusun->name }}</td>
 								<td class="align-middle ">{{ $r->rukun_warga->number }}</td>
 								<td class="align-middle ">{{ $r->number }}</td>
 								<td class="align-middle">@if($r->user_id > 0) {{$r->user->name}} @else - @endif</td>
@@ -61,14 +63,10 @@
                                     @else - @endif
 								</td>
 								<td class="align-middle text-center">
-									<form action="{{ route('rt.destroy', $r->id) }}" method="POST">
-										<input type="hidden" name="_method" value="DELETE">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="btn-group" role="group">
 										<a href="{{ route('rt.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-										<button type="submit" class="btn btn-dark"><i class="fas fa-trash"></i></button>
+                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Hapus RT" data-note="Anda akan menghapus RT {{$r->number}} dari RW {{$r->rukun_warga->number}} di Dusun {{$r->rukun_warga->dusun->name}}." data-url="{{ route('rt.destroy', $r->id) }}"><i class="fas fa-trash"></i></button>
 									</div>
-									</form>
 								</td>
 							</tr>
 							@endforeach

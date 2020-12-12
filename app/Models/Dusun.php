@@ -16,4 +16,9 @@ class Dusun extends Model
     {
     	return $this->belongsTo('App\Models\User');
     }
+    
+    public function rw()
+    {
+    	return $this->hasMany('App\Models\RW');
+    }
 }

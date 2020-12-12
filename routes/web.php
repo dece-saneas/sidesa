@@ -34,4 +34,15 @@ Route::put('/dashboard/rukun-tetangga/{id}', 'UserController@rt_update')->name('
 Route::delete('/dashboard/rukun-tetangga/{id}', 'UserController@rt_destroy')->name('rt.destroy');
 
 Route::get('/dashboard/rukun-warga', 'UserController@rw')->name('rw');
+Route::get('/dashboard/rukun-warga/tambah', 'UserController@rw_create')->name('rw.create');
+Route::post('/dashboard/rukun-warga/tambah', 'UserController@rw_store')->name('rw.store');
+Route::get('/dashboard/rukun-warga/{id}/ubah', 'UserController@rw_edit')->name('rw.edit');
+Route::put('/dashboard/rukun-warga/{id}', 'UserController@rw_update')->name('rw.update');
+Route::delete('/dashboard/rukun-warga/{id}', 'UserController@rw_destroy')->name('rw.destroy');
+
 Route::get('/dashboard/dusun', 'UserController@dusun')->name('dusun');
+Route::get('/dashboard/dusun/tambah', 'UserController@dusun_create')->name('dusun.create');
+Route::post('/dashboard/dusun/tambah', 'UserController@dusun_store')->name('dusun.store');
+Route::get('/dashboard/dusun/{id}/ubah', 'UserController@dusun_edit')->name('dusun.edit');
+Route::put('/dashboard/dusun/{id}', 'UserController@dusun_update')->name('dusun.update');
+Route::delete('/dashboard/dusun/{id}', 'UserController@dusun_destroy')->name('dusun.destroy');

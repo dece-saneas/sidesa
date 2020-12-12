@@ -19,6 +19,21 @@ $(function () {
 		placeholder: 'Pilih Ketua RT',
 		allowClear: true
 	});
+    
+    $('.selectKetuaRW').select2({
+		placeholder: 'Pilih Ketua RW',
+		allowClear: true
+	});
+    
+    $('.selectDusun').select2({
+		placeholder: 'Pilih Dusun',
+		allowClear: true
+	});
+    
+    $('.selectKepalaDusun').select2({
+		placeholder: 'Pilih Kepala Dusun',
+		allowClear: true
+	});
 });
 
 $(function () {
@@ -32,3 +47,21 @@ $(function () {
         }
     });
 });
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+$(function () {
+    $('#modal-delete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var title = button.data('title')
+        var note = button.data('note')
+        var url = button.data('url')
+        
+        var modal = $(this)
+        modal.find('.modal-title').text(title)
+        modal.find('.modal-note').text(note)
+        modal.find('.delete').attr('action', url)
+    })
+})
