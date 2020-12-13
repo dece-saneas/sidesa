@@ -50,7 +50,8 @@ class UserController extends Controller
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- PENDUDUK
     
     public function penduduk()
-	{
+	{if (auth()->user()->hasPermissionTo('penduduk')) {
+        
         if (auth()->user()->hasrole('Admin')) {
             $user = User::paginate(10);
         }elseif (auth()->user()->hasrole('Ketua RT')) {
@@ -61,10 +62,13 @@ class UserController extends Controller
         }
         
 		return view('dashboard.penduduk.index',['user' => $user]);
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function penduduk_create()
-	{
+	{if (auth()->user()->hasPermissionTo('penduduk-create')) {
+        
         $user = User::all();
         
         if (auth()->user()->hasrole('Admin')) {
@@ -74,10 +78,11 @@ class UserController extends Controller
         }
         
 		return view('dashboard.penduduk.create', ['user' => $user, 'dusun' => $dusun]);
-	}
+	}else{return abort(403);}}
     
     public function penduduk_store(Request $request)
-    {
+    {if (auth()->user()->hasPermissionTo('penduduk-create')) {
+        
         $this->validate($request,[
             'name' => 'required',
             'nik' => 'required|unique:nomor_induk_kependudukan,code',
@@ -115,7 +120,9 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('penduduk')->with('success', 'Penduduk berhasil di tambahkan!');
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function penduduk_edit($id)
 	{
