@@ -12,8 +12,10 @@
 */
 
 Route::get('/', 'SiteController@index')->name('site');
+Route::get('/visi-misi', 'SiteController@visimisi')->name('visimisi');
+Route::get('/article', 'SiteController@article')->name('article');
 
-Auth::routes();
+Auth::routes(['register' => false, 'reset' => false, 'confirm' => false, 'verify' => false]);
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
@@ -55,25 +57,20 @@ Route::get('/dashboard/penduduk', 'UserController@penduduk')->name('penduduk');
 Route::get('/dashboard/penduduk/create', 'UserController@penduduk_create')->name('penduduk.create');
 Route::post('/dashboard/penduduk/create', 'UserController@penduduk_store')->name('penduduk.store');
 Route::get('/dashboard/penduduk/{id}/edit', 'UserController@penduduk_edit')->name('penduduk.edit');
+Route::put('/dashboard/penduduk/{id}', 'UserController@penduduk_update')->name('penduduk.update');
 Route::delete('/dashboard/penduduk/{id}', 'UserController@penduduk_destroy')->name('penduduk.destroy');
 
+Route::get('/dashboard/penduduk/filter/warga-kurang-mampu', 'UserController@penduduk_filter_kurangmampu')->name('penduduk.filter.kurangmampu');
 
-
-
-
-
-
-
+Route::get('/dashboard/penduduk/toggle/warga-kurang-mampu/{id}', 'UserController@penduduk_toggle_kurangmampu')->name('penduduk.toggle.kurangmampu');
+Route::get('/dashboard/penduduk/toggle/warga/{id}', 'UserController@penduduk_toggle_warga')->name('penduduk.toggle.warga');
 
 Route::post('/json-rw/{id}','UserController@json_rw');
 Route::post('/json-rt/{id}','UserController@json_rt');
 
 
-Route::get('/dashboard/penduduk/{id}/ubah', 'UserController@penduduk_edit')->name('penduduk.edit');
-Route::put('/dashboard/penduduk/{id}', 'UserController@penduduk_update')->name('penduduk.update');
-Route::get('/dashboard/penduduk/filter/warga-kurang-mampu', 'UserController@penduduk_filter_kurangmampu')->name('penduduk.filter.kurangmampu');
-Route::get('/dashboard/penduduk/toggle/warga-kurang-mampu/{id}', 'UserController@penduduk_toggle_kurangmampu')->name('penduduk.toggle.kurangmampu');
-Route::get('/dashboard/penduduk/toggle/warga/{id}', 'UserController@penduduk_toggle_warga')->name('penduduk.toggle.warga');
+
+
 
 
 Route::get('/dashboard/jurnalis', 'UserController@jurnalis')->name('jurnalis');

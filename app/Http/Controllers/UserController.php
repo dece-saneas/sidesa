@@ -129,7 +129,8 @@ class UserController extends Controller
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function penduduk_edit($id)
-	{
+	{if (auth()->user()->hasPermissionTo('penduduk-edit')) {
+        
 		$penduduk = User::find($id);
         $user = User::all();
         $data_dusun = Dusun::find($penduduk->nik->dusun_id);
@@ -143,15 +144,16 @@ class UserController extends Controller
         }
         
 		return view('dashboard.penduduk.edit',['user' => $user, 'penduduk' => $penduduk, 'dusun' => $dusun, 'data_dusun' => $data_dusun, 'data_rw' => $data_rw, 'data_rt' => $data_rt]);
-	}
+	}else{return abort(403);}}
 	
 	public function penduduk_update(Request $request, $id)
-    {
+    {if (auth()->user()->hasPermissionTo('penduduk-edit')) {
+        
 		$user = User::find($id);
 		
         $this->validate($request,[
             'name' => 'required',
-            'nik' => 'required|unique:nomor_induk_kependudukan,code',
+            'nik' => 'required|unique:nomor_induk_kependudukan,code,' . $user->nik->id,
             'gender' => 'required',
             'place' => 'required',
             'dob' => 'required',
@@ -188,7 +190,7 @@ class UserController extends Controller
 		}
 		
         return redirect()->route('penduduk')->with('success', 'Data penduduk berhasil di ubah!');
-	}
+	}else{return abort(403);}}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -223,6 +225,8 @@ class UserController extends Controller
 		return view('dashboard.penduduk.kurang-mampu',['user' => $user]);
 	}
     
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     public function penduduk_toggle_warga($id)
 	{
 		$user = User::find($id);
@@ -235,6 +239,8 @@ class UserController extends Controller
 		
 		return redirect()->back();
 	}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function penduduk_toggle_kurangmampu($id)
 	{

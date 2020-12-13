@@ -21,7 +21,7 @@
 	<div class="content pb-4">
 		<div class="container">
             <div class="card">
-				<form action="{{ route('penduduk.update') }}" method="POST">
+				<form action="{{ route('penduduk.update', $penduduk->id) }}" method="POST">
 				@csrf @method('PUT')
 					<div class="card-header">
 						<h3 class="card-title">Ubah Data</h3>
@@ -61,6 +61,7 @@
                                 <label for="gender">Jenis Kelamin *</label>
                                 <select class="form-control selectGender @error('gender') is-invalid @enderror" name="gender" id="gender">
                                     <option></option>
+                                    <option value="">-</option>
                                     <option value="Laki-Laki" @if($penduduk->nik->gender == 'Laki-Laki') selected @endif>Laki-Laki</option>
                                     <option value="Perempuan" @if($penduduk->nik->gender == 'Perempuan') selected @endif>Perempuan</option>
 							    </select>
@@ -76,7 +77,7 @@
                                 <label for="dad">Ayah</label>
                                 <select class="form-control selectDady @error('dad') is-invalid @enderror" name="dad" id="dad">
                                     <option></option>
-                                    <option value="" selected>-</option>
+                                    <option value="">-</option>
                                     @foreach($user as $no => $u)
                                     <option value="{{ $u->id }}" @if($penduduk->nik->father_id == $u->id) selected @endif>{{ $u->nik->code }} - {{ $u->name }}</option>
                                     @endforeach
@@ -91,7 +92,7 @@
                                 <label for="mom">Ibu</label>
                                 <select class="form-control selectMommy @error('mom') is-invalid @enderror" name="mom" id="mom">
                                     <option></option>
-                                    <option value="" selected>-</option>
+                                    <option value="">-</option>
                                     @foreach($user as $no => $u)
                                     <option value="{{ $u->id }}" @if($penduduk->nik->mother_id == $u->id) selected @endif>{{ $u->nik->code }} - {{ $u->name }}</option>
                                     @endforeach
@@ -131,7 +132,7 @@
                                 <label for="blood">Gol Darah</label>
                                 <select class="form-control selectType @error('blood') is-invalid @enderror" name="blood" id="blood">
                                     <option></option>
-                                    <option value="" selected>-</option>
+                                    <option value="">-</option>
                                     <option value="A" @if($penduduk->nik->blood_type == 'A') selected @endif>A</option>
                                     <option value="B" @if($penduduk->nik->blood_type == 'B') selected @endif>B</option>
                                     <option value="AB" @if($penduduk->nik->blood_type == 'AB') selected @endif>AB</option>
@@ -149,7 +150,7 @@
                                 <label for="religion">Agama</label>
                                 <select class="form-control selectReligion @error('religion') is-invalid @enderror" name="religion" id="religion">
                                     <option></option>
-                                    <option value="" selected>-</option>
+                                    <option value="">-</option>
                                     <option value="Islam" @if($penduduk->nik->religion == 'Islam') selected @endif>Islam</option>
                                     <option value="Kristen" @if($penduduk->nik->religion == 'Kristen') selected @endif>Kristen</option>
                                     <option value="Katolik" @if($penduduk->nik->religion == 'Katolik') selected @endif>Katolik</option>
@@ -167,7 +168,7 @@
                                 <label for="married">Status Perkawinan</label>
                                 <select class="form-control selectType @error('married') is-invalid @enderror" name="married" id="married">
                                     <option></option>
-                                    <option value="" selected>-</option>
+                                    <option value="">-</option>
                                     <option value="Kawin" @if($penduduk->nik->married_status == 'Kawin') selected @endif>Kawin</option>
                                     <option value="Belum Kawin" @if($penduduk->nik->married_status == 'Belum Kawin') selected @endif>Belum Kawin</option>
 							    </select>
@@ -235,6 +236,26 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+					</div>
+                    <div class="card-header">
+						<h3 class="card-title">Ganti Password</h3>
+					</div>
+					<div class="card-body">
+						<div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="password">Password Baru</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="password-confirm">Konfirmasi Password</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" id="password-confirm">
                             </div>
                         </div>
 					</div>
