@@ -24,6 +24,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $KC = curl_init();
+		curl_setopt($KC, CURLOPT_URL, 'https://api.kawalcorona.com/indonesia/provinsi/');
+		curl_setopt($KC, CURLOPT_RETURNTRANSFER, 1);
+		$KCP = curl_exec($KC);
+		curl_close($KC);
+		$result=json_decode($KCP,true);
+		$covid = $result[14]['attributes'];
+        
+        return view('dashboard',['covid' => $covid]);
     }
 }
