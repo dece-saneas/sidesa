@@ -94,6 +94,7 @@ class SuratController extends Controller
                 }
             }else{return abort(404);}
         }
+        
         return redirect()->back()->with('success', 'RT berhasil di hapus!');
     }else{return abort(403);}}
 }

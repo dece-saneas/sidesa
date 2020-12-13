@@ -15,6 +15,11 @@ $(function () {
 		allowClear: true
 	});
     
+    $('.selectRT').select2({
+		placeholder: 'Pilih RT',
+		allowClear: true
+	});
+    
     $('.selectKetuaRT').select2({
 		placeholder: 'Pilih Ketua RT',
 		allowClear: true
@@ -54,6 +59,26 @@ $(function () {
 		placeholder: 'Pilih Status',
 		allowClear: true
 	});
+    
+    $('.selectDady').select2({
+		placeholder: 'Pilih Ayah',
+		allowClear: true
+	});
+    
+    $('.selectMommy').select2({
+		placeholder: 'Pilih Ibu',
+		allowClear: true
+	});
+    
+    $('.selectType').select2({
+		placeholder: 'Pilih Jenis',
+		allowClear: true
+	});
+    
+    $('.selectReligion').select2({
+		placeholder: 'Pilih Agama',
+		allowClear: true
+	});
 });
 
 $(function () {
@@ -89,3 +114,49 @@ $(function () {
 $(function () {
     $('.rupiah').mask('000.000.000.000.000', {reverse: true});
 })
+
+$(function(){
+    $("#dusunJSON").change(function(){
+        var dusunID = $('#dusunJSON').val();
+        var url = $('#dusunJSON').data("url");
+        
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+        });
+        
+        $.ajax({
+            type    : "POST",
+            url     : url+'/json-rw/'+dusunID,
+            dataType: 'json',
+            success : function (data) {
+                $('.rw').empty();
+                $.each(data, function(key, value) {
+                    $('select[name="rw"]').append('<option value="'+ value.id +'">'+ value.number +'</option>');
+                });
+            },
+        });
+    });
+    
+    $("#rwJSON").change(function(){
+        var rwID = $('#rwJSON').val();
+        var url = $('#rwJSON').data("url");
+        
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+        });
+        
+        $.ajax({
+            type    : "POST",
+            url     : url+'/json-rt/'+rwID,
+            dataType: 'json',
+            success : function (data) {
+                $('.rt').empty();
+                $.each(data, function(key, value) {
+                    $('select[name="rt"]').append('<option value="'+ value.id +'">'+ value.number +'</option>');
+                });
+            },
+        });
+    });
+});

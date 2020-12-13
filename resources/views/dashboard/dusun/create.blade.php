@@ -11,7 +11,7 @@
 					<ol class="breadcrumb">
               			<li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Dashboard</a></li>
               			<li class="breadcrumb-item"><a href="{{ route('dusun')}}">Dusun</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Tambah</li>
+						<li class="breadcrumb-item active" aria-current="page">Buat Dusun</li>
 					</ol>
 				</nav>
 			</div>
@@ -24,13 +24,13 @@
 				<form action="{{ route('dusun.store') }}" method="POST">
 				@csrf
 					<div class="card-header">
-						<h3 class="card-title">Tambah Dusun</h3>
+						<h3 class="card-title">Buat Dusun</h3>
 					</div>
 					<div class="card-body">
 						<div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">Nama Dusun</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

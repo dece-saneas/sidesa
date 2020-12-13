@@ -20,6 +20,7 @@ class AnggaranController extends Controller
 	{if (auth()->user()->hasPermissionTo('anggaran')) {
             
         $anggaran = Anggaran::paginate(10);
+        
         return view('dashboard.anggaran.index', ['anggaran' => $anggaran]);
     }else{return abort(403);}}
     
@@ -101,7 +102,6 @@ class AnggaranController extends Controller
     {if (auth()->user()->hasPermissionTo('anggaran-destroy')) {
         
         $anggaran = Anggaran::find($id);
-        
         $anggaran->delete();
         
         return redirect()->back()->with('success', 'Catatan Anggaran berhasil di hapus!');

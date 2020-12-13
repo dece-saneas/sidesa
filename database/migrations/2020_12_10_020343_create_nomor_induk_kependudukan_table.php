@@ -39,6 +39,10 @@ class CreateNomorIndukKependudukanTable extends Migration
 			$table->foreign('rukun_warga_id')->references('id')->on('data_rukun_warga')->onDelete('set null');
 			$table->foreign('rukun_tetangga_id')->references('id')->on('data_rukun_tetangga')->onDelete('set null');
         });
+        
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('email')->nullable()->change();
+        });
     }
 
     /**

@@ -29,23 +29,23 @@
 					<div class="card-body">
 						<div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="number">Nomor RW</label>
-                                <input type="text" class="form-control @error('number') is-invalid @enderror" name="number" id="number" value="{{old('number', $rw->number)}}">
-                                @error('number')
+                                <label for="dusun">Dusun</label>
+                                <select class="form-control selectDusun @error('dusun') is-invalid @enderror" name="dusun" id="dusun">
+                                    <option></option>
+                                    @foreach ($dusun as $no => $d)
+                                    <option value="{{ $d->id }}" @if($d->id == $rw->dusun_id) selected @endif>{{ $d->name }}</option>
+                                    @endforeach
+							    </select>
+                                @error('dusun')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="dusun">Dusun</label>
-                                <select class="form-control selectDusun @error('dusun') is-invalid @enderror" name="dusun" id="dusun">
-                                    <option></option>
-                                    @foreach ($dusun as $no => $d)
-                                    <option value="{{ $d->id }}" @if(old('dusun', $d->id) == $rw->dusun_id) selected @endif>{{ $d->name }}</option>
-                                    @endforeach
-							    </select>
-                                @error('dusun')
+                                <label for="number">Nomor RW</label>
+                                <input type="text" class="form-control @error('number') is-invalid @enderror" name="number" id="number" value="{{ $rw->number }}">
+                                @error('number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

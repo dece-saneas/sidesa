@@ -22,7 +22,6 @@
 			<div class="text-right mb-4">
 				<div class="btn-group mb-2">
 					<a href="{{ route('penduduk.filter.kurangmampu') }}" class="btn btn-dark"><i class="fas fa-caret-down mr-2"></i>Kurang Mampu</a>
-					<a href="{{ route('penduduk.filter.warga') }}" class="btn btn-dark"><i class="fas fa-caret-down mr-2"></i>Warga Desa</a>
 				</div>
 				<div class="btn-group mb-2">
 					<a href="{{ route('penduduk.create') }}" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>
@@ -49,30 +48,29 @@
 							@foreach ($user as $no => $u)
 							<tr>
 								<td class="align-middle text-center">{{ $no+1+(($user->currentpage()-1)*10) }}</td>
-								<td class="align-middle ">{{ $u->user->nik->code }}</td>
-								<td class="align-middle">{{ $u->user->name }}</td>
-								<td class="align-middle text-center">{{ $u->user->nik->gender }}</td>
-								<td class="align-middle">{{ $u->user->nik->address }}</td>
+								<td class="align-middle ">{{ $u->nik->code }}</td>
+								<td class="align-middle">{{ $u->name }}</td>
+								<td class="align-middle text-center">{{ $u->nik->gender }}</td>
+								<td class="align-middle">{{ $u->nik->address }}</td>
 								<td class="align-middle text-center">
-									@if($u->user->hasRole('Warga'))
-									@else <span class="badge badge-dark">Non Warga</span>
+									@if($u->hasRole('Warga'))
+									@else <a href="{{ route('penduduk.toggle.warga', $u->id) }}"><span class="badge badge-dark">Non Warga</span></a>
 									@endif
-									@foreach ($u->user->getRoleNames() as $role) 
+									@foreach ($u->getRoleNames() as $role) 
+                                    @if($role == 'Warga')
+									<a href="{{ route('penduduk.toggle.warga', $u->id) }}"><span class="badge badge-primary">Warga</span></a>
+                                    @else
 									<span class="badge badge-primary">{{ $role }}</span>
+                                    @endif
 									@endforeach
 								</td>
 								<td class="align-middle text-center">
-                                    @if(!empty($u->user->warga_kurang_mampu))
-									<span class="badge badge-dark">Kurang Mampu</span>
-                                    @else
-                                    -
-                                    @endif
+                                    <a href="{{ route('penduduk.toggle.kurangmampu', $u->id) }}"><span class="badge @if(!empty($u->warga_kurang_mampu)) badge-dark @else badge-primary @endif">@if(!empty($u->warga_kurang_mampu)) Kurang Mampu @else Mampu @endif</span></a>
 								</td>
 								<td class="align-middle text-center">
 									<div class="btn-group" role="group">
-										<a href="{{ route('penduduk.toggle.warga', $u->user->id) }}" class="btn btn-primary"><i class="fas fa-user"></i></a>
 										<a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-										<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Hapus Penduduk" data-note="Anda akan menghapus {{$u->name}}." data-url="{{ route('penduduk.destroy', $u->user->id) }}"><i class="fas fa-trash"></i></button>
+										<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Hapus Penduduk" data-note="Anda akan menghapus {{$u->name}}." data-url="{{ route('penduduk.destroy', $u->id) }}"><i class="fas fa-trash"></i></button>
 									</div>
 								</td>
 							</tr>

@@ -28,24 +28,35 @@
 					</div>
 					<div class="card-body">
 						<div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="number">Nomor RT</label>
-                                <input type="text" class="form-control @error('number') is-invalid @enderror" name="number" id="number" value="{{ old('number') }}">
-                                @error('number')
+                            <div class="form-group col-md-4">
+                                <label for="dusun">Dusun</label>
+                                <select class="form-control selectDusun @error('dusun') is-invalid @enderror" name="dusun" id="dusunJSON" data-url="{{ route('site') }}">
+                                    <option></option>
+                                    @foreach ($dusun as $no => $d)
+                                    <option value="{{ $d->id }}">{{ $d->name }}</option>
+                                    @endforeach
+							    </select>
+                                @error('dusun')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="rw">Nomor RW</label>
-                                <select class="form-control selectRW @error('rw') is-invalid @enderror" name="rw" id="rw">
+                                <select class="form-control selectRW @error('rw') is-invalid @enderror" name="rw" id="rwJSON">
                                     <option></option>
-                                    @foreach ($rw as $no => $r)
-                                    <option value="{{ $r->id }}">RW {{ $r->number }}</option>
-                                    @endforeach
 							    </select>
                                 @error('rw')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="number">Nomor RT</label>
+                                <input type="text" class="form-control @error('number') is-invalid @enderror" name="number" id="number">
+                                @error('number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

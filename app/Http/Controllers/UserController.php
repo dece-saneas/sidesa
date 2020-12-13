@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Auth;
+use DB;
 use App\Models\user;
 use App\Models\NIK;
 use App\Models\RT;
@@ -20,57 +22,96 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-	
-/// -------------------------------------------------------------------------------------------------------------------------------------- PENDUDUK
+    
+    public function json_rw($id)
+    {
+        if (auth()->user()->hasrole('Admin')) {
+            $rw = RW::where('dusun_id', $id)->get();
+        }elseif (auth()->user()->hasrole('Ketua RW')) {
+            $rw = RW::where('id', auth()->user()->rw->id)->get();
+        }elseif (auth()->user()->hasrole('Ketua RT')) {
+            $rw = RW::where('id', auth()->user()->rt->rukun_warga->id)->get();
+        }
+        
+        return response()->json($rw);
+    }
+    
+    public function json_rt($id)
+    {
+        if (auth()->user()->hasrole('Admin')) {
+            $rt = RT::where('rukun_warga_id', $id)->get();
+        }elseif (auth()->user()->hasrole('Ketua RT')) {
+            $rt = RT::where('id', auth()->user()->rt->id)->get();
+        }
+        
+        return response()->json($rt);
+    }
+    
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- PENDUDUK
     
     public function penduduk()
 	{
-		$user = User::paginate(10);
-		
+        if (auth()->user()->hasrole('Admin')) {
+            $user = User::paginate(10);
+        }elseif (auth()->user()->hasrole('Ketua RT')) {
+            $id = RT::find(auth()->user()->rt->id)->id;
+            $user = User::whereHas('nik', function ($query) use ($id) {
+                $query->where('rukun_tetangga_id', $id);
+            })->paginate(10);
+        }
+        
 		return view('dashboard.penduduk.index',['user' => $user]);
 	}
     
     public function penduduk_create()
 	{
-		return view('dashboard.penduduk.create');
+        $user = User::all();
+        
+        if (auth()->user()->hasrole('Admin')) {
+            $dusun = Dusun::all();
+        }elseif (auth()->user()->hasrole('Ketua RT')) {
+            $dusun = Dusun::where('id', auth()->user()->rt->rukun_warga->dusun_id)->get();
+        }
+        
+		return view('dashboard.penduduk.create', ['user' => $user, 'dusun' => $dusun]);
 	}
     
     public function penduduk_store(Request $request)
     {
         $this->validate($request,[
             'name' => 'required',
-            'email' => 'required|unique:users,email',
             'nik' => 'required|unique:nomor_induk_kependudukan,code',
             'gender' => 'required',
             'place' => 'required',
             'dob' => 'required',
             'address' => 'required',
+            'dusun' => 'required',
+            'rw' => 'required',
+            'rt' => 'required',
         ]);
-
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make('12345678'),
         ]);
         
-        $user->assignRole('Warga');
-        
         NIK::create([
             'user_id' => $user->id,
-            'father_id' => NULL,
-            'mother_id' => NULL,
+            'father_id' => $request->dad,
+            'mother_id' => $request->mom,
             'code' => $request->nik,
             'place_of_birth' => $request->place,
             'date_of_birth' => $request->dob,
             'gender' => $request->gender,
-            'blood_type' => NULL,
+            'blood_type' => $request->blood,
             'address' => $request->address,
-            'dusun_id' => NULL,
-            'rukun_warga_id' => NULL,
-            'rukun_tetangga_id' => NULL,
-            'religion' => NULL,
-            'married_status' => NULL,
-            'job_status' => NULL,
+            'dusun_id' => $request->dusun,
+            'rukun_warga_id' => $request->rw,
+            'rukun_tetangga_id' => $request->rt,
+            'religion' => $request->religion,
+            'married_status' => $request->married,
+            'job_status' => $request->job,
         ]);
 
         return redirect()->route('penduduk')->with('success', 'Penduduk berhasil di tambahkan!');
@@ -78,8 +119,16 @@ class UserController extends Controller
     
     public function penduduk_edit($id)
 	{
-		$user = User::find($id);
-		return view('dashboard.penduduk.edit',['user' => $user]);
+		$penduduk = User::find($id);
+        $user = User::all();
+        
+        if (auth()->user()->hasrole('Admin')) {
+            $dusun = Dusun::all();
+        }elseif (auth()->user()->hasrole('Ketua RT')) {
+            $dusun = Dusun::where('id', auth()->user()->rt->rukun_warga->dusun_id)->get();
+        }
+        
+		return view('dashboard.penduduk.edit',['user' => $user, 'penduduk' => $penduduk, 'dusun' => $dusun]);
 	}
 	
 	public function penduduk_update(Request $request, $id)
@@ -121,20 +170,26 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect()->back()->with('success', 'Penduduk berhasil di hapus!');
+        return redirect()->route('penduduk')->with('success', 'Penduduk berhasil di hapus!');
     }
-    
-    public function penduduk_filter_warga()
-	{
-		$user = User::role('Warga')->paginate(10);
-		
-		return view('dashboard.penduduk.index',['user' => $user]);
-	}
     
     public function penduduk_filter_kurangmampu()
 	{
-		$user = KurangMampu::paginate(10);
-		
+        if (auth()->user()->hasrole('Admin')) {
+            $user = User::whereHas('warga_kurang_mampu', function ($query) {
+                $query->where('id', '>', 0);
+            })->paginate(10);
+        }elseif (auth()->user()->hasrole('Ketua RT')) {
+            
+            $id = RT::find(auth()->user()->rt->id)->id;
+            
+            $user = User::whereHas('warga_kurang_mampu', function ($query) use ($id){
+                $query->where('id', '>', 0);
+            })->whereHas('nik', function ($query) use ($id){
+                $query->where('rukun_tetangga_id', $id);
+            })->paginate(10);
+        }
+        
 		return view('dashboard.penduduk.kurang-mampu',['user' => $user]);
 	}
     
@@ -167,25 +222,42 @@ class UserController extends Controller
 		return redirect()->back();
 	}
     
-/// -------------------------------------------------------------------------------------------------------------------------------------- RUKUN TETANGGA - RT
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- RUKUN TETANGGA
     
     public function rt()
-	{
-		$rt = RT::paginate(10);
+	{if (auth()->user()->hasPermissionTo('rukun-tetangga')) {
+        
+        if (auth()->user()->hasrole('Admin')) {
+            $rt = RT::paginate(10);
+        }elseif (auth()->user()->hasrole('Ketua RW')) {
+            $rw = RW::where('user_id', auth()->user()->id)->first();
+            $rt = RT::where('rukun_warga_id', $rw->id)->paginate(10);
+        }
 		
 		return view('dashboard.rukun-tetangga.index',['rt' => $rt]);
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function rt_create()
-	{
-        $rw = RW::all();
+	{if (auth()->user()->hasPermissionTo('rukun-tetangga-create')) {
+        
         $user = User::all();
-		return view('dashboard.rukun-tetangga.create',['user' => $user, 'rw' => $rw]);
-	}
+        
+        if (auth()->user()->hasrole('Admin')) {
+            $dusun = Dusun::all();
+        }elseif (auth()->user()->hasrole('Ketua RW')) {
+            $dusun = Dusun::where('id', auth()->user()->rw->dusun_id)->get();
+        }
+        
+		return view('dashboard.rukun-tetangga.create',['user' => $user, 'dusun' => $dusun]);
+	}else{return abort(403);}}
     
     public function rt_store(Request $request)
-    {
+    {if (auth()->user()->hasPermissionTo('rukun-tetangga-create')) {
+        
         $this->validate($request,[
+            'dusun' => 'required',
             'number' => 'required',
             'rw' => 'required',
             'user' => 'required',
@@ -206,18 +278,30 @@ class UserController extends Controller
         ]);
         
         return redirect()->route('rt')->with('success', 'RT berhasil di tambahkan!');
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function rt_edit($id)
-	{
+	{if (auth()->user()->hasPermissionTo('rukun-tetangga-edit')) {
+        
 		$rt = RT::find($id);
-        $rw = RW::all();
         $user = User::all();
-		return view('dashboard.rukun-tetangga.edit',['user' => $user, 'rw' => $rw, 'rt' => $rt]);
-	}
+        
+        if (auth()->user()->hasrole('Admin')) {
+            $dusun = Dusun::all();
+            $rw = RW::where('dusun_id', $rt->rukun_warga->dusun_id)->get();
+        }elseif (auth()->user()->hasrole('Ketua RW')) {
+            $dusun = Dusun::where('id', auth()->user()->rw->dusun_id)->get();
+            $rw = RW::where('id', auth()->user()->rw->id)->get();
+        }
+        
+		return view('dashboard.rukun-tetangga.edit',['user' => $user, 'dusun' => $dusun, 'rt' => $rt, 'rw' => $rw]);
+	}else{return abort(403);}}
 	
     public function rt_update(Request $request, $id)
-    {
+    {if (auth()->user()->hasPermissionTo('rukun-tetangga-edit')) {
+        
         $rt = RT::find($id);
         
 		$this->validate($request,[
@@ -249,37 +333,57 @@ class UserController extends Controller
 		$rt->save();
 		
         return redirect()->route('rt')->with('success', 'Data RT berhasil di ubah!');
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
 	public function rt_destroy($id)
-    {
+    {if (auth()->user()->hasPermissionTo('rukun-tetangga-edit')) {
+        
         $rt = RT::find($id);
+        
         if($rt->user_id > 0) {
             $user = User::find($rt->user_id);
             $user->removeRole('Ketua RT');
         }
+        
         $rt->delete();
+        
         return redirect()->route('rt')->with('success', 'RT berhasil di hapus!');
-    }
+    }else{return abort(403);}}
 
-/// -------------------------------------------------------------------------------------------------------------------------------------- RUKUN WARGA - RW
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- RUKUN WARGA
     
 	public function rw()
-	{
-		$rw = RW::paginate(10);
-		
+	{if (auth()->user()->hasPermissionTo('rukun-warga')) {
+
+        $rw = RW::paginate(10);
+        
+		if (auth()->user()->hasrole('Kepala Dusun')) {
+            $dusun = Dusun::where('user_id', auth()->user()->id)->first();
+            $rw = RW::where('dusun_id', $dusun->id)->paginate(10);
+        }
+        
 		return view('dashboard.rukun-warga.index',['rw' => $rw]);
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
     public function rw_create()
-	{
+	{if (auth()->user()->hasPermissionTo('rukun-warga-create')) {
+        
         $dusun = Dusun::all();
         $user = User::all();
+        
+        if (auth()->user()->hasrole('Kepala Dusun')) {
+            $dusun = Dusun::where('user_id', auth()->user()->id)->get();
+        }
+        
 		return view('dashboard.rukun-warga.create',['user' => $user, 'dusun' => $dusun]);
-	}
+	}else{return abort(403);}}
     
     public function rw_store(Request $request)
-    {
+    {if (auth()->user()->hasPermissionTo('rukun-warga-create')) {
         $this->validate($request,[
             'number' => 'required',
             'dusun' => 'required',
@@ -301,19 +405,26 @@ class UserController extends Controller
         ]);
         
         return redirect()->route('rw')->with('success', 'RW berhasil di tambahkan!');
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function rw_edit($id)
-	{
+	{if (auth()->user()->hasPermissionTo('rukun-warga-edit')) {
+        
 		$rw = RW::find($id);
         $dusun = Dusun::all();
         $user = User::all();
+        
+        if (auth()->user()->hasrole('Kepala Dusun')) {
+            $dusun = Dusun::where('user_id', auth()->user()->id)->get();
+        }
+        
 		return view('dashboard.rukun-warga.edit',['user' => $user, 'rw' => $rw, 'dusun' => $dusun]);
-	}
+	}else{return abort(403);}}
     
     public function rw_update(Request $request, $id)
-    {
-        $rw = RW::find($id);
+    {if (auth()->user()->hasPermissionTo('rukun-warga-edit')) {
         
 		$this->validate($request,[
             'number' => 'required',
@@ -321,6 +432,7 @@ class UserController extends Controller
             'user' => 'required',
         ]);
         
+        $rw = RW::find($id);
         $ID = NULL;
         
         if($request->user > 0) {
@@ -344,43 +456,56 @@ class UserController extends Controller
 		$rw->save();
 		
         return redirect()->route('rw')->with('success', 'Data RW berhasil di ubah!');
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function rw_destroy($id)
-    {
+    {if (auth()->user()->hasPermissionTo('rukun-warga-destroy')) {
+        
         $rw = RW::find($id);
+        
         if($rw->user_id > 0) {
             $user = User::find($rw->user_id);
             $user->removeRole('Ketua RW');
         }
+        
         $rt = RT::where('rukun_warga_id', $id)->get();
+        
         if(count($rt) > 0) {
             foreach($rt as $r) {
                 $user = User::find($r->user_id);
                 $user->removeRole('Ketua RT');
             }
         }
+        
         $rw->delete();
+        
         return redirect()->route('rw')->with('success', 'RW berhasil di hapus!');
-    }
+    }else{return abort(403);}}
     
-/// -------------------------------------------------------------------------------------------------------------------------------------- DUSUN
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- DUSUN
     
 	public function dusun()
-	{
+	{if (auth()->user()->hasPermissionTo('dusun')) {
 		$dusun = Dusun::paginate(10);
 		
 		return view('dashboard.dusun.index',['dusun' => $dusun]);
-	}
+	}else{return abort(403);}}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function dusun_create()
-	{
+	{if (auth()->user()->hasPermissionTo('dusun-create')) {
+        
         $user = User::all();
+        
 		return view('dashboard.dusun.create',['user' => $user]);
-	}
+	}else{return abort(403);}}
     
     public function dusun_store(Request $request)
-    {
+    {if (auth()->user()->hasPermissionTo('dusun-create')) {
+        
         $this->validate($request,[
             'name' => 'required',
             'user' => 'required',
@@ -400,17 +525,22 @@ class UserController extends Controller
         ]);
         
         return redirect()->route('dusun')->with('success', 'Dusun berhasil di tambahkan!');
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function dusun_edit($id)
-	{
+	{if (auth()->user()->hasPermissionTo('dusun-edit')) {
+        
 		$dusun = Dusun::find($id);
         $user = User::all();
+        
 		return view('dashboard.dusun.edit',['user' => $user, 'dusun' => $dusun]);
-	}
+	}else{return abort(403);}}
     
     public function dusun_update(Request $request, $id)
-    {
+    {if (auth()->user()->hasPermissionTo('dusun-edit')) {
+        
         $dusun = Dusun::find($id);
         
 		$this->validate($request,[
@@ -440,7 +570,9 @@ class UserController extends Controller
 		$dusun->save();
 		
         return redirect()->route('dusun')->with('success', 'Data Dusun berhasil di ubah!');
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function dusun_destroy($id)
     {
@@ -467,7 +599,7 @@ class UserController extends Controller
         return redirect()->route('dusun')->with('success', 'Dusun berhasil di hapus!');
     }
     
-/// -------------------------------------------------------------------------------------------------------------------------------------- DUSUN
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- JURNALIS
     
     public function jurnalis()
 	{
