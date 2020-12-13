@@ -23,6 +23,8 @@ class UserController extends Controller
         $this->middleware('auth');
     }
     
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- JSON
+    
     public function json_rw($id)
     {
         if (auth()->user()->hasrole('Admin')) {
@@ -35,6 +37,8 @@ class UserController extends Controller
         
         return response()->json($rw);
     }
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function json_rt($id)
     {
@@ -128,6 +132,9 @@ class UserController extends Controller
 	{
 		$penduduk = User::find($id);
         $user = User::all();
+        $data_dusun = Dusun::find($penduduk->nik->dusun_id);
+        $data_rw = RW::find($penduduk->nik->rukun_warga_id);
+        $data_rt = RT::find($penduduk->nik->rukun_tetangga_id);
         
         if (auth()->user()->hasrole('Admin')) {
             $dusun = Dusun::all();
@@ -135,7 +142,7 @@ class UserController extends Controller
             $dusun = Dusun::where('id', auth()->user()->rt->rukun_warga->dusun_id)->get();
         }
         
-		return view('dashboard.penduduk.edit',['user' => $user, 'penduduk' => $penduduk, 'dusun' => $dusun]);
+		return view('dashboard.penduduk.edit',['user' => $user, 'penduduk' => $penduduk, 'dusun' => $dusun, 'data_dusun' => $data_dusun, 'data_rw' => $data_rw, 'data_rt' => $data_rt]);
 	}
 	
 	public function penduduk_update(Request $request, $id)
@@ -144,13 +151,14 @@ class UserController extends Controller
 		
         $this->validate($request,[
             'name' => 'required',
-            'email' => 'required|unique:users,email,'.$user->id,
-            'nik' => 'required|unique:nomor_induk_kependudukan,code,'.$user->nik->id,
+            'nik' => 'required|unique:nomor_induk_kependudukan,code',
             'gender' => 'required',
             'place' => 'required',
             'dob' => 'required',
             'address' => 'required',
-			'password' => 'nullable|confirmed',
+            'dusun' => 'required',
+            'rw' => 'required',
+            'rt' => 'required',
         ]);
 
 		$user->name = $request->name;
@@ -158,11 +166,20 @@ class UserController extends Controller
 		$user->save();
 
 		$nik = NIK::where('user_id', $id)->first();
-		$nik->code=  $request->nik;
-		$nik->place_of_birth=  $request->place;
-		$nik->date_of_birth=  $request->dob;
-		$nik->gender=  $request->gender;
-		$nik->address=  $request->address;
+		$nik->father_id = $request->dad;
+		$nik->mother_id = $request->mom;
+		$nik->code = $request->nik;
+		$nik->blood_type = $request->blood;
+		$nik->dusun_id = $request->dusun;
+		$nik->rukun_warga_id = $request->rw;
+		$nik->rukun_tetangga_id = $request->rt;
+		$nik->religion = $request->religion;
+		$nik->married_status = $request->married;
+		$nik->job_status = $request->job;
+		$nik->place_of_birth = $request->place;
+		$nik->date_of_birth = $request->dob;
+		$nik->gender = $request->gender;
+		$nik->address = $request->address;
 		$nik->save();
 		
 		if(!empty($request->password)) {
@@ -173,12 +190,18 @@ class UserController extends Controller
         return redirect()->route('penduduk')->with('success', 'Data penduduk berhasil di ubah!');
 	}
     
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     public function penduduk_destroy($id)
-    {
+    {if (auth()->user()->hasPermissionTo('penduduk-create')) {
+        
         $user = User::find($id);
         $user->delete();
+        
         return redirect()->route('penduduk')->with('success', 'Penduduk berhasil di hapus!');
-    }
+    }else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function penduduk_filter_kurangmampu()
 	{
