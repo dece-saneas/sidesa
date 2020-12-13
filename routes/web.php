@@ -74,14 +74,10 @@ Route::delete('/dashboard/aspiration/{id}', 'AspirasiController@destroy')->name(
 Route::post('/json-rw/{id}','UserController@json_rw');
 Route::post('/json-rt/{id}','UserController@json_rt');
 
-
-
-
-
-
 Route::get('/dashboard/jurnalis', 'UserController@jurnalis')->name('jurnalis');
-Route::get('/dashboard/jurnalis/tambah', 'UserController@jurnalis_create')->name('jurnalis.create');
-Route::post('/dashboard/jurnalis/tambah', 'UserController@jurnalis_store')->name('jurnalis.store');
+
+Route::get('/dashboard/jurnalis/create', 'UserController@jurnalis_create')->name('jurnalis.create');
+Route::post('/dashboard/jurnalis/create', 'UserController@jurnalis_store')->name('jurnalis.store');
 Route::delete('/dashboard/jurnalis/{id}', 'UserController@jurnalis_destroy')->name('jurnalis.destroy');
 
 

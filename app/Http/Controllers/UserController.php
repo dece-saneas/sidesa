@@ -137,11 +137,7 @@ class UserController extends Controller
         $data_rw = RW::find($penduduk->nik->rukun_warga_id);
         $data_rt = RT::find($penduduk->nik->rukun_tetangga_id);
         
-        if (auth()->user()->hasrole('Admin')) {
-            $dusun = Dusun::all();
-        }elseif (auth()->user()->hasrole('Ketua RT')) {
-            $dusun = Dusun::where('id', auth()->user()->rt->rukun_warga->dusun_id)->get();
-        }
+        $dusun = Dusun::all();
         
 		return view('dashboard.penduduk.edit',['user' => $user, 'penduduk' => $penduduk, 'dusun' => $dusun, 'data_dusun' => $data_dusun, 'data_rw' => $data_rw, 'data_rt' => $data_rt]);
 	}else{return abort(403);}}
@@ -638,20 +634,26 @@ class UserController extends Controller
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- JURNALIS
     
     public function jurnalis()
-	{
+	{if (auth()->user()->hasPermissionTo('jurnalis')) {
+        
 		$jurnalis = Jurnalis::paginate(10);
 		
 		return view('dashboard.jurnalis.index',['jurnalis' => $jurnalis]);
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function jurnalis_create()
-	{
+	{if (auth()->user()->hasPermissionTo('jurnalis-create')) {
+        
         $user = User::all();
+        
 		return view('dashboard.jurnalis.create',['user' => $user]);
-	}
+	}else{return abort(403);}}
     
     public function jurnalis_store(Request $request)
-    {
+    {if (auth()->user()->hasPermissionTo('jurnalis-create')) {
+        
         $this->validate($request,[
             'user' => 'required',
         ]);
@@ -660,19 +662,25 @@ class UserController extends Controller
         $user->assignRole('Jurnalis');
         
         $jurnalis = Jurnalis::create([
-            'code' => 'BJ'.str_pad($request->user, 4, '0', STR_PAD_LEFT),
+            'code' => 'BJ'.date("Ymdhis"),
             'user_id' =>  $request->user,
         ]);
         
         return redirect()->route('jurnalis')->with('success', 'Jurnalis berhasil di tambahkan!');
-	}
+	}else{return abort(403);}}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function jurnalis_destroy($id)
-    {
+    {if (auth()->user()->hasPermissionTo('jurnalis-destroy')) {
+        
         $jurnalis = Jurnalis::find($id);
+        
         $user = User::find($jurnalis->user_id);
         $user->removeRole('Jurnalis');
+        
         $jurnalis->delete();
-        return redirect()->route('jurnalis')->with('success', 'Jurnalis berhasil di hapus!');
-    }
+        
+        return redirect()->back()->with('success', 'Jurnalis berhasil di hapus!');
+    }else{return abort(403);}}
 }

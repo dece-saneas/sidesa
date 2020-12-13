@@ -50,15 +50,21 @@
 								<td class="align-middle">{{ $j->user->nik->address }}</td>
 								<td class="align-middle text-center">
 									@if($j->user->hasRole('Warga'))
-									@else <span class="badge badge-dark">Non Warga</span>
+									@else <a href="{{ route('penduduk.toggle.warga', $j->user->id) }}"><span class="badge badge-dark">Non Warga</span></a>
 									@endif
 									@foreach ($j->user->getRoleNames() as $role) 
+                                    @if($role == 'Warga')
+									<a href="{{ route('penduduk.toggle.warga', $j->user->id) }}"><span class="badge badge-primary">Warga</span></a>
+                                    @else
 									<span class="badge badge-primary">{{ $role }}</span>
+                                    @endif
 									@endforeach
 								</td>
 								<td class="align-middle text-center">
 									<div class="btn-group" role="group">
+                                        @can('jurnalis-edit')
 										<a href="{{ route('penduduk.edit', $j->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                        @endcan
                                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Hapus Jurnalis" data-note="Anda akan menghapus {{$j->user->name}} dari daftar Jurnalis." data-url="{{ route('jurnalis.destroy', $j->id) }}"><i class="fas fa-trash"></i></button>
 									</div>
 								</td>
