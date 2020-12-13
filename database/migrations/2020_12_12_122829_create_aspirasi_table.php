@@ -13,9 +13,15 @@ class CreateAspirasiTable extends Migration
      */
     public function up()
     {
-        Schema::create('aspirasi', function (Blueprint $table) {
+        Schema::create('aspiration', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->string('title');
+            $table->text('message');
+            $table->string('status');
             $table->timestamps();
+			
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -26,6 +32,6 @@ class CreateAspirasiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aspirasi');
+        Schema::dropIfExists('aspiration');
     }
 }

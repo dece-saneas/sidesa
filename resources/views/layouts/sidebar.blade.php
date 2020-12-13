@@ -36,7 +36,7 @@
                 @endcan
                 @can('aspirasi')
 				<li class="nav-item">
-					<a href="#" class="nav-link">
+					<a href="{{ route('aspiration') }}" class="nav-link">
 						<i class="nav-icon fas fa-bullhorn"></i><p>Aspirasi</p>
 					</a>
 				</li>

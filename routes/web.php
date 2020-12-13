@@ -65,6 +65,12 @@ Route::get('/dashboard/penduduk/filter/warga-kurang-mampu', 'UserController@pend
 Route::get('/dashboard/penduduk/toggle/warga-kurang-mampu/{id}', 'UserController@penduduk_toggle_kurangmampu')->name('penduduk.toggle.kurangmampu');
 Route::get('/dashboard/penduduk/toggle/warga/{id}', 'UserController@penduduk_toggle_warga')->name('penduduk.toggle.warga');
 
+Route::get('/dashboard/aspiration', 'AspirasiController@index')->name('aspiration');
+Route::get('/dashboard/aspiration/create', 'AspirasiController@create')->name('aspiration.create');
+Route::post('/dashboard/aspiration/create', 'AspirasiController@store')->name('aspiration.store');
+Route::get('/dashboard/aspiration/{id}/process', 'AspirasiController@process')->name('aspiration.process');
+Route::delete('/dashboard/aspiration/{id}', 'AspirasiController@destroy')->name('aspiration.destroy');
+
 Route::post('/json-rw/{id}','UserController@json_rw');
 Route::post('/json-rt/{id}','UserController@json_rt');
 
@@ -81,3 +87,16 @@ Route::delete('/dashboard/jurnalis/{id}', 'UserController@jurnalis_destroy')->na
 
 
 Route::get('/dashboard/berita/buat-berita', 'NewsController@create')->name('news.create');
+
+
+
+
+
+
+
+
+
+
+
+
+

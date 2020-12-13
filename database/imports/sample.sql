@@ -386,6 +386,8 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (14, 1),
 (15, 1),
 (16, 1),
+(26, 1),
+(30, 1),
 (31, 1),
 (32, 1),
 (33, 1),
@@ -411,6 +413,9 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (4, 4),
 (31, 4),
 -- Warga
+(26, 5),
+(27, 5),
+(29, 5),
 (31, 5),
 (35, 5),
 (36, 5),
