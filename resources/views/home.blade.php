@@ -217,6 +217,40 @@
 		</div>
 	</div>
 </section>
+<!-- Covid-19 -->
+<section class="w3_stats py-5" id="stats">
+	<div class="container py-lg-5 py-md-4 py-2">
+		<div class="title-content text-center">
+			<h3 class="title-big">Statistik Pengunjung website.</h3>
+			<h4 class="title-big">Desa Blang Kolak II.</h4>
+		</div>
+		<div class="w3-stats text-center">
+			<div class="row">
+				<div class="col-md-4 col-12">
+					<div class="counter">
+						<span class="fa fa-globe-asia"></span>
+						<div class="timer count-title count-number mt-3" data-to="20" data-speed="1000"></div>
+						<p class="count-text ">Hari ini</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-12">
+					<div class="counter">
+						<span class="fa fa-globe-asia"></span>
+						<div class="timer count-title count-number mt-3" data-to="684" data-speed="1000"></div>
+						<p class="count-text ">Bulan ini</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-12">
+					<div class="counter">
+						<span class="fa fa-globe-asia"></span>
+						<div class="timer count-title count-number mt-3" data-to="4822" data-speed="1000"></div>
+						<p class="count-text ">Tahun ini</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 <!-- logo -->
 <section class="w3l-clients py-5" id="clients">
 	<div class="call-w3 py-lg-5 py-md-4">
