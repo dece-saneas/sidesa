@@ -41,7 +41,7 @@
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info Publik</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="{{ route('article') }}">Artikel</a>
+									<a class="dropdown-item" href="{{ route('site.article') }}">Artikel</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">
@@ -147,7 +147,7 @@
 							</div>
 							<div class="footers14-bottom d-flex">
 								<div class="copyright">
-									<p>© 2020 Blang Kolak II. All rights reserved. Design by <a href="#">W3Layouts</a> | <a href="#">Dece Saneas</a></p>
+									<p>© 2020 Blang Kolak II. All rights reserved. Design by <a href="#">W3Layouts</a> | <a href="#">Aveas</a></p>
 								</div>
 								<div class="language-select d-flex">
 									<span class="fa fa-language" aria-hidden="true"></span>

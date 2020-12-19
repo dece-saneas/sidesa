@@ -20,7 +20,7 @@ class ArticleController extends Controller
     public function index()
 	{
         if (auth()->user()->hasrole('Admin')) {
-            $article = Article::paginate(10);
+            $article = Article::where('status', '!=' , 'Draft')->paginate(10);
         }elseif (auth()->user()->hasrole('Jurnalis')) {
             $article = Article::where('user_id', auth()->user()->id)->paginate(10);
         }
@@ -72,6 +72,78 @@ class ArticleController extends Controller
             $article->status = 'In Review';
             $article->save();
             return redirect()->route('article')->with('success', 'Artikel berhasil dikirim!');
+        }
+	}
+  
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function edit($id)
+	{
+        $article = Article::find($id);
+        
+		return view('dashboard.article-edit', ['article' => $article]);
+	}
+    
+    public function update(Request $request, $id)
+    {
+        
+		$article = Article::find($id);
+		
+        $this->validate($request,[
+            'title' => 'required',
+            'content' => 'required',
+            'image' => 'file|image|mimes:jpeg,png|max:2048',
+        ]);
+
+		$article->title = $request->title;
+		$article->content = $request->content;
+		$article->save();
+        
+        if($article->note != NULL) {
+            $article->note = $article->note.' [Update]';
+            $article->save();
+        }
+        
+        if($request->hasFile('image')){
+            File::delete('img/article/'.$article->image);
+            $image = $request->file('image');
+            $image_filename = time().'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(795, 586)->save(public_path('img/article/'.$image_filename));
+            $article->image = $image_filename;
+            $article->save();
+        }
+        
+        return redirect()->route('article.show', $id)->with('success', 'Artikel berhasil di ubah!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function update_note(Request $request, $id)
+    {
+        $article = Article::find($id);
+        $article->note = $request->note;
+        $article->save();
+       
+        return redirect()->route('article')->with('success', 'Note Artikel berhasil dikirim!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function update_confirm(Request $request, $id, $type)
+    {
+        if($type == 'approve') {
+            $article = Article::find($id);
+            $article->status = 'Approved';
+            $article->note = NULL;
+            $article->save();
+
+            return redirect()->back()->with('success', 'Artikel sudah di terima!');
+        }else {
+            $article = Article::find($id);
+            $article->status = 'Published';
+            $article->save();
+
+            return redirect()->back()->with('success', 'Artikel berhasil di publish!');
         }
 	}
     

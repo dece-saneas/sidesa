@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Article;
 
 class SiteController extends Controller
 {
@@ -26,6 +27,7 @@ class SiteController extends Controller
 	
 	public function article()
 	{
-		return view('article');
+        $article = Article::where('status', 'Published')->paginate(5);
+		return view('article', ['article' => $article]);
 	}
 }

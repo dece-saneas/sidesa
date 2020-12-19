@@ -1,12 +1,12 @@
 @extends('layouts.master-frontend')
 
-@section('title') Desa Blang Kolak II - Article @endsection
+@section('title') Desa Blang Kolak II - Artikel @endsection
 
 @section('content')
 <div class="inner-banner">
     <section class="w3l-breadcrumb py-5">
         <div class="container py-lg-5 py-md-3">
-            <h2 class="title">Article</h2>
+            <h2 class="title">Artikel</h2>
         </div>
     </section>
 </div>
@@ -19,35 +19,31 @@
 </div>
 <section class="w3l-blogblock py-5">
 	<div class="container pt-lg-4 pt-md-3">
-		<div class="item">
+        @if (count($article) > 0)
+        @foreach ($article as $no => $a)
+		<div class="item mt-5">
 			<div class="row">
 				<div class="col-lg-6">
 					<a href="#">
-						<img class="card-img-bottom d-block radius-image-full" src="{{ asset('img/news/news1.jpg') }}" alt="Card image cap">
+						<img class="card-img-bottom d-block radius-image-full" src="{{ asset('img/article/'.$a->image) }}" alt="Card image cap">
 					</a>
 				</div>
 				<div class="col-lg-6 blog-details align-self mt-lg-0 mt-4">
-					<a href="#" class="blog-desc-big">Charity, Faith and hope, Help the poor, Help the Homeless</a>
+					<a href="#" class="blog-desc-big">{{ $a->title }}</a>
 					<div class="entry-meta mb-3">
 						<span class="posted-on">By</span>
-						<span class="comments-link"> <a href="#">Padlika</a> </span> /
-						<span class="cat-links"><a href="#url" rel="category tag">Kesehatan</a></span> / 
-						<span class="posted-on"><span class="published"> 18 Desember 2020</span></span>
+						<span class="comments-link"> <a href="#">{{ $a->user->name }}</a> </span> /
+						<span class="posted-on"><span class="published"> {{ $a->created_at->format('d F Y') }}</span></span>
 					</div>
-					<p>Lorem ipsum dolor sit amet elit. Eos, odit non ossimus voluptas sit nihil nam id explicabo saepe sapiente, dicta officia odio natus nemo. Ratione ipsa esse quod autem, in fugit odio.</p>
+                    {!! Str::limit($a->content, 120) !!}
+					<p></p>
 					<a href="#" class="btn btn-primary btn-style mt-4">Read More</a>
 				</div>
 			</div>
 		</div>
-		<div class="pagination-wrapper my-lg-5 mt- py-lg-3 text-center">
-			<ul class="page-pagination">
-				<li><a class="next" href="#url"><span class="fa fa-angle-left"></span> Prev</a></li>
-				<li><a class="page-numbers" href="#url">1</a></li>
-				<li><span aria-current="page" class="page-numbers current">2</span></li>
-				<li><a class="page-numbers" href="#url">3</a></li>
-				<li><a class="next" href="#url">Next <span class="fa fa-angle-right"></span></a></li>
-			</ul>
-		</div>
+        @endforeach
+        {{ $article->links('layouts.pagination-frontend') }}
+        @endif
 	</div>
 </section>
 @endsection

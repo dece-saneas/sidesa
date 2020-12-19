@@ -51,7 +51,7 @@
                                         <td class="align-middle">{{ Str::limit($a->title, 80) }}</td>
                                         <td class="align-middle text-center">{{ $a->created_at->format('F d, Y') }} <br> {{ $a->created_at->format('G:i') }} WIB</td>
                                         <td class="align-middle text-center">
-                                            <span class="badge badge-dark">{{ $a->status }}</span>
+                                            <span class="badge @if($a->status == 'Published') badge-success @else badge-dark @endif">{{ $a->status }}</span>
                                         </td>
                                         <td class="align-middle text-center">
                                             <div class="btn-group" role="group">
