@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Image;
+use Auth;
+use File;
+use App\Models\Article;
+
+class ArticleController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function index()
+	{
+        if (auth()->user()->hasrole('Admin')) {
+            $article = Article::paginate(10);
+        }elseif (auth()->user()->hasrole('Jurnalis')) {
+            $article = Article::where('user_id', auth()->user()->id)->paginate(10);
+        }
+        
+		return view('dashboard.article', ['article' => $article]);
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function show($id)
+	{
+        $article = Article::find($id);
+        
+		return view('dashboard.article-show', ['article' => $article]);
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function create()
+	{
+		return view('dashboard.article-create');
+	}
+    
+    public function store(Request $request)
+    {
+        
+        $this->validate($request,[
+            'title' => 'required',
+            'content' => 'required',
+            'image' => 'required|file|image|mimes:jpeg,png|max:2048',
+        ]);
+        
+        $image = $request->file('image');
+        $image_filename = time().'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(795, 586)->save(public_path('img/article/'.$image_filename));
+        
+        $article = Article::create([
+            'user_id' => Auth::user()->id,
+            'title' => $request->title,
+            'content' => $request->content,
+            'image' => $image_filename,
+            'status' => 'Draft',
+            'note' => NULL,
+        ]);
+        
+        if($request->save){
+            return redirect()->route('article')->with('success', 'Draft artikel berhasil disimpan!');
+        } else {
+            $article->status = 'In Review';
+            $article->save();
+            return redirect()->route('article')->with('success', 'Artikel berhasil dikirim!');
+        }
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function destroy($id)
+    {
+        $article = Article::find($id);
+        File::delete('img/article/'.$article->image);
+        $article->delete();
+        
+        return redirect()->route('article')->with('success', 'Artikel berhasil dihapus!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+}

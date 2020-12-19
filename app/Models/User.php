@@ -39,6 +39,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 	
+    /**
+     * The attributes for relation.
+     *
+     * @var array
+     */
+    public function article()
+    {
+    	return $this->hasMany('App\Models\Article');
+    }
+    
+    
+    
+    
+    
 	public function nik()
     {
     	return $this->hasOne('App\Models\NIK');
@@ -69,10 +83,6 @@ class User extends Authenticatable
     	return $this->hasOne('App\Models\Jurnalis');
     }
     
-    public function news()
-    {
-    	return $this->hasMany('App\Models\Jurnalis');
-    }
     
     public function aspirasi()
     {

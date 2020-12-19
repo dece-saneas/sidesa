@@ -75,14 +75,18 @@ Route::post('/json-rw/{id}','UserController@json_rw');
 Route::post('/json-rt/{id}','UserController@json_rt');
 
 Route::get('/dashboard/jurnalis', 'UserController@jurnalis')->name('jurnalis');
-
 Route::get('/dashboard/jurnalis/create', 'UserController@jurnalis_create')->name('jurnalis.create');
 Route::post('/dashboard/jurnalis/create', 'UserController@jurnalis_store')->name('jurnalis.store');
 Route::delete('/dashboard/jurnalis/{id}', 'UserController@jurnalis_destroy')->name('jurnalis.destroy');
 
 
 
-Route::get('/dashboard/berita/buat-berita', 'NewsController@create')->name('news.create');
+
+Route::get('/dashboard/article', 'ArticleController@index')->name('article');
+Route::get('/dashboard/article/{id}', 'ArticleController@show')->name('article.show');
+Route::get('/dashboard/article/create', 'ArticleController@create')->name('article.create');
+Route::post('/dashboard/article/create', 'ArticleController@store')->name('article.store');
+Route::delete('/dashboard/article/{id}', 'ArticleController@destroy')->name('article.destroy');
 
 
 

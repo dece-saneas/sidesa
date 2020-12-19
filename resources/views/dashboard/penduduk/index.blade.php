@@ -19,16 +19,38 @@
 	<!-- Main -->
 	<div class="content pb-4">
 		<div class="container-fluid">
-			<div class="text-right mb-4">
-				<div class="btn-group mb-2">
-					<a href="{{ route('penduduk.filter.kurangmampu') }}" class="btn btn-dark"><i class="fas fa-caret-down mr-2"></i>Kurang Mampu</a>
-				</div>
-				<div class="btn-group mb-2">
-					<a href="{{ route('penduduk.create') }}" class="btn btn-success"><i class="fas fa-plus-circle mr-2"></i>Tambah</a>
-					<a href="{{ route('penduduk') }}" class="btn btn-dark" id="refresh"><i class="fas fa-sync-alt mr-2 refresh"></i>Refresh</a>
-				</div>
-			</div>
-			@if (count($user) > 0)
+            <div class="row">
+                
+                <div class="col-md-2">
+			<div class="card">
+                <div class="card-body text-center">
+                <a class="btn btn-success btn-block" href="{{ route('penduduk.create') }}">Add New</a>
+                <a class="btn btn-default btn-block" href="{{ route('penduduk') }}">Refresh</a>
+                
+                </div>
+                </div>
+                <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('penduduk.store') }}" method="POST">
+                        <div class="form-group">
+                            <select class="form-control selectGender @error('gender') is-invalid @enderror" name="gender" id="gender">
+                                    <option></option>
+                                    <option value="Laki-Laki" selected>Semua</option>
+                                    <option value="Perempuan" @if(old('gender') == 'Perempuan') selected @endif>Kurang Mampu</option>
+							    </select>
+                                @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
+                <a class="btn btn-primary btn-block" href="{{ route('penduduk.filter.kurangmampu') }}">Apply Filter</a>
+                    </form>
+                </div>
+                </div>
+                </div>
+                <div class="col-md-10">
+                    @if (count($user) > 0)
 			<div class="card">
 				<div class="card-body table-responsive">
 					<table class="table table-sm table-hover">
@@ -51,7 +73,7 @@
 								<td class="align-middle ">{{ $u->nik->code }}</td>
 								<td class="align-middle">{{ $u->name }}</td>
 								<td class="align-middle text-center">{{ $u->nik->gender }}</td>
-								<td class="align-middle">{{ $u->nik->address }}</td>
+								<td class="align-middle">{{ Str::limit($u->nik->address, 50) }}</td>
 								<td class="align-middle text-center">
 									@if($u->hasRole('Warga'))
 									@else <a href="{{ route('penduduk.toggle.warga', $u->id) }}"><span class="badge badge-dark">Non Warga</span></a>
@@ -85,6 +107,9 @@
 				<img src="{{ asset('img/no-results.gif')}}" alt="">
 			</div>
 			@endif
+                </div>
+            </div>
+			
 		</div>
 	</div>
 </div>

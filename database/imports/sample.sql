@@ -390,6 +390,8 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (18, 1),
 (19, 1),
 (20, 1),
+(21, 1),
+(25, 1),
 (26, 1),
 (30, 1),
 (31, 1),
@@ -423,8 +425,12 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (31, 5),
 (35, 5),
 (36, 5),
-(38, 5);
+(38, 5),
 -- Jurnalis
+(21, 6),
+(22, 6),
+(23, 6),
+(24, 6);
 
 INSERT INTO `data_warga_kurang_mampu` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 17, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),

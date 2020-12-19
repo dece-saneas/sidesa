@@ -1,8 +1,25 @@
-$(function(){
-	$("#refresh").click(function(){
-		$(".refresh").addClass("fa-spin")
-	});
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Article Upload Image
+
+$(function () {
+    $("#upfile-article").click(function () {
+        $("#file-article").trigger('click');
+    });
 });
+
+function readImageArticle(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+            $('.img-article').attr('src', e.target.result);
+        };
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Select2 Placeholder
 
 $(function () {
 	$('.selectGender').select2({
@@ -80,6 +97,10 @@ $(function () {
 		allowClear: true
 	});
 });
+
+
+
+
 
 $(function () {
     $('#datetimeBirth').datetimepicker({
@@ -160,3 +181,11 @@ $(function(){
         });
     });
 });
+
+$(function () {
+    // Summernote
+    $('#summernote').summernote()
+  })
+
+
+

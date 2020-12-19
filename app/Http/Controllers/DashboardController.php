@@ -30,7 +30,7 @@ class DashboardController extends Controller
 		$KCP = curl_exec($KC);
 		curl_close($KC);
 		$result=json_decode($KCP,true);
-		$covid = $result[14]['attributes'];
+		$covid = $result[16]['attributes'];
         
         return view('dashboard',['covid' => $covid]);
     }

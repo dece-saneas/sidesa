@@ -20,7 +20,7 @@
 		<div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4 col-6">
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-white">
                         <div class="inner">
                             <h3>{{ $covid['Kasus_Posi'] }}</h3>
                             <p>Total Positif</p>
@@ -28,11 +28,10 @@
                         <div class="icon">
                             <i class="fas fa-procedures"></i>
                         </div>
-                        <a href="https://kawalcorona.com/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-6">
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-white">
                         <div class="inner">
                             <h3>{{ $covid['Kasus_Semb'] }}</h3>
                             <p>Total Sembuh</p>
@@ -40,11 +39,10 @@
                         <div class="icon">
                             <i class="fas fa-heartbeat"></i>
                         </div>
-                        <a href="https://kawalcorona.com/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-6">
-                    <div class="small-box bg-danger">
+                    <div class="small-box bg-white">
                         <div class="inner">
                             <h3>{{ $covid['Kasus_Meni'] }}</h3>
                             <p>Total Meninggal</p>
@@ -52,7 +50,6 @@
                         <div class="icon">
                             <i class="fas fa-sad-tear"></i>
                         </div>
-                        <a href="https://kawalcorona.com/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
