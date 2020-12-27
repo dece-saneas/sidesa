@@ -6,3 +6,8 @@
 .no-result {
 	padding: 100px 0;
 }
+
+.vl {
+  border-left: 1px solid green;
+  height: 100%;
+}

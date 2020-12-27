@@ -20,24 +20,23 @@
 	<div class="content pb-4">
 		<div class="container-fluid">
             <div class="row">
-                <div class="col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <a class="btn btn-success btn-block" href="{{ route('article.create') }}">Add New</a>
-                            <a class="btn btn-default btn-block" href="{{ route('article') }}">Refresh</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-10">
+                <div class="col">
                     @if (count($article) > 0)
                     <div class="card">
+                        <div class="card-header">
+                <div class="float-right">
+                  <button type="button" class="btn btn-primary"><i class="fas fa-plus mr-2"></i>Create New</button>
+                </div>
+                <button type="reset" class="btn btn-default"><i class="fas fa-sync-alt mr-2"></i>Refresh</button>
+                        </div>
                         <div class="card-body table-responsive">
                             <table class="table table-sm table-hover">
                                 <thead>
                                     <tr>
                                         <th width="5%" class="text-center">No</th>
-                                        <th width="5%">Image</th>
-                                        <th width="60%">Title</th>
+                                        <th width="10%">Jurnalis</th>
+                                        <th width="5%" class="text-center">Image</th>
+                                        <th width="50%">Title</th>
                                         <th width="10%" class="text-center">Created</th>
                                         <th width="10%" class="text-center">Status</th>
                                         <th width="10%" class="text-center">Action</th>
@@ -47,7 +46,8 @@
                                     @foreach ($article as $no => $a)
                                     <tr>
                                         <td class="align-middle text-center">{{ $no+1+(($article->currentpage()-1)*10) }}</td>
-                                        <td class="align-middle "><img src="{{ asset('img/article/'.$a->image) }}" alt="Article Image" class="img-thumbnail img-fluid"></td>
+                                        <td class="align-middle">{{ $a->user->name }}</td>
+                                        <td class="align-middle"><img src="{{ asset('img/article/'.$a->image) }}" alt="Article Image" class="img-thumbnail img-fluid"></td>
                                         <td class="align-middle">{{ Str::limit($a->title, 80) }}</td>
                                         <td class="align-middle text-center">{{ $a->created_at->format('F d, Y') }} <br> {{ $a->created_at->format('G:i') }} WIB</td>
                                         <td class="align-middle text-center">

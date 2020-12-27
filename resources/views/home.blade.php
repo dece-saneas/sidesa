@@ -63,7 +63,7 @@
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-12 mt-lg-0 mt-sm-4 mt-3">
 				<div class="box-wrap">
-					<h4><a href="#contact">Hubungi kami</a></h4>
+					<h4><a href="#footer">Hubungi kami</a></h4>
 				</div>
 			</div>
 		</div>
@@ -263,40 +263,6 @@
 					</div>
 					<div class="col-lg-2 col-md-3 col-4">
 						<img src="{{ asset('img/logo/logo2.png') }}" alt="" class="img-fluid">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- kontak -->
-<section class="w3l-contact-7 py-5" id="contact">
-	<div class="contacts-9 py-lg-5 py-md-4">
-		<div class="container">
-			<div class="top-map">
-				<div class="row map-content-9">
-					<div class="col-lg-8">
-						<h3 class="title-big">Kirim Pesan</h3>
-						<p class="mb-4 mt-lg-0 mt-2">Email dan data anda tidak akan di publikasi. Tanda bintang (*) wajib di isi.</p>
-						<form action="#" method="post" class="text-right">
-							<div class="form-grid">
-								<input type="text" name="w3lName" id="w3lName" placeholder="Nama Lengkap*" required="">
-								<input type="email" name="w3lSender" id="w3lSender" placeholder="Email*" required="">
-								<input type="text" name="w3lPhone" id="w3lPhone" placeholder="Nomor Handphone*"
-								required="">
-								<input type="text" name="w3lSubject" id="w3lSubject" placeholder="Subject">
-							</div>
-							<textarea name="w3lMessage" id="w3lMessage" placeholder="Isi Pesan"></textarea>
-							<button type="submit" class="btn btn-primary btn-style mt-3">Kirim Pesan</button>
-					</form>
-					</div>
-					<div class="col-lg-4 cont-details">
-						<address>
-							<h5 class="">Alamat</h5>
-							<p><span class="fa fa-map-marker"></span>Desa Blang Kolak II, Kecamatan Bebesan, Kabupaten Aceh Tengah, Provinsi Aceh.</p>
-							<p> <a href="mailto:blangkolakdua@sidesa.id"><span class="fa fa-envelope"></span>blangkolakdua@sidesa.id</a></p>
-							<p><span class="fa fa-phone"></span><a href="tel:021345678910">021345678910</a></p>
-						</address>
 					</div>
 				</div>
 			</div>

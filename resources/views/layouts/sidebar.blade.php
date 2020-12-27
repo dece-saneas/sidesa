@@ -1,9 +1,17 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-no-expand">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<a href="{{ route('site') }}" class="brand-link">
-		<img src="{{ asset('img/user.jpg') }}" alt="User Image" class="brand-image img-circle elevation-2">
-		<span class="brand-text font-weight-light">{{ Auth::user()->name }}</span>
+		<img src="{{ asset('favicon.png') }}" alt="User Image" class="brand-image">
+		<span class="brand-text font-weight-light"><strong>SIDesa</strong></span>
 	</a>
 	<div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{{ asset('img/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+            </div>
+        </div>
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">

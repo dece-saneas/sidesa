@@ -21,66 +21,109 @@
 	<div class="content pb-4">
 		<div class="container-fluid">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-8 offset-md-2">
+                    
                     <div class="card">
-                        <div class="card-body text-center">
-                            @hasrole('Admin')
-                            @if($article->status == 'In Review')
-                            <a class="btn btn-default btn-block" href="{{ route('article.update.confirm', [$article->id, 'approve']) }}">Approve</a>
-                            @elseif($article->status == 'Approved')
-                            <a class="btn btn-default btn-block" href="{{ route('article.update.confirm', [$article->id, 'publish']) }}">Publish</a>
-                            @elseif($article->status == 'Published')
-                            <a class="btn btn-success btn-block" href="{{ route('article.update.confirm', [$article->id, 'approve']) }}">Published</a>
-                            @endif
-                            @endhasrole
-                            @hasrole('Jurnalis')
-                            @if($article->status == 'In Review')
-                            <a class="btn btn-primary btn-block" href="{{ route('article.edit', $article->id) }}">Edit</a>
-                            @elseif($article->status == 'Approved' || $article->status == 'Published')
-                            <button class="btn btn-default btn-block" disabled>Edit</button>
-                            @endif
-                            @endhasrole
-                        </div>
-                    </div>
+                        <div class="card-header">
+                <div class="float-right">
+                  <button type="button" class="btn btn-default"><i class="fas fa-check mr-2"></i>Approve</button>
                 </div>
-                <div class="col-md-10">
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <h2>{{ $article->title }}</h2>
-                            <h6>By {{ $article->user->name }} / {{ $article->created_at->format('F d, Y') }} - {{ $article->created_at->format('G:i') }} WIB</h6>
+                <button type="reset" class="btn btn-default"><i class="fas fa-times mr-2"></i>Cancel</button>
                         </div>
                         <div class="card-body">
                             <img src="{{ asset('img/article/'.$article->image) }}" alt="Article Image" class="w-100 img-thumbnail">
                         </div>
                         <div class="card-body">
+                            <div class="text-center">
+                            
+                            <h1>{{ $article->title }}</h1>
+                            </div>
                             {!! $article->content !!}
                         </div>
+                        
+                        
                     </div>
                     @hasrole('Admin')
                     @if($article->status == 'In Review')
-                    <div class="card">
-                        <form action="{{ route('article.update.note', $article->id) }}" method="POST" enctype="multipart/form-data">
-				        @csrf @method('PUT')
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label for="note" class="col-sm-2 col-form-label">Note</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control @error('note') is-invalid @enderror" id="note" name="note" placeholder="Write note for creator">{{ $article->note }}</textarea>
-                                     @error('note')
-                                     <span class="invalid-feedback" role="alert">
-                                         <strong>{{ $message }}</strong>
-                                     </span>
-                                     @enderror
+                    
+                    <div class="card direct-chat direct-chat-primary">
+                        <div class="card-footer">
+                            <h3 class="card-title">Discussion</h3>
+                        </div>
+                        <div class="card-footer card-comments">
+                <div class="card-comment">
+                  <!-- User image -->
+                  <img class="img-circle img-sm" src="{{ asset('img/user/bot.jpg') }}" alt="User Image">
+
+                  <div class="comment-text">
+                    <span class="username">
+                      @BOT
+                      <span class="text-muted float-right">8:03 PM - 
+                        
+                        @if (\Carbon\Carbon::parse('2020-12-25 02:11:11')->toDateString() === date('Y-m-d'))
+    Today
+@elseif (\Carbon\Carbon::parse('2020-12-25 02:11:11')->toDateString() === date('Y-m-d', strtotime('-1 day')))
+    Yesterday
+@else
+    {{'25 December 2020'}}
+@endif
+                        
+                        </span>
+                    </span><!-- /.username -->
+                    <strong>Jurnalis Pertama</strong> Telah membuat artikel.
+                  </div>
+                  <!-- /.comment-text -->
+                </div>
+                <!-- /.card-comment -->
+                <div class="card-comment">
+                  <!-- User image -->
+                  <img class="img-circle img-sm" src="{{ asset('img/user.jpg') }}" alt="User Image">
+
+                  <div class="comment-text">
+                    <span class="username">
+                      Admin Pertama
+                      <span class="text-muted float-right">8:03 PM - Today</span>
+                    </span><!-- /.username -->
+                    Mohon di perbaiki penulisan nya mas di bagian pembukaan itu, Terimakasih.
+                  </div>
+                  <!-- /.comment-text -->
+                </div>
+                <!-- /.card-comment -->
+                <!-- /.card-comment -->
+                <div class="card-comment">
+                  <!-- User image -->
+                  <img class="img-circle img-sm" src="{{ asset('img/user/placeholder.jpg') }}" alt="User Image">
+
+                  <div class="comment-text">
+                    <span class="username">
+                      Jurnalis Pertama
+                        
+                      <span class="text-muted float-right">8:03 PM - Today</span>
+                    </span><!-- /.username -->
+                    Sudah saya revisi pak, coba diperiksa kembali ya. <a href=""><span class="badge badge-light">Delete</span></a>
+                  </div>
+                  <!-- /.comment-text -->
+                </div>
+                <!-- /.card-comment -->
+              </div>
+                        <div class="card-footer">
+                <form action="#" method="post">
+                  <img class="img-fluid img-circle img-sm" src="{{ asset('img/user.jpg') }}" alt="Alt Text">
+                  <!-- .img-push is used to add margin to elements next to floating images -->
+                  <div class="img-push">
+                      <form action="#" method="post">
+                                <div class="input-group">
+                                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                                    <span class="input-group-append">
+                                        <button type="button" class="btn btn-primary"><i class="fa fa-paper-plane mr-2"></i>Send</button>
+                                    </span>
                                 </div>
-                            </div>
-                        </div>
-                        <hr class="m-0">
-                        <div class="card-body text-right">
-                            <a href="{{ route('article') }}" class="btn btn-default mr-2">Cancel</a>
-                            <button class="btn btn-success" type="submit">Send Note</button>
-                        </div>
-                        </form>
+                            </form>
+                  </div>
+                </form>
+              </div>
                     </div>
+                </div>
                     @endif
                     @endhasrole
                     @hasrole('Jurnalis')
@@ -97,6 +140,7 @@
                     @endif
                     @endhasrole
                 </div>
+                
             </div>
 		</div>
 	</div>

@@ -3,34 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
 
 class DashboardController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     public function index()
     {
-        $KC = curl_init();
-		curl_setopt($KC, CURLOPT_URL, 'https://api.kawalcorona.com/indonesia/provinsi/');
-		curl_setopt($KC, CURLOPT_RETURNTRANSFER, 1);
-		$KCP = curl_exec($KC);
-		curl_close($KC);
-		$result=json_decode($KCP,true);
-		$covid = $result[16]['attributes'];
+        // Kawal Corona
+        
+        $CURL = curl_init();
+		curl_setopt($CURL, CURLOPT_URL, 'https://api.kawalcorona.com/indonesia/provinsi/');
+		curl_setopt($CURL, CURLOPT_RETURNTRANSFER, 1);
+		$CURL_EXEC = curl_exec($CURL);
+		curl_close($CURL);
+		$CURL_RESULT=json_decode($CURL_EXEC,true);
+        
+        $KEY = -1;
+        
+        foreach($CURL_RESULT as $i=>$DATA){
+            if($DATA['attributes']['Provinsi'] == "Aceh"){
+                $KEY = $i;
+            }
+        }
+        
+		$covid = $CURL_RESULT[$KEY]['attributes'];
         
         return view('dashboard',['covid' => $covid]);
     }
