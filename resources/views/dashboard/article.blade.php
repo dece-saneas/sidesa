@@ -17,9 +17,8 @@
 		</div>
 	</div>
 	<!-- Main -->
-    
-    <section class="content">
-        <div class="container-fluid">
+    <section class="content pb-4">
+        <div class="container-fluid ">
             @if (count($article) > 0)
             <div class="card">
                 <div class="card-header">
@@ -49,10 +48,10 @@
                                 <td class="align-middle"><img src="{{ asset('img/article/'.$a->image) }}" alt="Article Image" class="img-thumbnail img-fluid"></td>
                                 <td class="align-middle">{{ $a->user->name }}<br/><small>Created {{ $a->created_at->format('d/F/Y') }}</small></td>
                                 <td class="align-middle">{{ Str::limit($a->title, 80) }}</td>
-                                <td class="text-center align-middle"><span class="badge badge-dark">{{ $a->status }}</span></td>
+                                <td class="text-center align-middle"><span class="badge @if($a->status == 'Approved') badge-primary @elseif($a->status == 'Published') badge-success @else badge-dark @endif">{{ $a->status }}</span></td>
                                 <td class="text-center align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('article.show', Crypt::encrypt($a->id)) }}" class="btn btn-default"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('article.show', $a->id) }}" class="btn btn-default"><i class="fas fa-eye"></i></a>
                                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Delete Article!" data-note="This process cannot be undone." data-url="{{ route('article.destroy', $a->id) }}"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </td>

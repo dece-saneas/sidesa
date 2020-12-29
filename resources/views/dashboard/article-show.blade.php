@@ -26,14 +26,34 @@
                     <div class="card card-primary card-outline">
                         <div class="card-header">
 							<div class="float-right">
-								@if($article->status == 'Draft' || $article->status == 'In Review')
-								<a href="{{ route('article.edit', Crypt::encrypt($article->id)) }}" class="btn btn-default mr-2"><i class="fas fa-edit mr-2"></i>Edit</a>
-								@endif
-								@if($article->status == 'Draft')
-								<a href="{{ route('article.toggle', [Crypt::encrypt($article->id), Crypt::encrypt('review')]) }}" class="btn btn-success"><i class="fas fa-paper-plane mr-2"></i>Create Article</a>
-								@elseif($article->status == 'In Review')
-								<button class="btn btn-success" disabled><i class="fas fa-paper-plane mr-2"></i>In Review</button>
-								@endif
+                                @hasrole('Jurnalis')
+                                    @if($article->status == 'Draft' || $article->status == 'In Review')
+                                    <a href="{{ route('article.edit', $article->id) }}" class="btn btn-default mr-2"><i class="fas fa-edit mr-2"></i>Edit</a>
+                                    @elseif($article->status == 'Approved' || $article->status == 'Published')
+                                    <button class="btn btn-default mr-2" disabled><i class="fas fa-edit mr-2"></i>Edit</button>
+                                    @endif
+                                    @if($article->status == 'Draft')
+                                    <a href="{{ route('article.toggle', [$article->id, 'review']) }}" class="btn btn-success"><i class="fas fa-paper-plane mr-2"></i>Create Article</a>
+                                    @elseif($article->status == 'In Review')
+                                    <button class="btn btn-default" disabled><i class="fas fa-search mr-2"></i>In Review</button>
+                                    @elseif($article->status == 'Approved')
+                                    <button class="btn btn-primary" disabled><i class="fas fa-check mr-2"></i>Approved</button>
+                                    @elseif($article->status == 'Published')
+                                    <button class="btn btn-success" disabled><i class="fas fa-bookmark mr-2"></i>Published</button>
+                                    @endif
+                                @endhasrole
+                                @hasrole('Admin')
+                                    @if($article->status == 'In Review')
+                                    <a href="{{ route('article.toggle', [$article->id, 'approve']) }}" class="btn btn-default mr-2"><i class="fas fa-check mr-2"></i>Approve</a>
+                                    <a href="{{ route('article.toggle', [$article->id, 'publish']) }}" class="btn btn-default"><i class="fas fa-bookmark mr-2"></i>Publish</a>
+                                    @elseif($article->status == 'Approved')
+                                    <a href="{{ route('article.toggle', [$article->id, 'approve']) }}" class="btn btn-primary mr-2"><i class="fas fa-check mr-2"></i>Approved</a>
+                                    <a href="{{ route('article.toggle', [$article->id, 'publish']) }}" class="btn btn-default"><i class="fas fa-bookmark mr-2"></i>Publish</a>
+                                    @elseif($article->status == 'Published')
+                                    <a href="{{ route('article.toggle', [$article->id, 'approve']) }}" class="btn btn-primary mr-2"><i class="fas fa-check mr-2"></i>Approved</a>
+                                    <a href="{{ route('article.toggle', [$article->id, 'publish']) }}" class="btn btn-success"><i class="fas fa-bookmark mr-2"></i>Published</a>
+                                    @endif
+                                @endhasrole
 							</div>
 							<a href="{{ route('article') }}" class="btn btn-default"><i class="fas fa-times mr-2"></i>Cancel</a>
                         </div>
@@ -67,23 +87,18 @@
 										@endif
 										</span>
 									</span>
-									<form action="{{ route('article.comment.destroy', Crypt::encrypt($c->id)) }}" method="POST" class="delete" id="deleteComment">
-										<input type="hidden" name="_method" value="DELETE">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									{!! $c->comment !!} @if($c->user_id == Auth::user()->id)<a href="#" onclick="document.getElementById('deleteComment').submit()"><span class="badge badge-light">Delete</span></a> 
-									</form>
-									@endif
+									{!! $c->comment !!} @if($c->user_id == Auth::user()->id)<a href="{{ route('article-comment.destroy', $c->id) }}" ><span class="badge badge-light">Delete</span></a>@endif
 								</div>
 							</div>
 							@endforeach
 						</div>
 						<div class="card-footer">
-							<form action="{{ route('article.comment.store', Crypt::encrypt($article->id)) }}" method="POST">
+							<form action="{{ route('article-comment.store', $article->id) }}" method="POST">
 							@csrf
 								<img class="img-fluid img-circle img-sm" src="{{ asset('img/user/placeholder.jpg') }}" alt="Alt Text">
 								<div class="img-push">
 									<div class="input-group">
-										<input type="text" name="comment" placeholder="Type Message ..." class="form-control">
+										<input type="text" name="comment" placeholder="Type Message ..." class="form-control" @if($article->status == 'Approved' || $article->status == 'Published') disabled @endif>
 										<span class="input-group-append">
 											<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane mr-2"></i>Send</button>
 										</span>

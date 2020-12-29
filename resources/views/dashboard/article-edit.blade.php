@@ -68,7 +68,7 @@
                         <div class="float-right">
                         	<button class="btn btn-success" type="submit"><i class="fas fa-save mr-2"></i>Save</button>
                         </div>
-                        <a href="{{ route('article.show', Crypt::encrypt($article->id)) }}" class="btn btn-default"><i class="fas fa-times mr-2"></i>Cancel</a>
+                        <a href="{{ route('article.show', $article->id) }}" class="btn btn-default"><i class="fas fa-times mr-2"></i>Cancel</a>
                     </div>
 				</form>
             </div>

@@ -20,30 +20,8 @@
 					</a>
 				</li>
 				
-				@hasrole('Admin')
-				<li class="nav-item">
-					<a href="#" class="nav-link {{ set_active(['article', 'article.create']) }}">
-						<i class="nav-icon fas fa-desktop mr-2"></i><p>Website<i class="right fas fa-angle-left"></i></p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
-								<i class="fas fa-newspaper nav-icon mr-2"></i><p>Article</p>
-							</a>
-						</li>
-					</ul>
-				</li>
-                @endhasrole
 				
-                @hasrole('Jurnalis')
-				<li class="nav-item">
-					<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
-						<i class="nav-icon fas fa-newspaper mr-2"></i><p>Article</p>
-					</a>
-				</li>
-                @endhasrole
-				
-                <!--
+                
                 @can('surat')
 				<li class="nav-item">
 					<a href="{{ route('surat') }}" class="nav-link">
@@ -65,27 +43,11 @@
 					</a>
 				</li>
                 @endcan
-                @hasanyrole('Admin|Jurnalis')
+                @hasanyrole('Admin')
 				<li class="nav-item">
-					<a href="#" class="nav-link {{ set_active(['article', 'article.create']) }}">
-						<i class="nav-icon fas fa-user-tie"></i><p>Jurnalistik<i class="right fas fa-angle-left"></i></p>
+					<a href="{{ route('jurnalis') }}" class="nav-link">
+						<i class="nav-icon fas fa-user-tie"></i><p>Jurnalis</p>
 					</a>
-					<ul class="nav nav-treeview">
-                        @can('berita')
-						<li class="nav-item">
-							<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create']) }}">
-								<i class="fas fa-newspaper nav-icon"></i><p>Article</p>
-							</a>
-						</li>
-                        @endcan
-                        @can('jurnalis')
-						<li class="nav-item">
-							<a href="{{ route('jurnalis') }}" class="nav-link">
-								<i class="fas fa-user nav-icon"></i><p>Jurnalis</p>
-							</a>
-						</li>
-                        @endcan
-					</ul>
 				</li>
                 @endhasanyrole
                 @hasanyrole('Admin|Kepala Dusun|Ketua RW|Ketua RT')
@@ -124,7 +86,30 @@
                         @endcan
 					</ul>
 				</li>
-                @endhasanyrole-->
+                @endhasanyrole
+                
+                @hasrole('Jurnalis')
+				<li class="nav-item">
+					<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
+						<i class="nav-icon fas fa-newspaper mr-2"></i><p>Article</p>
+					</a>
+				</li>
+                @endhasrole
+				
+				@hasrole('Admin')
+				<li class="nav-item">
+					<a href="#" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
+						<i class="nav-icon fas fa-desktop mr-2"></i><p>Website<i class="right fas fa-angle-left"></i></p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
+								<i class="fas fa-newspaper nav-icon mr-2"></i><p>Article</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+                @endhasrole
 			</ul>
 		</nav>
 	</div>
