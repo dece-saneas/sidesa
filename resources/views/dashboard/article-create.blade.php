@@ -20,7 +20,7 @@
 	<!-- Main -->
 	<div class="content pb-4">
 		<div class="container">
-            <div class="card">
+            <div class="card card-primary card-outline">
 				<form action="{{ route('article.store') }}" method="POST" enctype="multipart/form-data">
 				@csrf
 					<div class="card-body">
@@ -67,7 +67,7 @@
                     <div class="card-body">
                         <div class="float-right">
                             <button class="btn btn-default mr-2" type="submit" name="save" value="save"><i class="fas fa-edit mr-2"></i>Save Draft</button>
-                            <button class="btn btn-success" type="submit" name="create" value="create"><i class="fas fa-plus mr-2"></i>Create Article</button>
+                            <button class="btn btn-success" type="submit" name="create" value="create"><i class="fas fa-paper-plane mr-2"></i>Create Article</button>
                         </div>
                         <a href="{{ route('article') }}" class="btn btn-default"><i class="fas fa-times mr-2"></i>Cancel</a>
                     </div>

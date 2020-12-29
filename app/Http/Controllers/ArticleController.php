@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Crypt;
 use Image;
 use Auth;
 use File;
@@ -15,6 +16,26 @@ class ArticleController extends Controller
     {
         $this->middleware('auth');
     }
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function toggle($id, $type)
+	{        
+		$article = Article::findorFail(Crypt::decrypt($id));
+		
+		if(Crypt::decrypt($type) == 'review') {
+			$article->status = 'In Review';
+            $article->save();
+			
+			$commet = ArticleComment::create([
+				'user_id' => NULL,
+				'article_id' => Crypt::decrypt($id),
+				'comment' => '<strong>'.Auth::user()->name.'</strong> Membuat artikel.',
+			]);
+		}
+		
+		return redirect()->back()->with('success', 'Artikel sedang di Review!');
+	}
 	
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -33,7 +54,7 @@ class ArticleController extends Controller
     
     public function show($id)
 	{
-        $article = Article::find($id);
+        $article = Article::findOrFail(Crypt::decrypt($id));
         
 		return view('dashboard.article-show', ['article' => $article]);
 	}
@@ -84,7 +105,7 @@ class ArticleController extends Controller
     
     public function edit($id)
 	{
-        $article = Article::find($id);
+        $article = Article::findorFail(Crypt::decrypt($id));
         
 		return view('dashboard.article-edit', ['article' => $article]);
 	}
@@ -118,19 +139,9 @@ class ArticleController extends Controller
             $article->save();
         }
         
-        return redirect()->route('article.show', $id)->with('success', 'Artikel berhasil di ubah!');
+        return redirect()->route('article.show', Crypt::encrypt($id))->with('success', 'Artikel berhasil di ubah!');
 	}
     
-// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
-    public function update_note(Request $request, $id)
-    {
-        $article = Article::find($id);
-        $article->note = $request->note;
-        $article->save();
-       
-        return redirect()->route('article')->with('success', 'Note Artikel berhasil dikirim!');
-	}
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -164,4 +175,30 @@ class ArticleController extends Controller
 	}
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function comment_store(Request $request, $id)
+    {
+        
+        $this->validate($request,[
+            'comment' => 'required',
+        ]);
+
+        $comment = ArticleComment::create([
+            'user_id' => Auth::user()->id,
+            'article_id' => Crypt::decrypt($id),
+            'comment' => $request->comment,
+        ]);
+		
+		return redirect()->back();
+	}
+	
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function comment_destroy($id)
+    {
+        $comment = ArticleComment::find(Crypt::decrypt($id));
+        $comment->delete();
+        
+        return redirect()->back();
+	}
 }

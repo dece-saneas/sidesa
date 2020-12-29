@@ -86,11 +86,15 @@ Route::get('/dashboard/article', 'ArticleController@index')->name('article');
 Route::get('/dashboard/article/create', 'ArticleController@create')->name('article.create');
 Route::post('/dashboard/article/create', 'ArticleController@store')->name('article.store');
 Route::get('/dashboard/article/{id}', 'ArticleController@show')->name('article.show');
-Route::get('/dashboard/article/{id}/edit', 'ArticleController@edit')->name('article.edit');
+Route::get('/dashboard/article/edit/{id}', 'ArticleController@edit')->name('article.edit');
 Route::put('/dashboard/article/{id}', 'ArticleController@update')->name('article.update');
 Route::put('/dashboard/article/{id}/note', 'ArticleController@update_note')->name('article.update.note');
 Route::get('/dashboard/article/{id}/confirm/{type}', 'ArticleController@update_confirm')->name('article.update.confirm');
 Route::delete('/dashboard/article/{id}', 'ArticleController@destroy')->name('article.destroy');
+
+Route::post('/dashboard/article/comment/create/{id}', 'ArticleController@comment_store')->name('article.comment.store');
+Route::delete('/dashboard/article/comment/{id}', 'ArticleController@comment_destroy')->name('article.comment.destroy');
+Route::get('/dashboard/article/{id}/{type}', 'ArticleController@toggle')->name('article.toggle');
 
 
 

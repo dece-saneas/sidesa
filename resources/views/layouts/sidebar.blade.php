@@ -6,7 +6,7 @@
 	<div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('img/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{ asset('img/user/placeholder.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -19,13 +19,30 @@
 						<i class="nav-icon fas fa-home mr-2"></i><p>Dashboard</p>
 					</a>
 				</li>
+				
+				@hasrole('Admin')
+				<li class="nav-item">
+					<a href="#" class="nav-link {{ set_active(['article', 'article.create']) }}">
+						<i class="nav-icon fas fa-desktop mr-2"></i><p>Website<i class="right fas fa-angle-left"></i></p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
+								<i class="fas fa-newspaper nav-icon mr-2"></i><p>Article</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+                @endhasrole
+				
                 @hasrole('Jurnalis')
 				<li class="nav-item">
-					<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create']) }}">
+					<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
 						<i class="nav-icon fas fa-newspaper mr-2"></i><p>Article</p>
 					</a>
 				</li>
                 @endhasrole
+				
                 <!--
                 @can('surat')
 				<li class="nav-item">

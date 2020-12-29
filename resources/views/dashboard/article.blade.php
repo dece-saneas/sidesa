@@ -24,7 +24,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="float-right">
+						@can('article-create')
                         <a href="{{ route('article.create') }}" class="btn btn-primary"><i class="fas fa-plus mr-2"></i>Create New</a>
+						@endcan
                     </div>
                     <a href="" class="btn btn-default"><i class="fas fa-sync-alt mr-2"></i>Refresh</a>
                 </div>
@@ -50,7 +52,7 @@
                                 <td class="text-center align-middle"><span class="badge badge-dark">{{ $a->status }}</span></td>
                                 <td class="text-center align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('article.show', $a->id) }}" class="btn btn-default"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('article.show', Crypt::encrypt($a->id)) }}" class="btn btn-default"><i class="fas fa-eye"></i></a>
                                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Delete Article!" data-note="This process cannot be undone." data-url="{{ route('article.destroy', $a->id) }}"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </td>
@@ -65,9 +67,11 @@
             <div class="row justify-content-center no-result">
                 <img src="{{ asset('img/no-results.gif')}}" alt="">
             </div>
+			@can('article-create')
             <div class="row justify-content-center">
                 <a href="{{ route('article.create') }}" class="btn btn-primary"><i class="fas fa-plus mr-2"></i>Create New</a>
             </div>
+			@endcan
             @endif
         </div>
     </section>

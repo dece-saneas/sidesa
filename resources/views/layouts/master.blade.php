@@ -8,7 +8,10 @@
     <title>SIDesa - @yield('title')</title>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- Script -->
+	<script src="{{ asset('js/pace.min.js') }}"></script>
     <!-- Styles -->
+	<link rel="stylesheet" href="{{ asset('css/pace.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">

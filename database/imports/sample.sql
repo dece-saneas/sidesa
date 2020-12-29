@@ -1,13 +1,4 @@
-INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'web', '2020-12-10 04:22:25', '2020-12-10 04:22:25'),
-(2, 'Kepala Dusun', 'web', '2020-12-10 04:22:25', '2020-12-10 04:22:25'),
-(3, 'Ketua RW', 'web', '2020-12-10 04:22:25', '2020-12-10 04:22:25'),
-(4, 'Ketua RT', 'web', '2020-12-10 04:22:25', '2020-12-10 04:22:25'),
-(5, 'Warga', 'web', '2020-12-10 04:22:25', '2020-12-10 04:22:25'),
-(6, 'Jurnalis', 'web', '2020-12-10 04:22:25', '2020-12-10 04:22:25');
-
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-('1','Admin Pertama','admin@sidesa.id',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1985-11-24 12:06:47','2010-01-30 15:05:57'),
 ('2','Matilda Lynch','grady.stacy@luettgen.org',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1974-08-31 03:19:44','2013-10-26 21:40:41'),
 ('3','Kepala Dusun Satu','kadus@sidesa.id',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1986-06-27 10:55:17','2000-06-14 05:46:59'),
 ('4','Carson Dooley','fritz.toy@yahoo.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1984-03-29 07:34:39','2017-11-07 23:02:27'),
@@ -109,7 +100,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 ('100','Kyleigh Reichel','itzel05@hauck.org',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1970-05-15 10:22:08','1980-06-21 09:40:45'); 
 
 INSERT INTO `nomor_induk_kependudukan` (`id`, `user_id`, `father_id`, `mother_id`, `code`, `place_of_birth`, `date_of_birth`, `gender`, `blood_type`, `address`, `dusun_id`, `rukun_warga_id`, `rukun_tetangga_id`, `religion`, `married_status`, `job_status`, `created_at`, `updated_at`) VALUES
-('1','1',NULL,NULL,'3579013105780002','Dominiquefort','2013-02-18 05:07:08','Laki-Laki',NULL,'9936 Becker Islands\nNorth Marge, AK 98508',NULL,NULL,NULL,NULL,NULL,NULL,'1985-05-10 23:21:14','2019-03-06 15:58:17'),
 ('2','2',NULL,NULL,'3579034809880001','Lake Laury','1980-08-02 04:58:19','Laki-Laki',NULL,'97675 Thea Shore Apt. 542\nKeelymouth, IA 90216',NULL,NULL,NULL,NULL,NULL,NULL,'1998-10-05 22:35:48','2005-08-29 13:19:26'),
 ('3','3',NULL,NULL,'3579031308090001','Port Randiview','1977-05-29 13:28:23','Perempuan',NULL,'717 McKenzie Trafficway\nRaemouth, VA 00365',NULL,NULL,NULL,NULL,NULL,NULL,'1992-12-30 04:51:52','2009-04-23 18:24:09'),
 ('4','4',NULL,NULL,'3579030510700002','Makennafurt','1992-05-01 02:24:22','Perempuan',NULL,'666 Derek Garden\nLeonieberg, RI 03521',NULL,NULL,NULL,NULL,NULL,NULL,'2014-06-20 13:28:12','1982-03-16 08:47:02'),
@@ -212,7 +202,6 @@ INSERT INTO `nomor_induk_kependudukan` (`id`, `user_id`, `father_id`, `mother_id
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 -- Admin
-(1, 'App\\Models\\User', 1),
 (1, 'App\\Models\\User', 2),
 (5, 'App\\Models\\User', 2),
 -- Kepala Dusun
@@ -327,110 +316,6 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (6, 'App\\Models\\User', 99),
 (5, 'App\\Models\\User', 99),
 (6, 'App\\Models\\User', 100);
-
-INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'penduduk', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(2, 'penduduk-create', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(3, 'penduduk-edit', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(4, 'penduduk-destroy', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(5, 'rukun-warga', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(6, 'rukun-warga-create', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(7, 'rukun-warga-edit', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(8, 'rukun-warga-destroy', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(9, 'rukun-tetangga', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(10, 'rukun-tetangga-create', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(11, 'rukun-tetangga-edit', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(12, 'rukun-tetangga-destroy', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(13, 'dusun', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(14, 'dusun-create', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(15, 'dusun-edit', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(16, 'dusun-destroy', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(17, 'jurnalis', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(18, 'jurnalis-create', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(19, 'jurnalis-edit', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(20, 'jurnalis-destroy', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(21, 'berita', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(22, 'berita-create', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(23, 'berita-edit', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(24, 'berita-destroy', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(25, 'berita-confirm', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(26, 'aspirasi', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(27, 'aspirasi-create', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(28, 'aspirasi-edit', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(29, 'aspirasi-destroy', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(30, 'aspirasi-confirm', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(31, 'anggaran', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(32, 'anggaran-create', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(33, 'anggaran-edit', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(34, 'anggaran-destroy', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(35, 'surat', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(36, 'surat-create', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(37, 'surat-process', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(38, 'surat-destroy', 'web', '2020-12-10 04:22:29', '2020-12-10 04:22:29');
-
-INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
--- Admin
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(5, 1),
-(6, 1),
-(7, 1),
-(8, 1),
-(9, 1),
-(10, 1),
-(11, 1),
-(12, 1),
-(13, 1),
-(14, 1),
-(15, 1),
-(16, 1),
-(17, 1),
-(18, 1),
-(19, 1),
-(20, 1),
-(21, 1),
-(25, 1),
-(26, 1),
-(30, 1),
-(31, 1),
-(32, 1),
-(33, 1),
-(34, 1),
-(35, 1),
-(37, 1),
--- Kepala Dusun
-(5, 2),
-(6, 2),
-(7, 2),
-(8, 2),
-(31, 2),
--- Ketua RW
-(9, 3),
-(10, 3),
-(11, 3),
-(12, 3),
-(31, 3),
--- Ketua RT
-(1, 4),
-(2, 4),
-(3, 4),
-(4, 4),
-(31, 4),
--- Warga
-(26, 5),
-(27, 5),
-(29, 5),
-(31, 5),
-(35, 5),
-(36, 5),
-(38, 5),
--- Jurnalis
-(21, 6),
-(22, 6),
-(23, 6),
-(24, 6);
 
 INSERT INTO `data_warga_kurang_mampu` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 17, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
