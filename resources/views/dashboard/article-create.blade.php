@@ -23,32 +23,7 @@
             <div class="card">
 				<form action="{{ route('article.store') }}" method="POST" enctype="multipart/form-data">
 				@csrf
-                    <div class="card-header">
-                    <strong>Create Article</strong>
-                    </div>
 					<div class="card-body">
-                         <div class="form-group row">
-                             <label for="title" class="col-sm-2 col-form-label">Title</label>
-                             <div class="col-sm-10">
-                                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Article Title" name="title">
-                                 @error('title')
-                                 <span class="invalid-feedback" role="alert">
-                                     <strong>{{ $message }}</strong>
-                                 </span>
-                                 @enderror
-                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="content" class="col-sm-2 col-form-label">Content</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control @error('content') is-invalid @enderror" id="summernote" name="content"></textarea>
-                                 @error('content')
-                                 <span class="invalid-feedback" role="alert">
-                                     <strong>{{ $message }}</strong>
-                                 </span>
-                                 @enderror
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="image" class="col-sm-2 col-form-label">Image</label>
                             <div class="col-sm-10 d-none">
@@ -65,16 +40,43 @@
                                 @enderror
                             </div>
                         </div>
-					</div>
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-2 col-form-label">Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Article Title" name="title">
+                                @error('title')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="content" class="col-sm-2 col-form-label">Content</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control @error('content') is-invalid @enderror" id="summernote" name="content"></textarea>
+                                @error('content')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
                     <hr class="m-0">
-                    <div class="card-body text-right">
-                        <a href="{{ route('article') }}" class="btn btn-default mr-2">Cancel</a>
-                        <button class="btn btn-default mr-2" type="submit" name="save" value="save">Save Draft</button>
-                        <button class="btn btn-success" type="submit" name="create" value="create">Create Article</button>
-					</div>
+                    <div class="card-body">
+                        <div class="float-right">
+                            <button class="btn btn-default mr-2" type="submit" name="save" value="save"><i class="fas fa-edit mr-2"></i>Save Draft</button>
+                            <button class="btn btn-success" type="submit" name="create" value="create"><i class="fas fa-plus mr-2"></i>Create Article</button>
+                        </div>
+                        <a href="{{ route('article') }}" class="btn btn-default"><i class="fas fa-times mr-2"></i>Cancel</a>
+                    </div>
 				</form>
             </div>
 		</div>
 	</div>
+    <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
 </div>
 @endsection

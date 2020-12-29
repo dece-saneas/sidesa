@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-no-expand">
 	<a href="{{ route('site') }}" class="brand-link">
 		<img src="{{ asset('favicon.png') }}" alt="User Image" class="brand-image">
 		<span class="brand-text font-weight-light"><strong>SIDesa</strong></span>
@@ -16,10 +16,17 @@
 			<ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
 					<a href="{{ route('dashboard') }}" class="nav-link {{ set_active(['dashboard']) }}">
-						<i class="nav-icon fas fa-home"></i><p>Dashboard</p>
+						<i class="nav-icon fas fa-home mr-2"></i><p>Dashboard</p>
 					</a>
 				</li>
-				<li class="nav-header">MENU UTAMA</li>
+                @hasrole('Jurnalis')
+				<li class="nav-item">
+					<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create']) }}">
+						<i class="nav-icon fas fa-newspaper mr-2"></i><p>Article</p>
+					</a>
+				</li>
+                @endhasrole
+                <!--
                 @can('surat')
 				<li class="nav-item">
 					<a href="{{ route('surat') }}" class="nav-link">
@@ -100,7 +107,7 @@
                         @endcan
 					</ul>
 				</li>
-                @endhasanyrole
+                @endhasanyrole-->
 			</ul>
 		</nav>
 	</div>

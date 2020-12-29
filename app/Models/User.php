@@ -88,4 +88,9 @@ class User extends Authenticatable
     {
     	return $this->hasMany('App\Models\Aspirasi');
     }
+    
+    public function article_comment()
+    {
+    	return $this->hasMany('App\Models\ArticleComment');
+    }
 }

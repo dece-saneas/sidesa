@@ -187,5 +187,8 @@ $(function () {
     $('#summernote').summernote()
   })
 
-
-
+  // The Calender
+  $('#calendar').datetimepicker({
+    format: 'L',
+    inline: true
+  })

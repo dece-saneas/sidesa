@@ -4,10 +4,21 @@
 }
 
 .no-result {
-	padding: 100px 0;
+	padding-top: 80px;
 }
 
 .vl {
   border-left: 1px solid green;
   height: 100%;
+}
+
+.back-to-top{
+    bottom:2.6rem;
+    position:fixed;
+    right:1.25rem;
+    z-index:1032;
+}
+
+html {
+  scroll-behavior: smooth;
 }

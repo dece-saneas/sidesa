@@ -7,6 +7,7 @@ use Image;
 use Auth;
 use File;
 use App\Models\Article;
+use App\Models\ArticleComment;
 
 class ArticleController extends Controller
 {
@@ -63,7 +64,6 @@ class ArticleController extends Controller
             'content' => $request->content,
             'image' => $image_filename,
             'status' => 'Draft',
-            'note' => NULL,
         ]);
         
         if($request->save){
@@ -71,6 +71,11 @@ class ArticleController extends Controller
         } else {
             $article->status = 'In Review';
             $article->save();
+            $comment = ArticleComment::create([
+                'user_id' => NULL,
+                'article_id' => $article->id,
+                'comment' => '<strong>'.Auth::user()->name.'</strong> Telah membuat artikel.',
+            ]);
             return redirect()->route('article')->with('success', 'Artikel berhasil dikirim!');
         }
 	}

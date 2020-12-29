@@ -16,44 +16,68 @@
 		</div>
 	</div>
 	<!-- Main -->
-	<div class="content">
-		<div class="container-fluid">
+    
+    <section class="content" style="height: 1800px;">
+        <div class="container-fluid">
+            <h4 class="mb-2">Informasi Covid-19</h4>
+            <h6 class="mb-2">Provinsi Aceh</h6>
             <div class="row">
-                <div class="col-lg-4 col-6">
-                    <div class="small-box bg-white">
-                        <div class="inner">
-                            <h3>{{ $covid['Kasus_Posi'] }}</h3>
-                            <p>Total Positif</p>
+                <div class="col-lg-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-primary"><i class="fas fa-procedures"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Positif</span>
+                            <span class="info-box-number">{{ $covid['Kasus_Posi'] }}</span>
                         </div>
-                        <div class="icon">
-                            <i class="fas fa-procedures"></i>
+                    </div>
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"><i class="fas fa-heartbeat"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Sembuh</span>
+                            <span class="info-box-number">{{ $covid['Kasus_Semb'] }}</span>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger"><i class="fas fa-sad-tear"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Meninggal</span>
+                            <span class="info-box-number">{{ $covid['Kasus_Meni'] }}</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-6">
-                    <div class="small-box bg-white">
-                        <div class="inner">
-                            <h3>{{ $covid['Kasus_Semb'] }}</h3>
-                            <p>Total Sembuh</p>
+                <section class="col-lg-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="m-0">Seputar Aceh</h6>
                         </div>
-                        <div class="icon">
-                            <i class="fas fa-heartbeat"></i>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <h4>Info Terbaru Provinsi Aceh</h4>
+                                    <p>Bank Aceh Syariah terus berupaya memanjakan nasabahnya dengan meningkatkan pelayanan dan menambah akses keuangan. Kemudahan terbaru yang diberikan bank milik daerah ini adalah menyediakan fasilitas atau aplikasi mobile banking yang diberi nama Aceh Transaction Online (ACTION)</p>
+                                </div>
+                                <div class="col-lg-5">
+                                    <img class="img-thumbnail" src="{{ asset('img/info/info1.jpg') }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </section>
+                <section class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <h3 class="card-title"><i class="far fa-calendar-alt mr-2"></i>Calendar</h3>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div id="calendar"></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-6">
-                    <div class="small-box bg-white">
-                        <div class="inner">
-                            <h3>{{ $covid['Kasus_Meni'] }}</h3>
-                            <p>Total Meninggal</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-sad-tear"></i>
-                        </div>
-                    </div>
-                </div>
+                </section>
             </div>
         </div>
-	</div>
+    </section>
+    <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
 </div>
 @endsection
