@@ -24,15 +24,21 @@
 				<div class="cwp4-text">
 					<h3 class="title-big">Visi</h3>
 					<ul class="cont-4 mt-4">
-						<li><span class="fa fa-check"></span>Tercapainya masyarakat Desa Sidokumpul yang Maju sejahtera, berkeadilan, berakhlak mulia dan perekonomian yang meningkat melalui peningkatan kualitas SDM yang lebih baik yang dilandasi dengan kebersamaan dan pemberdayaan masyarakat.</li>
+						@foreach($visimisi as $no => $v)
+						@if($v->id == 1)
+						<li><span class="fa fa-check"></span>{{ $v->content}}</li>
+						@endif
+						@endforeach
 					</ul>
 				</div>
 				<div class="cwp4-text mt-md-5 mt-4">
 					<h3 class="title-big">Misi</h3>
 					<ul class="cont-4 mt-4">
-						<li><span class="fa fa-check"></span>Meningkatkan Perekonomian desa melalui pemanfaatan sumber daya yang ada serta potensi desa yang dimiliki.</li>
-						<li><span class="fa fa-check"></span>Meningkatkan pelayanan dibidang Pendidikan dan kesehatan untuk menciptakan kualitas sumber daya Manusia di Desa Sidokumpul yang handal dan bermoral tinggi.</li>
-						<li><span class="fa fa-check"></span>Menciptakan serta meningkatkan ketertiban masyarakat, agar tercipta kehidupan bermasyarakat yang rukun dan damai didesa sidokumpul.</li>
+						@foreach($visimisi as $no => $v)
+						@if($v->id > 1)
+						<li><span class="fa fa-check"></span>{{ $v->content}}</li>
+						@endif
+						@endforeach
 					</ul>
 				</div>
 			</div>

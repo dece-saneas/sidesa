@@ -25,7 +25,7 @@ class CreateArticlesTable extends Migration
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
         
-        Schema::create('articles_comments', function (Blueprint $table) {
+        Schema::create('articles_discussion', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->nullable()->unsigned();
             $table->bigInteger('article_id')->unsigned();
@@ -44,7 +44,7 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles_comments');
+        Schema::dropIfExists('articles_discussion');
         Schema::dropIfExists('articles');
     }
 }

@@ -119,3 +119,14 @@ INSERT INTO `nomor_induk_kependudukan` (`id`, `user_id`, `father_id`, `mother_id
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 -- Admin
 (1, 'App\\Models\\User', 1);
+
+INSERT INTO `set_visimisi` (`id`, `content`, `created_at`, `updated_at`) VALUES
+(1, 'Tercapainya masyarakat Desa Blang Kolak II yang Maju sejahtera, berkeadilan, berakhlak mulia dan perekonomian yang meningkat melalui peningkatan kualitas SDM yang lebih baik yang dilandasi dengan kebersamaan dan pemberdayaan masyarakat.', NULL, NULL),
+(2, 'Meningkatkan Perekonomian desa melalui pemanfaatan sumber daya yang ada serta potensi desa yang dimiliki.', NULL, NULL),
+(3, 'Meningkatkan pelayanan dibidang Pendidikan dan kesehatan untuk menciptakan kualitas sumber daya Manusia di Desa Blang Kolak II yang handal dan bermoral tinggi.', NULL, NULL),
+(4, 'Menciptakan serta meningkatkan ketertiban masyarakat, agar tercipta kehidupan bermasyarakat yang rukun dan damai didesa Blang Kolak II.', NULL, NULL);
+
+INSERT INTO `settings` (`id`, `A`, `B`, `C`, `D`, `E`, `F`, `G`, `created_at`, `updated_at`) VALUES
+(1, 'Aceh', 'provinsi.png', 'Aceh Tengah', 'kabupaten.png', 'Bebesan', 'Blang Kolak II', 'desa.png', NULL, NULL),
+(2, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5624.079267218182!2d96.83909119273355!3d4.625364547065412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3038ec09a78fe1bb%3A0xe1f38378e4c24887!2sBlang%20Kolak%20II%2C%20Bebesen%2C%20Kabupaten%20Aceh%20Tengah%2C%20Aceh!5e0!3m2!1sid!2sid!4v1607861569683!5m2!1sid!2sid', 'Senin-Jumat | 09:00 - 17:00', '+6221345678910', 'blangkolakdua@sidesa.id', 'https://www.facebook.com', 'https://twitter.com', 'https://www.instagram.com', NULL, NULL),
+(3, 'info.jpg', 'Bank Aceh Syariah terus berupaya memanjakan nasabahnya dengan meningkatkan pelayanan dan menambah akses keuangan. Kemudahan terbaru yang diberikan bank milik daerah ini adalah menyediakan fasilitas atau aplikasi mobile banking yang diberi nama <strong>Aceh Transaction Online (ACTION)</strong>', NULL, NULL, NULL, NULL, NULL, NULL, NULL);

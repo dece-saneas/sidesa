@@ -98,6 +98,11 @@
 				
 				@hasrole('Admin')
 				<li class="nav-item">
+					<a href="{{ route('setting') }}" class="nav-link">
+						<i class="nav-icon fas fa-cog mr-2"></i><p>Settings</p>
+					</a>
+				</li>
+				<li class="nav-item">
 					<a href="#" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
 						<i class="nav-icon fas fa-desktop mr-2"></i><p>Website<i class="right fas fa-angle-left"></i></p>
 					</a>

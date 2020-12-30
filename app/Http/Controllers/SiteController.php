@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Setting;
+use App\Models\Visimisi;
 
 class SiteController extends Controller
 {
     public function index()
 	{
 		// Kawal Corona
+		$glo['data'] = Setting::get();
         
         $CURL = curl_init();
 		curl_setopt($CURL, CURLOPT_URL, 'https://api.kawalcorona.com/indonesia/provinsi/');
@@ -21,13 +24,13 @@ class SiteController extends Controller
         $KEY = -1;
         
         foreach($CURL_RESULT as $i=>$DATA){
-            if($DATA['attributes']['Provinsi'] == "Aceh"){
+            if($DATA['attributes']['Provinsi'] == $glo['data'][0]->A){
                 $KEY = $i;
             }
         }
         
 		$covid = $CURL_RESULT[$KEY]['attributes'];
-			
+		
 		return view('home',['covid' => $covid]);
 	}
     
@@ -35,7 +38,9 @@ class SiteController extends Controller
     
     public function visimisi()
 	{
-		return view('visi-misi');
+		$visimisi = Visimisi::get();
+		
+		return view('visi-misi',['visimisi' => $visimisi]);
 	}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

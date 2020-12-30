@@ -1,6 +1,6 @@
 @extends('layouts.master-frontend')
 
-@section('title') Desa Blang Kolak II @endsection
+@section('title') Desa {{ $glo['data'][0]->F }} @endsection
 
 @section('content')
 <!-- main-slider -->
@@ -112,9 +112,9 @@
 				<div class="header-section">
 					<h3 class="title-big">Artikel Desa</h3>
 					<h4>Terbaru! artikel terbaik dan tervalid dari <a href="#url">Jurnalis Desa.</a></h4>
-					<p class="mt-3 mb-lg-5 mb-4">Desa Blang Kolak II menghadirkan beragam Artikel terbaru dan tervalid langsung dari jurnalis desa yang telah terverifikasi oleh aparatur desa. Ingin bergabung menjadi <strong>Jurnalis Desa ?</strong></p>
+					<p class="mt-3 mb-lg-5 mb-4">Desa {{ $glo['data'][0]->F }} menghadirkan beragam Artikel terbaru dan tervalid langsung dari jurnalis desa yang telah terverifikasi oleh aparatur desa. Ingin bergabung menjadi <strong>Jurnalis Desa ?</strong></p>
 				</div>
-				<a href="#" class="btn btn-outline-primary btn-style">Daftar Jurnalis</a>
+				<a href="#footer" class="btn btn-outline-primary btn-style">Daftar Jurnalis</a>
 			</div>
 			<div class="col-lg-4 col-md-6 mt-lg-0 mt-5">
 				<div class="img-block">
@@ -207,8 +207,8 @@
 	<div class="container py-lg-5 py-md-3">
 		<div class="row">
 			<div class="col-lg-6">
-				<h5 class="title-small">Seputar Aceh</h5>
-				<h3 class="title-big">Info Terbaru Provinsi Aceh</h3>
+				<h5 class="title-small">Seputar {{ $glo['data'][0]->A }}</h5>
+				<h3 class="title-big">Info Terbaru Provinsi {{ $glo['data'][0]->A }}</h3>
 				<p class="mt-3">Bank Aceh Syariah terus berupaya memanjakan nasabahnya dengan meningkatkan pelayanan dan menambah akses keuangan. Kemudahan terbaru yang diberikan bank milik daerah ini adalah menyediakan fasilitas atau aplikasi mobile banking yang diberi nama <strong>Aceh Transaction Online (ACTION)</strong></p>
 			</div>
 			<div class="col-lg-6 mt-lg-0 mt-5">
@@ -222,7 +222,7 @@
 	<div class="container py-lg-5 py-md-4 py-2">
 		<div class="title-content text-center">
 			<h3 class="title-big">Statistik Pengunjung website.</h3>
-			<h4 class="title-big">Desa Blang Kolak II.</h4>
+			<h4 class="title-big">Desa {{ $glo['data'][0]->F }}.</h4>
 		</div>
 		<div class="w3-stats text-center">
 			<div class="row">
@@ -259,10 +259,12 @@
 			<div class="company-logos text-center mt-5">
 				<div class="row logos justify-content-center">
 					<div class="col-lg-2 col-md-3 col-4">
-						<img src="{{ asset('img/logo/logo1.png') }}" alt="" class="img-fluid">
+						<img src="{{ asset('img/logo/'. $glo['data'][0]->B ) }}" alt="" class="img-fluid mb-2">
+						<p>Provinsi {{ $glo['data'][0]->A }}</p>
 					</div>
 					<div class="col-lg-2 col-md-3 col-4">
-						<img src="{{ asset('img/logo/logo2.png') }}" alt="" class="img-fluid">
+						<img src="{{ asset('img/logo/'. $glo['data'][0]->D ) }}" alt="" class="img-fluid mb-2">
+						<p>Kabupaten {{ $glo['data'][0]->C }}</p>
 					</div>
 				</div>
 			</div>
@@ -271,6 +273,6 @@
 </section>
 <!-- maps -->
 <div class="map">
-	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5624.079267218182!2d96.83909119273355!3d4.625364547065412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3038ec09a78fe1bb%3A0xe1f38378e4c24887!2sBlang%20Kolak%20II%2C%20Bebesen%2C%20Kabupaten%20Aceh%20Tengah%2C%20Aceh!5e0!3m2!1sid!2sid!4v1607861569683!5m2!1sid!2sid" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+	<iframe src="{{ $glo['data'][1]->A }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 </div>
 @endsection

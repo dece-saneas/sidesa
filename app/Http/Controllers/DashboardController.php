@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Setting;
 
 class DashboardController extends Controller
 {
@@ -16,7 +17,8 @@ class DashboardController extends Controller
     public function index()
     {
         // Kawal Corona
-        
+        $glo['data'] = Setting::get();
+		
         $CURL = curl_init();
 		curl_setopt($CURL, CURLOPT_URL, 'https://api.kawalcorona.com/indonesia/provinsi/');
 		curl_setopt($CURL, CURLOPT_RETURNTRANSFER, 1);
@@ -27,7 +29,7 @@ class DashboardController extends Controller
         $KEY = -1;
         
         foreach($CURL_RESULT as $i=>$DATA){
-            if($DATA['attributes']['Provinsi'] == "Aceh"){
+            if($DATA['attributes']['Provinsi'] == $glo['data'][0]->A){
                 $KEY = $i;
             }
         }
