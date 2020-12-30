@@ -9,7 +9,7 @@
 		<div class="owl-one owl-carousel owl-theme">
 			<div class="item">
 				<li>
-					<div class="slider-info banner-view">
+					<div class="slider-info banner-view" style="background: url({{ asset('img/carousels/carousel1.jpg') }}) no-repeat center; background-size: cover;">
 						<div class="banner-info">
 							<div class="container">
 								<div class="banner-info-bg text-left">
@@ -24,7 +24,7 @@
 			</div>
 			<div class="item">
 				<li>
-					<div class="slider-info banner-view banner-top1">
+					<div class="slider-info banner-view" style="background: url({{ asset('img/carousels/carousel2.jpg') }}) no-repeat center; background-size: cover;">
 						<div class="banner-info">
 							<div class="container">
 								<div class="banner-info-bg text-left">

@@ -45,4 +45,12 @@ class SiteController extends Controller
         $article = Article::where('status', 'Published')->paginate(5);
 		return view('article', ['article' => $article]);
 	}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	public function article_show($id)
+	{
+        $article = Article::find($id);
+		return view('article-show', ['article' => $article]);
+	}
 }

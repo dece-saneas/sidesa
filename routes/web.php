@@ -14,6 +14,7 @@
 Route::get('/', 'SiteController@index')->name('site');
 Route::get('/visi-misi', 'SiteController@visimisi')->name('visimisi');
 Route::get('/article', 'SiteController@article')->name('site.article');
+Route::get('/article/{id}', 'SiteController@article_show')->name('site.article.show');
 
 Auth::routes(['register' => false, 'reset' => false, 'confirm' => false, 'verify' => false]);
 

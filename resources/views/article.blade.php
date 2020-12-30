@@ -37,7 +37,7 @@
 					</div>
                     {!! Str::limit($a->content, 120) !!}
 					<p></p>
-					<a href="#" class="btn btn-primary btn-style mt-4">Read More</a>
+					<a href="{{ route('site.article.show', $a->id) }}" class="btn btn-primary btn-style mt-4">Read More</a>
 				</div>
 			</div>
 		</div>
