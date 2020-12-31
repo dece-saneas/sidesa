@@ -105,6 +105,7 @@
 	</div>
 </section>
 <!-- Artikel -->
+@if (count($article) > 0)
 <section class="w3l-index5 py-5" id="news">
 	<div class="container py-lg-5 py-md-4">
 		<div class="row">
@@ -116,35 +117,38 @@
 				</div>
 				<a href="#footer" class="btn btn-outline-primary btn-style">Daftar Jurnalis</a>
 			</div>
-			<div class="col-lg-4 col-md-6 mt-lg-0 mt-5">
-				<div class="img-block">
-					<a href="#">
-						<img src="{{ asset('img/news/news1.jpg') }}" class="img-fluid radius-image-full" alt="image" />
-						<span class="title">Food for Hungry</span>
-					</a>
-				</div>
-				<div class="img-block mt-4">
-					<a href="#"> <img src="{{ asset('img/news/news2.jpg') }}" class="img-fluid radius-image-full" alt="image" />
-						<span class="title">Help from Injuries</span>
-					</a>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mt-lg-0 mt-md-5 mt-4">
-				<div class="img-block">
-					<a href="#"> <img src="{{ asset('img/news/news3.jpg') }}" class="img-fluid radius-image-full" alt="image" />
-						<span class="title">Education for all</span>
-					</a>
-				</div>
-				<div class="img-block mt-4">
-					<a href="#">
-						<img src="{{ asset('img/news/news4.jpg') }}" class="img-fluid radius-image-full" alt="image" />
-						<span class="title">Clean water for all</span>
-					</a>
-				</div>
-			</div>
+            <div class="col-lg-8 mt-lg-0 mt-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        @foreach ($article as $no => $a)
+                        @if($a->id%2 == 0)
+                        <div class="img-block mb-4">
+                            <a href="{{ route('article.show', $a->id) }}">
+                                <img src="{{ asset('img/article/'.$a->image) }}" class="img-fluid radius-image-full" alt="image" />
+                                <span class="title">{{ $a->title }}</span>
+                            </a>
+                        </div>
+                        @endif
+                        @endforeach
+                    </div>
+                    <div class="col-md-6">
+                        @foreach ($article as $no => $a)
+                        @if($a->id%2 == 1)
+                        <div class="img-block mb-4">
+                            <a href="{{ route('article.show', $a->id) }}">
+                                <img src="{{ asset('img/article/'.$a->image) }}" class="img-fluid radius-image-full" alt="image" />
+                                <span class="title">{{ $a->title }}</span>
+                            </a>
+                        </div>
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
 		</div>
 	</div>
 </section>
+@endif
 <!-- aparatur -->
 <section class="w3l-team-main" id="team">
 	<div class="team py-5">

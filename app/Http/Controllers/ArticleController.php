@@ -139,18 +139,9 @@ class ArticleController extends Controller
 		$article->content = $request->content;
 		$article->save();
         
-        if($article->note != NULL) {
-            $article->note = $article->note.' [Update]';
-            $article->save();
-        }
-        
         if($request->hasFile('image')){
-            File::delete('img/article/'.$article->image);
             $image = $request->file('image');
-            $image_filename = time().'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(795, 586)->save(public_path('img/article/'.$image_filename));
-            $article->image = $image_filename;
-            $article->save();
+            Image::make($image)->resize(795, 586)->save(public_path('img/article/'.$article->image));
         }
         
         return redirect()->route('article.show', $id)->with('success', 'Artikel berhasil di ubah!');

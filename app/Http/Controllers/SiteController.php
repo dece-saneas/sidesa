@@ -30,8 +30,9 @@ class SiteController extends Controller
         }
         
 		$covid = $CURL_RESULT[$KEY]['attributes'];
+        $article = Article::latest('id')->take(4)->get();
 		
-		return view('home',['covid' => $covid]);
+		return view('home',['covid' => $covid, 'article' =>$article]);
 	}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

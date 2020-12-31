@@ -100,6 +100,7 @@ Route::get('/dashboard/article/{id}/{type}', 'ArticleController@toggle')->name('
 
 
 Route::get('/dashboard/setting', 'SettingController@index')->name('setting');
+Route::put('/dashboard/setting', 'SettingController@update')->name('setting.update');
 
 
 

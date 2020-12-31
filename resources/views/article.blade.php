@@ -43,6 +43,11 @@
 		</div>
         @endforeach
         {{ $article->links('layouts.pagination-frontend') }}
+        @else
+        <div class="item mt-5 text-center">
+            <h5 class="mb-2">Sayang sekali belum ada artikel disini.</h5>
+            <p class="font-italic">Yuk gabung jadi jurnalis desa dan mulai membuat artikel!</p>
+        </div>
         @endif
 	</div>
 </section>
