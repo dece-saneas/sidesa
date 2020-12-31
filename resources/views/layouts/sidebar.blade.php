@@ -19,9 +19,6 @@
 						<i class="nav-icon fas fa-home mr-2"></i><p>Dashboard</p>
 					</a>
 				</li>
-				
-				
-                
                 @can('surat')
 				<li class="nav-item">
 					<a href="{{ route('surat') }}" class="nav-link">
@@ -110,6 +107,13 @@
 						<li class="nav-item">
 							<a href="{{ route('article') }}" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
 								<i class="fas fa-newspaper nav-icon mr-2"></i><p>Article</p>
+							</a>
+						</li>
+					</ul>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('info') }}" class="nav-link">
+								<i class="fas fa-bullhorn nav-icon mr-2"></i><p>Info</p>
 							</a>
 						</li>
 					</ul>

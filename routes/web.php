@@ -103,6 +103,10 @@ Route::get('/dashboard/setting', 'SettingController@index')->name('setting');
 Route::put('/dashboard/setting', 'SettingController@update')->name('setting.update');
 
 
+Route::get('/dashboard/info', 'SettingController@info')->name('info');
+Route::put('/dashboard/info', 'SettingController@info_update')->name('info.update');
+
+
 
 
 

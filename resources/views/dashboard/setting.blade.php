@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') Create Article @endsection
+@section('title') Settings @endsection
 @section('content')
 <div class="content-wrapper">
 	<!-- Header -->

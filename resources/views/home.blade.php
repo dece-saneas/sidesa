@@ -105,18 +105,18 @@
 	</div>
 </section>
 <!-- Artikel -->
-@if (count($article) > 0)
 <section class="w3l-index5 py-5" id="news">
 	<div class="container py-lg-5 py-md-4">
 		<div class="row">
-			<div class="col-lg-4">
-				<div class="header-section">
+			<div class="@if (count($article) > 0) col-lg-4 @else col text-center @endif">
+				<div class="@if (count($article) > 0) header-section @endif">
 					<h3 class="title-big">Artikel Desa</h3>
 					<h4>Terbaru! artikel terbaik dan tervalid dari <a href="#url">Jurnalis Desa.</a></h4>
 					<p class="mt-3 mb-lg-5 mb-4">Desa {{ $glo['data'][0]->F }} menghadirkan beragam Artikel terbaru dan tervalid langsung dari jurnalis desa yang telah terverifikasi oleh aparatur desa. Ingin bergabung menjadi <strong>Jurnalis Desa ?</strong></p>
 				</div>
 				<a href="#footer" class="btn btn-outline-primary btn-style">Daftar Jurnalis</a>
 			</div>
+            @if (count($article) > 0)
             <div class="col-lg-8 mt-lg-0 mt-5">
                 <div class="row">
                     <div class="col-md-6">
@@ -145,10 +145,10 @@
                     </div>
                 </div>
             </div>
+            @endif
 		</div>
 	</div>
 </section>
-@endif
 <!-- aparatur -->
 <section class="w3l-team-main" id="team">
 	<div class="team py-5">
@@ -213,10 +213,10 @@
 			<div class="col-lg-6">
 				<h5 class="title-small">Seputar {{ $glo['data'][0]->A }}</h5>
 				<h3 class="title-big">Info Terbaru Provinsi {{ $glo['data'][0]->A }}</h3>
-				<p class="mt-3">Bank Aceh Syariah terus berupaya memanjakan nasabahnya dengan meningkatkan pelayanan dan menambah akses keuangan. Kemudahan terbaru yang diberikan bank milik daerah ini adalah menyediakan fasilitas atau aplikasi mobile banking yang diberi nama <strong>Aceh Transaction Online (ACTION)</strong></p>
+				<p class="mt-3">{!! $glo['data'][2]->B !!}</p>
 			</div>
 			<div class="col-lg-6 mt-lg-0 mt-5">
-				<img src="{{ asset('img/info/info1.jpg') }}" alt="" class="radius-image img-fluid">
+				<img src="{{ asset('img/info/'. $glo['data'][2]->A ) }}" alt="" class="radius-image img-fluid">
 			</div>
 		</div>
 	</div>

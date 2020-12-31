@@ -21,6 +21,13 @@ class SettingController extends Controller
 	}
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	public function info()
+	{        
+		return view('dashboard.info');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function update(Request $request)
     {
@@ -75,5 +82,27 @@ class SettingController extends Controller
         }
         
         return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function info_update(Request $request)
+    {
+		$setting = Setting::find(3);
+		
+        $this->validate($request,[
+            'content' => 'required',
+            'image' => 'file|image|mimes:jpeg,png|max:2048',
+        ]);
+
+		$setting->B = $request->content;
+		$setting->save();
+        
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            Image::make($image)->resize(855, 571)->save(public_path('img/info/'.$setting->A));
+        }
+        
+        return redirect()->back()->with('success', 'Info berhasil diperbarui!');
 	}
 }
