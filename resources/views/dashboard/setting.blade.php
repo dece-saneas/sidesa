@@ -228,7 +228,7 @@
                         <div class="float-right">
                             <button class="btn btn-success" type="submit"><i class="fas fa-save mr-2"></i>Save</button>
                         </div>
-                        <a href="{{ route('setting') }}" class="btn btn-default"><i class="fas fa-sync-alt mr-2"></i>Refresh</a>
+                        <a href="" class="btn btn-default"><i class="fas fa-sync-alt mr-2"></i>Refresh</a>
                     </div>
 				</form>
             </div>

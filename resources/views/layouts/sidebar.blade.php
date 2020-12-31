@@ -22,35 +22,35 @@
                 @can('surat')
 				<li class="nav-item">
 					<a href="{{ route('surat') }}" class="nav-link">
-						<i class="nav-icon fas fa-copy"></i><p>Permintaan Surat</p>
+						<i class="nav-icon fas fa-copy mr-2"></i><p>Permintaan Surat</p>
 					</a>
 				</li>
                 @endcan
                 @can('anggaran')
 				<li class="nav-item">
 					<a href="{{ route('anggaran') }}" class="nav-link">
-						<i class="nav-icon fas fa-chart-bar"></i><p>Laporan Keuangan</p>
+						<i class="nav-icon fas fa-chart-bar mr-2"></i><p>Laporan Keuangan</p>
 					</a>
 				</li>
                 @endcan
                 @can('aspirasi')
 				<li class="nav-item">
 					<a href="{{ route('aspiration') }}" class="nav-link">
-						<i class="nav-icon fas fa-bullhorn"></i><p>Aspirasi</p>
+						<i class="nav-icon fas fa-bullhorn mr-2"></i><p>Aspirasi</p>
 					</a>
 				</li>
                 @endcan
                 @hasanyrole('Admin')
 				<li class="nav-item">
 					<a href="{{ route('jurnalis') }}" class="nav-link">
-						<i class="nav-icon fas fa-user-tie"></i><p>Jurnalis</p>
+						<i class="nav-icon fas fa-user-tie mr-2"></i><p>Jurnalis</p>
 					</a>
 				</li>
                 @endhasanyrole
                 @hasanyrole('Admin|Kepala Dusun|Ketua RW|Ketua RT')
 				<li class="nav-item">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-users"></i><p>Kependudukan<i class="right fas fa-angle-left"></i></p>
+						<i class="nav-icon fas fa-users mr-2"></i><p>Kependudukan<i class="right fas fa-angle-left"></i></p>
 					</a>
 					<ul class="nav nav-treeview">
                         @can('dusun')
@@ -95,11 +95,6 @@
 				
 				@hasrole('Admin')
 				<li class="nav-item">
-					<a href="{{ route('setting') }}" class="nav-link">
-						<i class="nav-icon fas fa-cog mr-2"></i><p>Settings</p>
-					</a>
-				</li>
-				<li class="nav-item">
 					<a href="#" class="nav-link {{ set_active(['article', 'article.create', 'article.show', 'article.edit']) }}">
 						<i class="nav-icon fas fa-desktop mr-2"></i><p>Website<i class="right fas fa-angle-left"></i></p>
 					</a>
@@ -117,6 +112,18 @@
 							</a>
 						</li>
 					</ul>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('visimisi') }}" class="nav-link">
+								<i class="fas fa-bullseye nav-icon mr-2"></i><p>Visi & Misi</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a href="{{ route('setting') }}" class="nav-link">
+						<i class="nav-icon fas fa-cog mr-2"></i><p>Settings</p>
+					</a>
 				</li>
                 @endhasrole
 			</ul>

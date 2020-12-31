@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'SiteController@index')->name('site');
-Route::get('/visi-misi', 'SiteController@visimisi')->name('visimisi');
+Route::get('/visi-misi', 'SiteController@visimisi')->name('site.visimisi');
 Route::get('/article', 'SiteController@article')->name('site.article');
 Route::get('/article/{id}', 'SiteController@article_show')->name('site.article.show');
 
@@ -108,6 +108,12 @@ Route::put('/dashboard/info', 'SettingController@info_update')->name('info.updat
 
 
 
+Route::get('/dashboard/visimisi', 'SettingController@visimisi')->name('visimisi');
+Route::get('/dashboard/visimisi/create', 'SettingController@visimisi_create')->name('visimisi.create');
+Route::post('/dashboard/visimisi/create', 'SettingController@visimisi_store')->name('visimisi.store');
+Route::get('/dashboard/visimisi/edit/{id}', 'SettingController@visimisi_edit')->name('visimisi.edit');
+Route::put('/dashboard/visimisi/{id}', 'SettingController@visimisi_update')->name('visimisi.update');
+Route::delete('/dashboard/visimisi/{id}', 'SettingController@visimisi_destroy')->name('visimisi.destroy');
 
 
 

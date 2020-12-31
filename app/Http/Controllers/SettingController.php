@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Image;
 use App\Models\Setting;
+use App\Models\Visimisi;
 
 class SettingController extends Controller
 {
@@ -25,6 +26,37 @@ class SettingController extends Controller
 	public function info()
 	{        
 		return view('dashboard.info');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	public function visimisi()
+	{        
+        $visi = Visimisi::find(1);
+        $misi = Visimisi::where('id', '>', 1)->paginate(10);
+        
+		return view('dashboard.visimisi', ['misi' => $misi, 'visi'=> $visi]);
+	}
+ 
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function visimisi_create()
+	{
+		return view('dashboard.visimisi-create');
+	}
+    
+    public function visimisi_store(Request $request)
+    {
+        
+        $this->validate($request,[
+            'content' => 'required',
+        ]);
+        
+        $visimisi = Visimisi::create([
+            'content' => $request->content,
+        ]);
+        
+        return redirect()->route('visimisi')->with('success', 'Misi berhasil ditambahkan!');
 	}
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -104,5 +136,45 @@ class SettingController extends Controller
         }
         
         return redirect()->back()->with('success', 'Info berhasil diperbarui!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function visimisi_edit($id)
+	{
+        $visimisi = Visimisi::findorFail($id);
+        
+		return view('dashboard.visimisi-edit', ['visimisi' => $visimisi]);
+	}
+    
+    public function visimisi_update(Request $request, $id)
+    {
+        
+		$visimisi = Visimisi::find($id);
+		
+        $this->validate($request,[
+            'content' => 'required',
+        ]);
+
+		$visimisi->content = $request->content;
+		$visimisi->save();
+        
+        $type = 'Mission';
+        
+        if ($visimisi->id == 1) {
+             $type = 'Vision';
+        }
+        
+        return redirect()->route('visimisi')->with('success', $type.' berhasil di ubah!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function visimisi_destroy($id)
+    {
+        $visimisi = Visimisi::find($id);
+        $visimisi->delete();
+        
+        return redirect()->back()->with('success', 'Misi berhasil dihapus!');
 	}
 }

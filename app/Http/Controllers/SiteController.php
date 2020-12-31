@@ -41,7 +41,7 @@ class SiteController extends Controller
 	{
 		$visimisi = Visimisi::get();
 		
-		return view('visi-misi',['visimisi' => $visimisi]);
+		return view('visimisi',['visimisi' => $visimisi]);
 	}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
