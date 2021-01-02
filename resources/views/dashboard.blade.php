@@ -20,7 +20,7 @@
     <section class="content" style="height: 1800px;">
         <div class="container-fluid">
             <h4 class="mb-2">Informasi Covid-19</h4>
-            <h6 class="mb-2">Provinsi Aceh</h6>
+            <h6 class="mb-2">Provinsi {{ $glo['data'][0]->A }}</h6>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="info-box">
@@ -48,16 +48,16 @@
                 <section class="col-lg-5">
                     <div class="card">
                         <div class="card-header">
-                            <h6 class="m-0">Seputar Aceh</h6>
+                            <h6 class="m-0">Seputar {{ $glo['data'][0]->A }}</h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-7">
-                                    <h4>Info Terbaru Provinsi Aceh</h4>
-                                    <p>Bank Aceh Syariah terus berupaya memanjakan nasabahnya dengan meningkatkan pelayanan dan menambah akses keuangan. Kemudahan terbaru yang diberikan bank milik daerah ini adalah menyediakan fasilitas atau aplikasi mobile banking yang diberi nama Aceh Transaction Online (ACTION)</p>
+                                    <h4>Info Terbaru Provinsi {{ $glo['data'][0]->A }}</h4>
+                                    <p>{!! $glo['data'][2]->B !!}</p>
                                 </div>
                                 <div class="col-lg-5">
-                                    <img class="img-thumbnail" src="{{ asset('img/info/info1.jpg') }}">
+                                    <img class="img-thumbnail" src="{{ asset('img/info/'. $glo['data'][2]->A ) }}">
                                 </div>
                             </div>
                         </div>

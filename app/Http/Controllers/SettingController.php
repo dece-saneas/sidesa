@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Image;
 use App\Models\Setting;
 use App\Models\Visimisi;
+use App\Models\Carousel;
+use App\Models\Aparatur;
+use File;
 
 class SettingController extends Controller
 {
@@ -39,6 +42,24 @@ class SettingController extends Controller
 	}
  
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	public function carousel()
+	{        
+        $carousel = Carousel::paginate(10);
+        
+		return view('dashboard.carousel', ['carousel' => $carousel]);
+	}
+ 
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	public function aparatur()
+	{        
+        $aparatur = Aparatur::paginate(10);
+        
+		return view('dashboard.aparatur', ['aparatur' => $aparatur]);
+	}
+ 
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     public function visimisi_create()
 	{
@@ -57,6 +78,62 @@ class SettingController extends Controller
         ]);
         
         return redirect()->route('visimisi')->with('success', 'Misi berhasil ditambahkan!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function carousel_create()
+	{
+		return view('dashboard.carousel-create');
+	}
+    
+    public function carousel_store(Request $request)
+    {
+        
+        $this->validate($request,[
+            'content' => 'required',
+            'image' => 'required|file|image|mimes:jpeg,png|max:2048',
+        ]);;
+        
+        $image = $request->file('image');
+        $image_filename = time().'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(1760, 900)->save(public_path('img/carousels/'.$image_filename));
+        
+        $carousel = Carousel::create([
+            'content' => $request->content,
+            'image' => $image_filename,
+        ]);
+        
+        return redirect()->route('carousel')->with('success', 'Carousel berhasil dibuat!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function aparatur_create()
+	{
+		return view('dashboard.aparatur-create');
+	}
+    
+    public function aparatur_store(Request $request)
+    {
+        
+        $this->validate($request,[
+            'name' => 'required',
+            'position' => 'required',
+            'image' => 'required|file|image|mimes:jpeg,png|max:2048',
+        ]);;
+        
+        $image = $request->file('image');
+        $image_filename = time().'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(420, 520)->save(public_path('img/aparatur/'.$image_filename));
+        
+        $aparatur = Aparatur::create([
+            'name' => $request->name,
+            'position' => $request->position,
+            'image' => $image_filename,
+        ]);
+        
+        return redirect()->route('aparatur')->with('success', 'Aparatur berhasil ditambahkan!');
 	}
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -170,6 +247,68 @@ class SettingController extends Controller
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
+    public function carousel_edit($id)
+	{
+        $carousel = Carousel::findorFail($id);
+        
+		return view('dashboard.carousel-edit', ['carousel' => $carousel]);
+	}
+    
+    public function carousel_update(Request $request, $id)
+    {
+        
+		$carousel = Carousel::find($id);
+		
+        $this->validate($request,[
+            'content' => 'required',
+            'image' => 'file|image|mimes:jpeg,png|max:2048',
+        ]);
+
+		$carousel->content = $request->content;
+		$carousel->save();
+        
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            Image::make($image)->resize(1760, 900)->save(public_path('img/carousels/'.$carousel->image));
+        }
+        
+        return redirect()->route('carousel')->with('success', 'Carousel berhasil di ubah!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function aparatur_edit($id)
+	{
+        $aparatur = Aparatur::findorFail($id);
+        
+		return view('dashboard.aparatur-edit', ['aparatur' => $aparatur]);
+	}
+    
+    public function aparatur_update(Request $request, $id)
+    {
+        
+		$aparatur = Aparatur::find($id);
+		
+        $this->validate($request,[
+            'name' => 'required',
+            'position' => 'required',
+            'image' => 'file|image|mimes:jpeg,png|max:2048',
+        ]);
+
+		$aparatur->name = $request->name;
+		$aparatur->position = $request->position;
+		$aparatur->save();
+        
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            Image::make($image)->resize(420, 520)->save(public_path('img/aparatur/'.$aparatur->image));
+        }
+        
+        return redirect()->route('aparatur')->with('success', 'Aparatur berhasil di ubah!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     public function visimisi_destroy($id)
     {
         $all = Visimisi::get();
@@ -181,6 +320,30 @@ class SettingController extends Controller
         }else {
             return redirect()->back()->with('error', 'Misi tidak boleh kosong!');
         }
+        
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function carousel_destroy($id)
+    {
+        $carousel = Carousel::find($id);
+        File::delete('img/carousels/'.$carousel->image);
+        $carousel->delete();
+        
+        return redirect()->back()->with('success', 'Carousel berhasil dihapus!');
+        
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function aparatur_destroy($id)
+    {
+        $aparatur = Aparatur::find($id);
+        File::delete('img/aparatur/'.$aparatur->image);
+        $aparatur->delete();
+        
+        return redirect()->back()->with('success', 'Aparatur berhasil dihapus!');
         
 	}
 }

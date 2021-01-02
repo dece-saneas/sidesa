@@ -119,6 +119,20 @@
 							</a>
 						</li>
 					</ul>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('carousel') }}" class="nav-link">
+								<i class="fas fa-play nav-icon mr-2"></i><p>Carousel</p>
+							</a>
+						</li>
+					</ul>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('aparatur') }}" class="nav-link">
+								<i class="fas fa-user-tie nav-icon mr-2"></i><p>Aparatur</p>
+							</a>
+						</li>
+					</ul>
 				</li>
 				<li class="nav-item">
 					<a href="{{ route('setting') }}" class="nav-link">

@@ -8,6 +8,8 @@ use App\Models\Visitor;
 use App\Models\Article;
 use App\Models\Setting;
 use App\Models\Visimisi;
+use App\Models\Carousel;
+use App\Models\Aparatur;
 
 class SiteController extends Controller
 {
@@ -167,8 +169,10 @@ class SiteController extends Controller
         $visitor['day'] = Visitor::whereDay('created_at', '=', date('d'))->get();
         $visitor['month'] = Visitor::whereMonth('created_at', '=', date('m'))->get();
         $visitor['year'] = Visitor::whereYear('created_at', '=', date('Y'))->get();
+        $carousel = Carousel::get();
+        $aparatur = Aparatur::get();
 		
-		return view('home',['covid' => $covid, 'article' =>$article, 'visitor' =>$visitor]);
+		return view('home',['covid' => $covid, 'article' =>$article, 'visitor' =>$visitor, 'carousel' =>$carousel, 'aparatur' =>$aparatur]);
 	}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -130,3 +130,14 @@ INSERT INTO `settings` (`id`, `A`, `B`, `C`, `D`, `E`, `F`, `G`, `created_at`, `
 (1, 'Aceh', 'provinsi.png', 'Aceh Tengah', 'kabupaten.png', 'Bebesan', 'Blang Kolak II', 'desa.png', NULL, NULL),
 (2, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5624.079267218182!2d96.83909119273355!3d4.625364547065412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3038ec09a78fe1bb%3A0xe1f38378e4c24887!2sBlang%20Kolak%20II%2C%20Bebesen%2C%20Kabupaten%20Aceh%20Tengah%2C%20Aceh!5e0!3m2!1sid!2sid!4v1607861569683!5m2!1sid!2sid', 'Senin-Jumat | 09:00 - 17:00', '+6221345678910', 'blangkolakdua@sidesa.id', 'https://www.facebook.com', 'https://twitter.com', 'https://www.instagram.com', NULL, NULL),
 (3, 'info.jpg', 'Bank Aceh Syariah terus berupaya memanjakan nasabahnya dengan meningkatkan pelayanan dan menambah akses keuangan. Kemudahan terbaru yang diberikan bank milik daerah ini adalah menyediakan fasilitas atau aplikasi mobile banking yang diberi nama <strong>Aceh Transaction Online (ACTION)</strong>', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO `carousels` (`id`, `image`, `content`, `created_at`, `updated_at`) VALUES
+(1, 'carousel1.jpg', '<p>Selamat datang di</p><h5>Website Desa Blank Kolak II<br><span class="font-weight-lighter">Kec. Bebesan, Kab. Aceh Tengah</span></h5>','1985-11-24 12:06:47','2010-01-30 15:05:57'),
+(2, 'carousel2.jpg', '<p>Selamat datang di</p><h5>Website Desa Blank Kolak II<br><span class="font-weight-lighter">Kec. Bebesan, Kab. Aceh Tengah</span></h5>','1985-11-24 12:06:47','2010-01-30 15:05:57');
+
+INSERT INTO `aparatur` (`id`, `image`, `name`, `position`, `created_at`, `updated_at`) VALUES
+(1, 'aparatur1.jpg', 'Padlika', 'Kepala Kelurahan', '1985-11-24 12:06:47','2010-01-30 15:05:57'),
+(2, 'aparatur2.jpg', 'Hafiza', 'Wakil Kelurahan', '1985-11-24 12:06:47','2010-01-30 15:05:57'),
+(3, 'aparatur3.jpg', 'Angga', 'Sekretaris', '1985-11-24 12:06:47','2010-01-30 15:05:57'),
+(4, 'aparatur4.jpg', 'Fajar', 'Bendahara', '1985-11-24 12:06:47','2010-01-30 15:05:57'),
+(5, 'aparatur5.jpg', 'Sultan', 'Admin', '1985-11-24 12:06:47','2010-01-30 15:05:57');

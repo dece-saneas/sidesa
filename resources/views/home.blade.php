@@ -7,14 +7,14 @@
 <section class="w3l-main-slider" id="home">
 	<div class="companies20-content">
 		<div class="owl-one owl-carousel owl-theme">
+            @foreach ($carousel as $no => $c)
 			<div class="item">
 				<li>
-					<div class="slider-info banner-view" style="background: url({{ asset('img/carousels/carousel1.jpg') }}) no-repeat center; background-size: cover;">
+					<div class="slider-info banner-view" style="background: url({{ asset('img/carousels/'.$c->image) }}) no-repeat center; background-size: cover;">
 						<div class="banner-info">
 							<div class="container">
 								<div class="banner-info-bg text-left">
-									<p>Selamat datang di</p>
-									<h5>Website Desa Blank Kolak II<br><span class="font-weight-lighter">Kec. Bebesan, Kab. Aceh Tengah</span></h5>
+									{!! $c->content !!}
 									<a href="#contact" class="btn btn-primary btn-style">Hubungi kami</a>
 								</div>
 							</div>
@@ -22,21 +22,7 @@
 					</div>
 				</li>
 			</div>
-			<div class="item">
-				<li>
-					<div class="slider-info banner-view" style="background: url({{ asset('img/carousels/carousel2.jpg') }}) no-repeat center; background-size: cover;">
-						<div class="banner-info">
-							<div class="container">
-								<div class="banner-info-bg text-left">
-									<p>Selamat datang di</p>
-									<h5>Website Desa Blank Kolak II<br><span class="font-weight-lighter">Kec. Bebesan, Kab. Aceh Tengah</span></h5>
-									<a href="#contact" class="btn btn-primary btn-style">Hubungi kami</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-			</div>
+            @endforeach
 		</div>
 	</div>
 </section>
@@ -157,51 +143,17 @@
 				<h3 class="title-big">Aparatur Desa</h3>
 			</div>
 			<div class="team-row mt-md-5 mt-4">
+                @foreach ($aparatur as $no => $a)
 				<div class="team-wrap">
 					<div class="team-member text-center">
 						<div class="team-img">
-							<img src="{{ asset('img/aparatur/aparatur1.jpg') }}" alt="" class="radius-image img-fluid">
+							<img src="{{ asset('img/aparatur/'.$a->image) }}" alt="" class="radius-image img-fluid">
 						</div>
-						<a href="#url" class="team-title">Padlika</a>
-						<p>Kepala Kelurahan</p>
+						<a href="#url" class="team-title">{{ $a->name }}</a>
+						<p>{{ $a->position }}</p>
 					</div>
 				</div>
-				<div class="team-wrap">
-					<div class="team-member text-center">
-						<div class="team-img">
-							<img src="{{ asset('img/aparatur/aparatur2.jpg') }}" alt="" class="radius-image img-fluid">
-						</div>
-						<a href="#url" class="team-title">Hafiza</a>
-						<p>Wakil Kelurahan</p>
-					</div>
-				</div>
-				<div class="team-wrap">
-					<div class="team-member text-center">
-						<div class="team-img">
-							<img src="{{ asset('img/aparatur/aparatur3.jpg') }}" alt="" class="radius-image img-fluid">
-						</div>
-						<a href="#url" class="team-title">Angga</a>
-						<p>Sekretaris</p>
-					</div>
-				</div>
-				<div class="team-wrap">
-					<div class="team-member text-center">
-						<div class="team-img">
-							<img src="{{ asset('img/aparatur/aparatur4.jpg') }}" alt="" class="radius-image img-fluid">
-						</div>
-						<a href="#url" class="team-title">Fajar</a>
-						<p>Bendahara</p>
-					</div>
-				</div>
-				<div class="team-wrap">
-					<div class="team-member text-center">
-						<div class="team-img">
-							<img src="{{ asset('img/aparatur/aparatur5.jpg') }}" alt="" class="radius-image img-fluid">
-						</div>
-						<a href="#url" class="team-title">Sultan</a>
-						<p>Admin</p>
-					</div>
-				</div>
+                @endforeach
 			</div>
 		</div>
 	</div>
@@ -233,21 +185,21 @@
 				<div class="col-md-4 col-12">
 					<div class="counter">
 						<span class="fa fa-globe-asia"></span>
-						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['day']) }}" data-speed="@if(count($visitor['year']) > 0) count($visitor['year'] @else 1 @endif"></div>
+						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['day']) }}" data-speed="@if(count($visitor['year']) > 0) {{ count($visitor['year']) }} @else 1 @endif"></div>
 						<p class="count-text ">Hari ini</p>
 					</div>
 				</div>
 				<div class="col-md-4 col-12">
 					<div class="counter">
 						<span class="fa fa-globe-asia"></span>
-						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['month']) }}" data-speed="@if(count($visitor['year']) > 0) count($visitor['year'] @else 1 @endif"></div>
+						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['month']) }}" data-speed="@if(count($visitor['year']) > 0) {{ count($visitor['year']) }} @else 1 @endif"></div>
 						<p class="count-text ">Bulan ini</p>
 					</div>
 				</div>
 				<div class="col-md-4 col-12">
 					<div class="counter">
 						<span class="fa fa-globe-asia"></span>
-						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['year']) }}" data-speed="@if(count($visitor['year']) > 0) count($visitor['year'] @else 1 @endif"></div>
+						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['year']) }}" data-speed="@if(count($visitor['year']) > 0) {{ count($visitor['year']) }} @else 1 @endif"></div>
 						<p class="count-text ">Tahun ini</p>
 					</div>
 				</div>

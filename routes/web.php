@@ -117,5 +117,18 @@ Route::delete('/dashboard/visimisi/{id}', 'SettingController@visimisi_destroy')-
 
 
 
+Route::get('/dashboard/carousel', 'SettingController@carousel')->name('carousel');
+Route::get('/dashboard/carousel/create', 'SettingController@carousel_create')->name('carousel.create');
+Route::post('/dashboard/carousel/create', 'SettingController@carousel_store')->name('carousel.store');
+Route::get('/dashboard/carousel/edit/{id}', 'SettingController@carousel_edit')->name('carousel.edit');
+Route::put('/dashboard/carousel/{id}', 'SettingController@carousel_update')->name('carousel.update');
+Route::delete('/dashboard/carousel/{id}', 'SettingController@carousel_destroy')->name('carousel.destroy');
+
+Route::get('/dashboard/aparatur', 'SettingController@aparatur')->name('aparatur');
+Route::get('/dashboard/aparatur/create', 'SettingController@aparatur_create')->name('aparatur.create');
+Route::post('/dashboard/aparatur/create', 'SettingController@aparatur_store')->name('aparatur.store');
+Route::get('/dashboard/aparatur/edit/{id}', 'SettingController@aparatur_edit')->name('aparatur.edit');
+Route::put('/dashboard/aparatur/{id}', 'SettingController@aparatur_update')->name('aparatur.update');
+Route::delete('/dashboard/aparatur/{id}', 'SettingController@aparatur_destroy')->name('aparatur.destroy');
 
 
