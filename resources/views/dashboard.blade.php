@@ -17,7 +17,7 @@
 	</div>
 	<!-- Main -->
     
-    <section class="content" style="height: 1800px;">
+    <section class="content">
         <div class="container-fluid">
             <h4 class="mb-2">Informasi Covid-19</h4>
             <h6 class="mb-2">Provinsi {{ $glo['data'][0]->A }}</h6>
