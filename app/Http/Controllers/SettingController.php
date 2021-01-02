@@ -172,9 +172,15 @@ class SettingController extends Controller
     
     public function visimisi_destroy($id)
     {
-        $visimisi = Visimisi::find($id);
-        $visimisi->delete();
+        $all = Visimisi::get();
         
-        return redirect()->back()->with('success', 'Misi berhasil dihapus!');
+        if(count($all) > 2 ) {
+            $visimisi = Visimisi::find($id);
+            $visimisi->delete();
+            return redirect()->back()->with('success', 'Misi berhasil dihapus!');
+        }else {
+            return redirect()->back()->with('error', 'Misi tidak boleh kosong!');
+        }
+        
 	}
 }

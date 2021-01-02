@@ -233,21 +233,21 @@
 				<div class="col-md-4 col-12">
 					<div class="counter">
 						<span class="fa fa-globe-asia"></span>
-						<div class="timer count-title count-number mt-3" data-to="20" data-speed="1000"></div>
+						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['day']) }}" data-speed="@if(count($visitor['year']) > 0) count($visitor['year'] @else 1 @endif"></div>
 						<p class="count-text ">Hari ini</p>
 					</div>
 				</div>
 				<div class="col-md-4 col-12">
 					<div class="counter">
 						<span class="fa fa-globe-asia"></span>
-						<div class="timer count-title count-number mt-3" data-to="684" data-speed="1000"></div>
+						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['month']) }}" data-speed="@if(count($visitor['year']) > 0) count($visitor['year'] @else 1 @endif"></div>
 						<p class="count-text ">Bulan ini</p>
 					</div>
 				</div>
 				<div class="col-md-4 col-12">
 					<div class="counter">
 						<span class="fa fa-globe-asia"></span>
-						<div class="timer count-title count-number mt-3" data-to="4822" data-speed="1000"></div>
+						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['year']) }}" data-speed="@if(count($visitor['year']) > 0) count($visitor['year'] @else 1 @endif"></div>
 						<p class="count-text ">Tahun ini</p>
 					</div>
 				</div>
