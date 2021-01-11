@@ -9,6 +9,26 @@ Author URL: http://w3layouts.com
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+.map iframe{
+	width: 100%;
+	display: block;
+	pointer-events: none;
+	position: relative;
+}
+.map iframe.clicked{
+	pointer-events: auto;
+}
+
+@media only screen and (max-width: 991px) {
+.mobile-position {
+    position: absolute;
+    right: 50px!important;
+    top: 9.5px!important; 
+}
+}
+
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -9814,76 +9834,64 @@ p.white {
   padding: 0px 0;
   margin-left: 10px; }
 
-.gg-sun {
+.fa-sun {
   position: relative;
-  transform: scale(var(--ggs, 1));
-  height: 24px;
-  background: linear-gradient(180deg, currentColor 4px, transparent 0) no-repeat 5px -6px/2px 6px, linear-gradient(180deg, currentColor 4px, transparent 0) no-repeat 5px 14px/2px 6px, linear-gradient(180deg, currentColor 4px, transparent 0) no-repeat -8px 5px/6px 2px, linear-gradient(180deg, currentColor 4px, transparent 0) no-repeat 14px 5px/6px 2px;
-  border-radius: 100px;
-  box-shadow: inset 0 0 0 2px;
-  border: 6px solid transparent; }
+  height: 24px; }
 
-.gg-moon {
+.fa-moon {
   overflow: hidden;
   position: relative;
-  transform: rotate(-135deg) scale(var(--ggs, 1));
-  width: 20px;
-  height: 20px;
-  border: 2px solid;
-  border-bottom: 2px solid transparent; }
+  width: 24px;
+  height: 24px;
+  padding-top: 2px;
+  padding-left: 2px;}
 
-.gg-moon,
-.gg-moon:after {
-  display: block;
-  box-sizing: border-box;
-  border-radius: 50%; }
+.fa-moon,
+.fa-moon:after {
+  display: block; }
 
-.nav-fixed .gg-moon, .nav-fixed .gg-moon:after {
+.nav-fixed .fa-moon, .nav-fixed .fa-moon:after {
   color: var(--heading-color); }
 
-.gg-moon:after {
+.fa-moon:after {
   content: "";
   position: absolute;
   width: 12px;
   height: 18px;
-  border: 2px solid transparent;
-  box-shadow: 0 0 0 2px;
-  top: 8px;
+  top: 80px;
   left: 2px; }
 
-.gg-sun,
-.gg-sun:after,
-.gg-sun:before {
+.fa-sun,
+.fa-sun:after,
+.fa-sun:before {
   box-sizing: border-box;
   display: block;
   width: 24px; }
 
-.gg-sun:after,
-.gg-sun:before {
+.fa-sun:after,
+.fa-sun:before {
   content: "";
   position: absolute;
   height: 2px;
-  border-right: 4px solid;
-  border-left: 4px solid;
   left: -6px;
-  top: 5px; }
+  top: 3px; }
 
-.gg-sun:before {
+.fa-sun:before {
   transform: rotate(-45deg); }
 
-.gg-sun:after {
+.fa-sun:after {
   transform: rotate(45deg); }
 
-.mode-container i.gg-sun {
+.mode-container i.fa-sun {
   display: none; }
 
-.mode-container i.gg-moon {
+.mode-container i.fa-moon {
   display: block; }
 
-input:checked + .mode-container i.gg-sun {
+input:checked + .mode-container i.fa-sun {
   display: block; }
 
-input:checked + .mode-container i.gg-moon {
+input:checked + .mode-container i.fa-moon {
   display: none; }
 
 /*-- //dark and light mode styling --*/

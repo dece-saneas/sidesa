@@ -13,6 +13,7 @@ use App\Models\Aparatur;
 
 class SiteController extends Controller
 {
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- CONSTRUCT
 	public function __construct()
     {
 		if(Cookie::get('visitor') == null) {
@@ -25,7 +26,7 @@ class SiteController extends Controller
             ]);
         }      
     }
-    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public function user_ip()
     {
         if(!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -37,19 +38,19 @@ class SiteController extends Controller
         }
         return $ip;
     }
-    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public function user_browser()
     {
         $browser = $this->_userAgent();
         return $browser['name'] . ' v.'.$browser['version'];
     }
-    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public function user_os()
     {
         $OS = $this->_userAgent();
         return $OS['platform'];
     }
-    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public function _userAgent()
     {
         $u_agent 	= $_SERVER['HTTP_USER_AGENT'];
@@ -89,7 +90,6 @@ class SiteController extends Controller
             }
         }
         
-        // Next get the name of the useragent yes seperately and for good reason
         if (preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent)) {
             $bname = 'Internet Explorer';
             $ub = "MSIE";
@@ -110,19 +110,13 @@ class SiteController extends Controller
             $ub = "Netscape";
         }
         
-        //  finally get the correct version number
         $known = array('Version', $ub, 'other');
         $pattern = '#(?<browser>' . join('|', $known) .')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
         
-        if(!preg_match_all($pattern, $u_agent, $matches)) {
-            // we have no matching number just continue
-        }
+        if(!preg_match_all($pattern, $u_agent, $matches)) {}
         
-        // see how many we have
         $i = count($matches['browser']);
         if($i != 1) {
-            //we will have two since we are not using 'other' argument yet
-            //see if version is before or after the name
             if (strripos($u_agent,"Version") < strripos($u_agent,$ub)){
                 $version= $matches['version'][0];
             }else {
@@ -132,7 +126,6 @@ class SiteController extends Controller
             $version= $matches['version'][0];
         }
         
-        // check if we have a number
         $version = ( $version == null || $version == "" ) ? "?" : $version;
         
         return array(
@@ -143,10 +136,9 @@ class SiteController extends Controller
             'pattern'   => $pattern
         );
     }
-    
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- INDEX
     public function index()
     {
-		// Kawal Corona
 		$glo['data'] = Setting::get();
         
         $CURL = curl_init();
@@ -174,26 +166,20 @@ class SiteController extends Controller
 		
 		return view('home',['covid' => $covid, 'article' =>$article, 'visitor' =>$visitor, 'carousel' =>$carousel, 'aparatur' =>$aparatur]);
 	}
-    
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- SEKILAS DESA
     public function visimisi()
 	{
 		$visimisi = Visimisi::get();
 		
 		return view('visimisi',['visimisi' => $visimisi]);
 	}
-    
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- INFO PUBLIK
 	public function article()
 	{
         $article = Article::where('status', 'Published')->paginate(5);
 		return view('article', ['article' => $article]);
-	}
-    
+	} 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
 	public function article_show($id)
 	{
         $article = Article::find($id);

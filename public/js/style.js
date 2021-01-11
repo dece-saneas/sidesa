@@ -1,5 +1,15 @@
 // JavaScript Document
 
+// Gmaps
+$(function () {
+    $('.map')
+        .click(function(){
+            $(this).find('iframe').addClass('clicked')
+        })
+        .mouseleave(function(){
+            $(this).find('iframe').removeClass('clicked')
+        });
+});
 // Disable Scrollbar on Narbar Mobile
 $(function () {
 	$('.navbar-toggler').click(function () {

@@ -19,7 +19,7 @@
 		<header id="site-header" class="fixed-top">
 			<div class="container">
 				<nav class="navbar navbar-expand-lg stroke">
-					<h1><a class="navbar-brand mr-lg-5" href="{{ route('site') }}"><img src="{{ asset('img/logo/'.$glo['data'][0]->G) }}" class="mr-2" alt="Your logo" title="Your logo" height="40px;">Desa {{ $glo['data'][0]->F }}</a></h1>
+					<h1><a class="navbar-brand mr-lg-5" href="{{ route('site') }}"><img src="{{ asset('img/logo/'.$glo['data'][0]->G) }}" class="mr-2" alt="Your logo" title="Your logo" height="40px;">{{ $glo['data'][0]->F }}</a></h1>
 					<button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
 						<span class="navbar-toggler-icon fa icon-close fa-times"></span>
@@ -29,13 +29,15 @@
 							<li class="nav-item dropdown mr-lg-0 m-auto">
 								<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sekilas Desa</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="#">Belum Tersedia</a>
+									<a class="dropdown-item" href="{{ route('site.visimisi') }}">Sejarah</a>
+									<a class="dropdown-item" href="{{ route('site.visimisi') }}">Visi & Misi</a>
+									<a class="dropdown-item" href="{{ route('site.visimisi') }}">Profil Desa</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pemerintahan</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="{{ route('site.visimisi') }}">Visi & Misi</a>
+									<a class="dropdown-item" href="#">Fasilitas Desa</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">
@@ -44,14 +46,30 @@
 									<a class="dropdown-item" href="{{ route('site.article') }}">Artikel</a>
 								</div>
 							</li>
-							<li class="nav-item dropdown">
+							<li class="nav-item dropdown mb-2 mb-sm-0">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Layanan</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="#">Belum Tersedia</a>
+									<a class="dropdown-item" href="{{ route('surat') }}">Permintaan Surat</a>
 								</div>
 							</li>
+                            <li class="align-self mr-lg-0 m-auto">
+                                <a href="{{ route('login') }}" class="btn btn-primary">Sign In <span class="fas fa-sign-in-alt ml-1"></span></a>
+                            </li>
 						</ul>
 					</div>
+                    <div class="mobile-position ml-lg-2">
+                        <nav class="navigation">
+                            <div class="theme-switch-wrapper">
+                                <label class="theme-switch" for="checkbox">
+                                    <input type="checkbox" id="checkbox">
+                                    <div class="mode-container">
+                                        <h5><i class="fas fa-sun"></i></h5>
+                                        <h5><i class="fas fa-moon"></i></h5>
+                                    </div>
+                                </label>
+                            </div>
+                        </nav>
+                    </div>
 				</nav>
 			</div>
 		</header>
@@ -94,8 +112,9 @@
 								</div>
 							</div>
 							<div class="footers14-bottom d-flex justify-content-center">
-								<div class="copyright">
-									<p>© 2020 {{ $glo['data'][0]->F }}. All rights reserved. Design by <a href="#">W3Layouts</a> | <a href="#">Aveas</a></p>
+								<div class="copyright text-center">
+									<p>Copyright © 2020 | Desa <a href="{{ route('site') }}">{{ $glo['data'][0]->F }}.</a></p>
+									<p>All rights reserved. Design by <a href="">W3Layouts</a> | <a href="">Aveas</a></p>
 								</div>
 							</div>
 						</div>

@@ -10,16 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- AUTH
+Auth::routes(['register' => false, 'reset' => false, 'confirm' => false, 'verify' => false]);
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- SITE
 Route::get('/', 'SiteController@index')->name('site');
 Route::get('/visi-misi', 'SiteController@visimisi')->name('site.visimisi');
 Route::get('/article', 'SiteController@article')->name('site.article');
 Route::get('/article/{id}', 'SiteController@article_show')->name('site.article.show');
-
-Auth::routes(['register' => false, 'reset' => false, 'confirm' => false, 'verify' => false]);
-
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- DASHBOARD
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- SURAT
 Route::get('/dashboard/surat/', 'SuratController@index')->name('surat');
 Route::get('/dashboard/surat/create', 'SuratController@create')->name('surat.create');
 Route::post('/dashboard/surat/create', 'SuratController@store')->name('surat.store');

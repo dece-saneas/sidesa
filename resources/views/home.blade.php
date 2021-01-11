@@ -15,7 +15,7 @@
 							<div class="container">
 								<div class="banner-info-bg text-left">
 									{!! $c->content !!}
-									<a href="#contact" class="btn btn-primary btn-style">Hubungi kami</a>
+									<a href="#footer" class="btn btn-primary btn-style">Hubungi kami</a>
 								</div>
 							</div>
 						</div>
@@ -55,10 +55,8 @@
 		</div>
 	</div>
 </section>
-<div class="middle py-5">
-</div>
 <!-- Covid-19 -->
-<section class="w3_stats py-5" id="stats">
+<div class="middle py-5" id="stats">
 	<div class="container py-lg-5 py-md-4 py-2">
 		<div class="title-content text-center">
 			<h3 class="title-big">Statistik Kasus Coronavirus di Provinsi Aceh.</h3>
@@ -89,7 +87,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</div>
 <!-- Artikel -->
 <section class="w3l-index5 py-5" id="news">
 	<div class="container py-lg-5 py-md-4">
@@ -229,6 +227,6 @@
 </section>
 <!-- maps -->
 <div class="map">
-	<iframe src="{{ $glo['data'][1]->A }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+	<iframe src="{{ $glo['data'][1]->A }}" width="600" height="450" frameborder="0" scrolling="no" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 </div>
 @endsection
