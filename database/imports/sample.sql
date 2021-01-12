@@ -1,12 +1,7 @@
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-('2','Matilda Lynch','grady.stacy@luettgen.org',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1974-08-31 03:19:44','2013-10-26 21:40:41'),
-('3','Kepala Dusun Satu','kadus@sidesa.id',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1986-06-27 10:55:17','2000-06-14 05:46:59'),
-('4','Carson Dooley','fritz.toy@yahoo.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1984-03-29 07:34:39','2017-11-07 23:02:27'),
-('5','Ketua RW 002','rw@sidesa.id',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'2008-11-01 01:11:31','2001-10-04 20:00:59'),
-('6','Ms. Brenda Legros','atillman@hotmail.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1986-05-31 22:14:42','1976-03-09 17:57:56'),
 ('7','Maxie McClure Sr.','zchristiansen@gmail.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1986-01-15 10:06:40','1990-03-06 23:25:02'),
 ('8','Craig Roob Sr.','ken.stracke@yahoo.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'2011-10-31 08:41:50','2000-12-28 21:07:37'),
-('9','Ketua RT 001','rt@sidesa.id',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'2005-08-20 15:16:45','2016-09-01 14:33:05'),
+('9','Matilda Lynch','grady.stacy@luettgen.org',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1974-08-31 03:19:44','2013-10-26 21:40:41'),
 ('10','Miss Jadyn Weimann V','abigale67@stamm.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'2020-09-03 03:24:38','2012-04-12 05:40:44'),
 ('11','Lina O\'Connell','clemmie82@mayertroob.info',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1978-10-31 08:10:05','2006-11-20 13:00:13'),
 ('12','Tom Lang','zbeatty@hotmail.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1984-11-15 00:34:39','1991-09-07 20:25:46'),
@@ -16,7 +11,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 ('16','Spencer Bailey','hessel.telly@gmail.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1999-12-28 16:40:57','2015-12-26 14:35:01'),
 ('17','Rigoberto Labadie','loyal28@ziemelueilwitz.biz',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1994-09-17 16:23:50','1990-07-09 16:25:04'),
 ('18','Ron Blick III','josue.moore@gislason.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1976-03-15 21:34:53','1983-12-30 07:19:30'),
-('19','Warga Bijak','warga@sidesa.id',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1993-03-03 23:09:08','2003-04-04 17:37:58'),
+('19','Carson Dooley','fritz.toy@yahoo.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1984-03-29 07:34:39','2017-11-07 23:02:27'),
 ('20','Samir Lakin DVM','octavia.heller@gmail.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'2008-03-29 02:34:00','2013-10-20 13:31:43'),
 ('21','Mrs. Neva McLaughlin IV','bernadette.borer@leannon.org',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1986-11-24 00:37:57','1984-02-13 15:57:49'),
 ('22','Prof. Brown Armstrong','asa83@hotmail.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1975-03-07 12:39:31','1994-02-06 17:10:55'),
@@ -93,18 +88,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 ('93','Ms. Rafaela Kutch','demond.roberts@koss.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'2019-08-05 03:31:27','1982-08-28 10:29:00'),
 ('94','Prof. Damon Halvorson DDS','chris.harber@yahoo.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1981-04-12 08:21:45','2009-10-28 11:12:35'),
 ('95','Kiara Hansen','jade00@yahoo.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'2006-07-05 23:07:53','1978-05-14 08:19:47'),
-('96','Jurnalis Teladan','jurnalis@sidesa.id',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1996-12-26 13:31:21','2014-11-11 04:29:58'),
+('96','Ms. Brenda Legros','atillman@hotmail.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1986-05-31 22:14:42','1976-03-09 17:57:56'),
 ('97','May Pouros Jr.','kacie.satterfield@hodkiewicz.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'2016-03-11 08:05:12','2020-03-31 08:15:34'),
 ('98','Albina Kunze','henry.kuhic@effertz.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'2008-01-23 13:05:16','1999-09-08 16:22:20'),
 ('99','Aracely Lakin','jude36@gmail.com',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1988-10-10 00:35:48','1990-11-10 04:31:07'),
 ('100','Kyleigh Reichel','itzel05@hauck.org',NULL,'$2y$10$7AGIBGeVGc7E9IjTp.hGbuU1uLY.ZAKOTFr7IM/ut7iKfSJZGoQ/G',NULL,'1970-05-15 10:22:08','1980-06-21 09:40:45'); 
 
 INSERT INTO `nomor_induk_kependudukan` (`id`, `user_id`, `father_id`, `mother_id`, `code`, `place_of_birth`, `date_of_birth`, `gender`, `blood_type`, `address`, `dusun_id`, `rukun_warga_id`, `rukun_tetangga_id`, `religion`, `married_status`, `job_status`, `created_at`, `updated_at`) VALUES
-('2','2',NULL,NULL,'3579034809880001','Lake Laury','1980-08-02 04:58:19','Laki-Laki',NULL,'97675 Thea Shore Apt. 542\nKeelymouth, IA 90216',NULL,NULL,NULL,NULL,NULL,NULL,'1998-10-05 22:35:48','2005-08-29 13:19:26'),
-('3','3',NULL,NULL,'3579031308090001','Port Randiview','1977-05-29 13:28:23','Perempuan',NULL,'717 McKenzie Trafficway\nRaemouth, VA 00365',NULL,NULL,NULL,NULL,NULL,NULL,'1992-12-30 04:51:52','2009-04-23 18:24:09'),
-('4','4',NULL,NULL,'3579030510700002','Makennafurt','1992-05-01 02:24:22','Perempuan',NULL,'666 Derek Garden\nLeonieberg, RI 03521',NULL,NULL,NULL,NULL,NULL,NULL,'2014-06-20 13:28:12','1982-03-16 08:47:02'),
-('5','5',NULL,NULL,'3579034802710002','North Ezra','1995-11-25 11:26:13','Laki-Laki',NULL,'80093 Griffin Forges\nPort Alysa, SD 72243-6142',NULL,NULL,NULL,NULL,NULL,NULL,'1986-08-23 21:45:02','2010-10-09 13:48:14'),
-('6','6',NULL,NULL,'3579030406940006','Marksmouth','1991-11-21 06:04:37','Laki-Laki',NULL,'42691 Domingo Centers\nNew Alexandre, IL 56592-6821',NULL,NULL,NULL,NULL,NULL,NULL,'1997-01-28 18:48:35','2020-01-13 12:02:43'),
 ('7','7',NULL,NULL,'3303155406770002','East Chaya','2019-10-21 10:36:42','Perempuan',NULL,'940 Rohan Crescent\nSouth Lennashire, VT 21911-6602',NULL,NULL,NULL,NULL,NULL,NULL,'1994-09-01 10:50:26','1990-08-01 18:23:31'),
 ('8','8',NULL,NULL,'3303150705330001','Hayestown','1995-12-29 18:32:20','Perempuan',NULL,'65337 Johann Haven\nDavonland, GA 01890-2909',NULL,NULL,NULL,NULL,NULL,NULL,'1991-04-18 09:48:33','2015-08-11 02:39:33'),
 ('9','9',NULL,NULL,'3303155002450002','Raynorshire','2013-04-02 10:00:50','Laki-Laki',NULL,'826 Hintz Harbor\nHintzhaven, IN 12209',NULL,NULL,NULL,NULL,NULL,NULL,'2012-04-20 05:51:33','1985-04-26 20:27:52'),
@@ -202,35 +192,22 @@ INSERT INTO `nomor_induk_kependudukan` (`id`, `user_id`, `father_id`, `mother_id
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 -- Admin
-(1, 'App\\Models\\User', 2),
-(5, 'App\\Models\\User', 2),
+(1, 'App\\Models\\User', 7),
 -- Kepala Dusun
-(2, 'App\\Models\\User', 3),
-(2, 'App\\Models\\User', 4),
-(5, 'App\\Models\\User', 4),
+(2, 'App\\Models\\User', 8),
 -- Ketua RW
-(3, 'App\\Models\\User', 5),
-(3, 'App\\Models\\User', 6),
-(5, 'App\\Models\\User', 6),
-(3, 'App\\Models\\User', 7),
-(3, 'App\\Models\\User', 8),
-(5, 'App\\Models\\User', 8),
+(3, 'App\\Models\\User', 9),
+(3, 'App\\Models\\User', 10),
+(3, 'App\\Models\\User', 11),
 -- Ketua RT
-(4, 'App\\Models\\User', 9),
-(4, 'App\\Models\\User', 10),
-(5, 'App\\Models\\User', 10),
-(4, 'App\\Models\\User', 11),
 (4, 'App\\Models\\User', 12),
-(5, 'App\\Models\\User', 12),
 (4, 'App\\Models\\User', 13),
 (4, 'App\\Models\\User', 14),
-(5, 'App\\Models\\User', 14),
 (4, 'App\\Models\\User', 15),
 (4, 'App\\Models\\User', 16),
-(5, 'App\\Models\\User', 16),
+(4, 'App\\Models\\User', 17),
+(4, 'App\\Models\\User', 18),
 -- Warga
-(5, 'App\\Models\\User', 17),
-(5, 'App\\Models\\User', 18),
 (5, 'App\\Models\\User', 19),
 (5, 'App\\Models\\User', 20),
 (5, 'App\\Models\\User', 21),
@@ -308,13 +285,11 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (5, 'App\\Models\\User', 93),
 (5, 'App\\Models\\User', 94),
 (5, 'App\\Models\\User', 95),
+(5, 'App\\Models\\User', 96),
 -- Jurnalis
-(6, 'App\\Models\\User', 96),
 (6, 'App\\Models\\User', 97),
-(5, 'App\\Models\\User', 97),
 (6, 'App\\Models\\User', 98),
 (6, 'App\\Models\\User', 99),
-(5, 'App\\Models\\User', 99),
 (6, 'App\\Models\\User', 100);
 
 INSERT INTO `data_warga_kurang_mampu` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
@@ -340,17 +315,14 @@ INSERT INTO `data_warga_kurang_mampu` (`id`, `user_id`, `created_at`, `updated_a
 (20, 55, '2020-12-10 04:22:29', '2020-12-10 04:22:29');
 
 INSERT INTO `data_dusun` (`id`, `name`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Selatan', 3, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(2, 'Utara', 4, '2020-12-10 04:22:29', '2020-12-10 04:22:29');
+(2, 'Dusun II', 8, '2020-12-10 04:22:29', '2020-12-10 04:22:29');
 
 INSERT INTO `data_rukun_warga` (`id`, `number`, `dusun_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, '001', 1, 5, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
-(2, '002', 1, 6, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
-(3, '001', 2, 7, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
-(4, '002', 2, 8, '2020-12-10 04:22:30', '2020-12-10 04:22:30');
+(2, '002', 1, 9, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
+(3, '001', 2, 10, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
+(4, '002', 2, 11, '2020-12-10 04:22:30', '2020-12-10 04:22:30');
 
 INSERT INTO `data_rukun_tetangga` (`id`, `number`, `rukun_warga_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, '001', 1, 9, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
 (2, '002', 1, 10, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
 (3, '001', 2, 11, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
 (4, '002', 2, 12, '2020-12-10 04:22:30', '2020-12-10 04:22:30'),
@@ -360,7 +332,6 @@ INSERT INTO `data_rukun_tetangga` (`id`, `number`, `rukun_warga_id`, `user_id`, 
 (8, '002', 4, 16, '2020-12-10 04:22:30', '2020-12-10 04:22:30');
 
 INSERT INTO `data_jurnalis` (`id`, `code`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'BJ0001', 96, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
 (2, 'BJ0002', 97, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
 (3, 'BJ0003', 98, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),
 (4, 'BJ0004', 99, '2020-12-10 04:22:29', '2020-12-10 04:22:29'),

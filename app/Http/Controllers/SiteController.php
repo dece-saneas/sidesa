@@ -10,6 +10,7 @@ use App\Models\Setting;
 use App\Models\Visimisi;
 use App\Models\Carousel;
 use App\Models\Aparatur;
+use App\Models\Fasilitas;
 
 class SiteController extends Controller
 {
@@ -172,6 +173,23 @@ class SiteController extends Controller
 		$visimisi = Visimisi::get();
 		
 		return view('visimisi',['visimisi' => $visimisi]);
+	}
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public function sejarah()
+	{
+		return view('sejarah');
+	}
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public function profile()
+	{
+		return view('profile');
+	}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- SEKILAS DESA
+    public function facilities()
+	{
+		$fasilitas = Fasilitas::get();
+		
+		return view('facilities',['fasilitas' => $fasilitas]);
 	}
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- INFO PUBLIK
 	public function article()

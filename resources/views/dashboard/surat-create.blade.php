@@ -57,12 +57,13 @@
                             @enderror
                         </div>
 					</div>
-					<div class="card-footer text-right">
-						<div class="btn-group">
-							<a href="{{ route('surat') }}" class="btn btn-dark" type="submit"><i class="fas fa-angle-left mr-2"></i> Kembali</a>
-							<button class="btn btn-success" type="submit">Kirim <i class="fas fa-location-arrow ml-2"></i></button>
-						</div>
-					</div>
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <div class="float-right">
+                            <button class="btn btn-success" type="submit"><i class="fas fa-paper-plane mr-2"></i>Send</button>
+                        </div>
+                        <a href="{{ route('surat') }}" class="btn btn-default"><i class="fas fa-times mr-2"></i>Cancel</a>
+                    </div>
 				</form>
             </div>
 		</div>

@@ -25,7 +25,7 @@ class AspirasiController extends Controller
             $aspirasi = Aspirasi::paginate(10);
         }
         
-        return view('dashboard.aspirasi.index', ['aspirasi' => $aspirasi]);
+        return view('dashboard.aspirasi', ['aspirasi' => $aspirasi]);
     }else{return abort(403);}}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ class AspirasiController extends Controller
     public function create()
 	{if (auth()->user()->hasPermissionTo('aspirasi-create')) {
 
-        return view('dashboard.aspirasi.create');
+        return view('dashboard.aspirasi-create');
 	}else{return abort(403);}}
     
     public function store(Request $request)

@@ -1,6 +1,6 @@
 @extends('layouts.master-frontend')
 
-@section('title') Desa {{ $glo['data'][0]->F }} @endsection
+@section('title') {{ $glo['data'][0]->F }} @endsection
 
 @section('content')
 <!-- main-slider -->
@@ -175,28 +175,27 @@
 <section class="w3_stats py-5" id="stats">
 	<div class="container py-lg-5 py-md-4 py-2">
 		<div class="title-content text-center">
-			<h3 class="title-big">Statistik Pengunjung website.</h3>
-			<h4 class="title-big">Desa {{ $glo['data'][0]->F }}.</h4>
+			<h3 class="title-big">Statistik Pengunjung Website</h3>
 		</div>
 		<div class="w3-stats text-center">
 			<div class="row">
 				<div class="col-md-4 col-12">
 					<div class="counter">
-						<span class="fa fa-globe-asia"></span>
+						<span class="fa fa-user"></span>
 						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['day']) }}" data-speed="@if(count($visitor['year']) > 0) {{ count($visitor['year']) }} @else 1 @endif"></div>
 						<p class="count-text ">Hari ini</p>
 					</div>
 				</div>
 				<div class="col-md-4 col-12">
 					<div class="counter">
-						<span class="fa fa-globe-asia"></span>
+						<span class="fa fa-user-friends"></span>
 						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['month']) }}" data-speed="@if(count($visitor['year']) > 0) {{ count($visitor['year']) }} @else 1 @endif"></div>
 						<p class="count-text ">Bulan ini</p>
 					</div>
 				</div>
 				<div class="col-md-4 col-12">
 					<div class="counter">
-						<span class="fa fa-globe-asia"></span>
+						<span class="fa fa-users"></span>
 						<div class="timer count-title count-number mt-3" data-to="{{ count($visitor['year']) }}" data-speed="@if(count($visitor['year']) > 0) {{ count($visitor['year']) }} @else 1 @endif"></div>
 						<p class="count-text ">Tahun ini</p>
 					</div>

@@ -17,6 +17,9 @@ Route::get('/', 'SiteController@index')->name('site');
 Route::get('/visi-misi', 'SiteController@visimisi')->name('site.visimisi');
 Route::get('/article', 'SiteController@article')->name('site.article');
 Route::get('/article/{id}', 'SiteController@article_show')->name('site.article.show');
+Route::get('/sejarah', 'SiteController@sejarah')->name('site.sejarah');
+Route::get('/profile', 'SiteController@profile')->name('site.profile');
+Route::get('/facilities', 'SiteController@facilities')->name('site.facilities');
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- DASHBOARD
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- SURAT

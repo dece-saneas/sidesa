@@ -29,15 +29,15 @@
 							<li class="nav-item dropdown mr-lg-0 m-auto">
 								<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sekilas Desa</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="{{ route('site.visimisi') }}">Sejarah</a>
+									<a class="dropdown-item" href="{{ route('site.sejarah') }}">Sejarah</a>
 									<a class="dropdown-item" href="{{ route('site.visimisi') }}">Visi & Misi</a>
-									<a class="dropdown-item" href="{{ route('site.visimisi') }}">Profil Desa</a>
+									<a class="dropdown-item" href="{{ route('site.profile') }}">Profil Desa</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pemerintahan</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="#">Fasilitas Desa</a>
+									<a class="dropdown-item" href="{{ route('site.facilities') }}">Fasilitas Desa</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">

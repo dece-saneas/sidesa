@@ -25,7 +25,7 @@ class SuratController extends Controller
             $surat = Surat::paginate(10);
         }
 
-        return view('dashboard.surat.index', ['surat' => $surat]);
+        return view('dashboard.surat', ['surat' => $surat]);
     }else{return abort(403);}}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ class SuratController extends Controller
     public function create()
 	{if (auth()->user()->hasPermissionTo('surat-create')) {
         
-		return view('dashboard.surat.create');
+		return view('dashboard.surat-create');
 	}else{return abort(403);}}
     
     public function store(Request $request)

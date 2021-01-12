@@ -27,7 +27,9 @@ Author URL: http://w3layouts.com
     top: 9.5px!important; 
 }
 }
-
+.dropdown:hover>.dropdown-menu {
+	display: block;
+}
 
 :root {
   --blue: #007bff;
