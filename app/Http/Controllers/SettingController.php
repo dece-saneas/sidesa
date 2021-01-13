@@ -8,6 +8,7 @@ use App\Models\Setting;
 use App\Models\Visimisi;
 use App\Models\Carousel;
 use App\Models\Aparatur;
+use App\Models\Fasilitas;
 use File;
 
 class SettingController extends Controller
@@ -30,6 +31,18 @@ class SettingController extends Controller
 	{        
 		return view('dashboard.info');
 	}
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	public function sejarah()
+	{        
+		return view('dashboard.sejarah');
+	}
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	public function profile()
+	{        
+		return view('dashboard.profile-desa');
+	}
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
@@ -39,6 +52,15 @@ class SettingController extends Controller
         $misi = Visimisi::where('id', '>', 1)->paginate(10);
         
 		return view('dashboard.visimisi', ['misi' => $misi, 'visi'=> $visi]);
+	}
+ 
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	public function fasilitas()
+	{        
+        $fasilitas = Fasilitas::paginate(10);
+        
+		return view('dashboard.fasilitas', ['fasilitas'=> $fasilitas]);
 	}
  
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -213,6 +235,37 @@ class SettingController extends Controller
         }
         
         return redirect()->back()->with('success', 'Info berhasil diperbarui!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function sejarah_update(Request $request)
+    {
+		$setting = Setting::find(3);
+		
+        $this->validate($request,[
+            'content' => 'required',
+        ]);
+
+		$setting->C = $request->content;
+		$setting->save();
+		
+        return redirect()->back()->with('success', 'Sejarah berhasil diperbarui!');
+	}
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function profile_update(Request $request)
+    {
+		$setting = Setting::find(3);
+		
+        $this->validate($request,[
+            'content' => 'required',
+        ]);
+
+		$setting->D = $request->content;
+		$setting->save();
+		
+        return redirect()->back()->with('success', 'Profil Desa berhasil diperbarui!');
 	}
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

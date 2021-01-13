@@ -9,6 +9,6 @@ class Fasilitas extends Model
 	protected $table = "facilities";
 	
     protected $fillable = [
-		'type', 'Name',
+		'type', 'name',
 	];
 }

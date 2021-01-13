@@ -119,7 +119,6 @@ Route::put('/dashboard/visimisi/{id}', 'SettingController@visimisi_update')->nam
 Route::delete('/dashboard/visimisi/{id}', 'SettingController@visimisi_destroy')->name('visimisi.destroy');
 
 
-
 Route::get('/dashboard/carousel', 'SettingController@carousel')->name('carousel');
 Route::get('/dashboard/carousel/create', 'SettingController@carousel_create')->name('carousel.create');
 Route::post('/dashboard/carousel/create', 'SettingController@carousel_store')->name('carousel.store');
@@ -134,4 +133,10 @@ Route::get('/dashboard/aparatur/edit/{id}', 'SettingController@aparatur_edit')->
 Route::put('/dashboard/aparatur/{id}', 'SettingController@aparatur_update')->name('aparatur.update');
 Route::delete('/dashboard/aparatur/{id}', 'SettingController@aparatur_destroy')->name('aparatur.destroy');
 
+Route::get('/dashboard/sejarah', 'SettingController@sejarah')->name('sejarah');
+Route::put('/dashboard/sejarah', 'SettingController@sejarah_update')->name('sejarah.update');
 
+Route::get('/dashboard/profil-desa', 'SettingController@profile')->name('profile-desa');
+Route::put('/dashboard/profil-desa', 'SettingController@profile_update')->name('profile-desa.update');
+
+Route::get('/dashboard/fasilitas', 'SettingController@fasilitas')->name('facilities');

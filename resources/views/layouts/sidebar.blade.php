@@ -121,32 +121,39 @@
 								<i class="fas fa-newspaper nav-icon mr-2"></i><p>Article</p>
 							</a>
 						</li>
-					</ul>
-					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<a href="{{ route('info') }}" class="nav-link">
 								<i class="fas fa-bullhorn nav-icon mr-2"></i><p>Info</p>
 							</a>
 						</li>
-					</ul>
-					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<a href="{{ route('visimisi') }}" class="nav-link">
 								<i class="fas fa-bullseye nav-icon mr-2"></i><p>Visi & Misi</p>
 							</a>
 						</li>
-					</ul>
-					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<a href="{{ route('carousel') }}" class="nav-link">
 								<i class="fas fa-play nav-icon mr-2"></i><p>Carousel</p>
 							</a>
 						</li>
-					</ul>
-					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<a href="{{ route('aparatur') }}" class="nav-link">
 								<i class="fas fa-user-tie nav-icon mr-2"></i><p>Aparatur</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('sejarah') }}" class="nav-link">
+								<i class="fas fa-monument nav-icon mr-2"></i><p>Sejarah</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('profile-desa') }}" class="nav-link">
+								<i class="fas fa-university nav-icon mr-2"></i><p>Profil Desa</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('facilities') }}" class="nav-link">
+								<i class="fas fa-star nav-icon mr-2"></i><p>Fasilitas</p>
 							</a>
 						</li>
 					</ul>
