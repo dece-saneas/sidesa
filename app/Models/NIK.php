@@ -16,4 +16,14 @@ class NIK extends Model
     {
     	return $this->belongsTo('App\Models\User');
     }
+    
+	public function rukun_warga()
+    {
+    	return $this->belongsTo('App\Models\RW');
+    }
+    
+	public function rukun_tetangga()
+    {
+    	return $this->belongsTo('App\Models\RT');
+    }
 }

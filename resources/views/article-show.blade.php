@@ -1,6 +1,6 @@
 @extends('layouts.master-frontend')
 
-@section('title') {{ $glo['data'][0]->F }} - Artikel @endsection
+@section('title') Artikel @endsection
 
 @section('content')
 <div class="inner-banner">
@@ -23,7 +23,7 @@
         <div class="blog-post-align">
             <div class="entry-meta">
                 <span class="comments-link">By</span>
-                <span class="cat-links"><a href="#url" rel="category tag">{{ $article->user->name }}</a></span> /
+                <span class="cat-links"><a href="" rel="category tag">{{ $article->user->name }}</a></span> /
                 <span class="posted-on"><span class="published">{{ $article->created_at->format('F d, Y') }}</span></span>
             </div>
         </div>

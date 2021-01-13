@@ -21,7 +21,7 @@ class AnggaranController extends Controller
             
         $anggaran = Anggaran::paginate(10);
         
-        return view('dashboard.anggaran.index', ['anggaran' => $anggaran]);
+        return view('dashboard.anggaran', ['anggaran' => $anggaran]);
     }else{return abort(403);}}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ class AnggaranController extends Controller
     public function create()
 	{if (auth()->user()->hasPermissionTo('anggaran-create')) {
         
-		return view('dashboard.anggaran.create');
+		return view('dashboard.anggaran-create');
 	}else{return abort(403);}}
     
     public function store(Request $request)
@@ -70,7 +70,7 @@ class AnggaranController extends Controller
         
 		$anggaran = Anggaran::find($id);
         
-		return view('dashboard.anggaran.edit',['anggaran' => $anggaran]);
+		return view('dashboard.anggaran-edit',['anggaran' => $anggaran]);
 	}else{return abort(403);}}
     
     public function update(Request $request, $id)

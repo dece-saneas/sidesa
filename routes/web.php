@@ -64,7 +64,7 @@ Route::get('/dashboard/penduduk/{id}/edit', 'UserController@penduduk_edit')->nam
 Route::put('/dashboard/penduduk/{id}', 'UserController@penduduk_update')->name('penduduk.update');
 Route::delete('/dashboard/penduduk/{id}', 'UserController@penduduk_destroy')->name('penduduk.destroy');
 
-Route::get('/dashboard/penduduk/filter/warga-kurang-mampu', 'UserController@penduduk_filter_kurangmampu')->name('penduduk.filter.kurangmampu');
+Route::post('/dashboard/penduduk/filter/warga-kurang-mampu', 'UserController@penduduk_filter_kurangmampu')->name('penduduk.filter.kurangmampu');
 
 Route::get('/dashboard/penduduk/toggle/warga-kurang-mampu/{id}', 'UserController@penduduk_toggle_kurangmampu')->name('penduduk.toggle.kurangmampu');
 Route::get('/dashboard/penduduk/toggle/warga/{id}', 'UserController@penduduk_toggle_warga')->name('penduduk.toggle.warga');

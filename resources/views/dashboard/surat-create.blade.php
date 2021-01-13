@@ -6,12 +6,12 @@
 	<div class="content-header">
 		<div class="container-fluid">
 			<div class="jumbotron s-container-title">
-				<h1 class="display-4">Permintaan Surat</h1>
+				<h1 class="display-4">Create Permintaan Surat</h1>
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
               			<li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Dashboard</a></li>
               			<li class="breadcrumb-item"><a href="{{ route('surat')}}">Permintaan Surat</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Formulir</li>
+						<li class="breadcrumb-item active" aria-current="page">Create</li>
 					</ol>
 				</nav>
 			</div>
@@ -23,9 +23,6 @@
             <div class="card">
 				<form action="{{ route('surat.store') }}" method="POST">
 				@csrf
-					<div class="card-header">
-						<h3 class="card-title">Formulir Permintaan Surat</h3>
-					</div>
 					<div class="card-body">
                         <div class="form-group">
                             <label for="type">Jenis Surat</label>

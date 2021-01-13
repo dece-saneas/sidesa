@@ -26,4 +26,9 @@ class RW extends Model
     {
     	return $this->hasMany('App\Models\RT');
     }
+    
+    public function nik()
+    {
+    	return $this->hasOne('App\Models\NIK');
+    }
 }

@@ -65,7 +65,7 @@ class UserController extends Controller
             })->paginate(10);
         }
         
-		return view('dashboard.penduduk.index',['user' => $user]);
+		return view('dashboard.penduduk',['user' => $user]);
 	}else{return abort(403);}}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,29 +81,46 @@ class UserController extends Controller
             $dusun = Dusun::where('id', auth()->user()->rt->rukun_warga->dusun_id)->get();
         }
         
-		return view('dashboard.penduduk.create', ['user' => $user, 'dusun' => $dusun]);
+		return view('dashboard.penduduk-create', ['user' => $user, 'dusun' => $dusun]);
 	}else{return abort(403);}}
     
     public function penduduk_store(Request $request)
     {if (auth()->user()->hasPermissionTo('penduduk-create')) {
         
-        $this->validate($request,[
-            'name' => 'required',
-            'nik' => 'required|unique:nomor_induk_kependudukan,code',
-            'gender' => 'required',
-            'place' => 'required',
-            'dob' => 'required',
-            'address' => 'required',
-            'dusun' => 'required',
-            'rw' => 'required',
-            'rt' => 'required',
-        ]);
+        if (auth()->user()->hasrole('Admin')) {
+            $this->validate($request,[
+                'name' => 'required',
+                'email' => 'unique:users,email',
+                'nik' => 'required|unique:nomor_induk_kependudukan,code',
+                'gender' => 'required',
+                'place' => 'required',
+                'dob' => 'required',
+                'address' => 'required',
+            ]);
+        }else {
+            $this->validate($request,[
+                'name' => 'required',
+                'email' => 'unique:users,email',
+                'nik' => 'required|unique:nomor_induk_kependudukan,code',
+                'gender' => 'required',
+                'place' => 'required',
+                'dob' => 'required',
+                'address' => 'required',
+                'dusun' => 'required',
+                'rw' => 'required',
+                'rt' => 'required',
+            ]);
+        }
         
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make('12345678'),
         ]);
+        
+        if (auth()->user()->hasrole('Ketua RT')) {
+            $user->assignRole('Warga');
+        }
         
         NIK::create([
             'user_id' => $user->id,
@@ -137,9 +154,13 @@ class UserController extends Controller
         $data_rw = RW::find($penduduk->nik->rukun_warga_id);
         $data_rt = RT::find($penduduk->nik->rukun_tetangga_id);
         
-        $dusun = Dusun::all();
+        if (auth()->user()->hasrole('Admin')) {
+            $dusun = Dusun::all();
+        }elseif (auth()->user()->hasrole('Ketua RT')) {
+            $dusun = Dusun::where('id', auth()->user()->rt->rukun_warga->dusun_id)->get();
+        }
         
-		return view('dashboard.penduduk.edit',['user' => $user, 'penduduk' => $penduduk, 'dusun' => $dusun, 'data_dusun' => $data_dusun, 'data_rw' => $data_rw, 'data_rt' => $data_rt]);
+		return view('dashboard.penduduk-edit',['user' => $user, 'penduduk' => $penduduk, 'dusun' => $dusun, 'data_dusun' => $data_dusun, 'data_rw' => $data_rw, 'data_rt' => $data_rt]);
 	}else{return abort(403);}}
 	
 	public function penduduk_update(Request $request, $id)
@@ -147,17 +168,30 @@ class UserController extends Controller
         
 		$user = User::find($id);
 		
-        $this->validate($request,[
-            'name' => 'required',
-            'nik' => 'required|unique:nomor_induk_kependudukan,code,' . $user->nik->id,
-            'gender' => 'required',
-            'place' => 'required',
-            'dob' => 'required',
-            'address' => 'required',
-            'dusun' => 'required',
-            'rw' => 'required',
-            'rt' => 'required',
-        ]);
+        if (auth()->user()->hasrole('Admin')) {
+            $this->validate($request,[
+                'name' => 'required',
+                'email' => 'nullable|unique:users,email,'.$user->id,
+                'nik' => 'required|unique:nomor_induk_kependudukan,code,'.$user->nik->id,
+                'gender' => 'required',
+                'place' => 'required',
+                'dob' => 'required',
+                'address' => 'required',
+            ]);
+        }else {
+            $this->validate($request,[
+                'name' => 'required',
+                'email' => 'nullable|unique:users,email,'.$user->id,
+                'nik' => 'required|unique:nomor_induk_kependudukan,code,'.$user->nik->id,
+                'gender' => 'required',
+                'place' => 'required',
+                'dob' => 'required',
+                'address' => 'required',
+                'dusun' => 'required',
+                'rw' => 'required',
+                'rt' => 'required',
+            ]);
+        }
 
 		$user->name = $request->name;
 		$user->email = $request->email;
@@ -201,24 +235,28 @@ class UserController extends Controller
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
-    public function penduduk_filter_kurangmampu()
+    public function penduduk_filter_kurangmampu(Request $request)
 	{
-        if (auth()->user()->hasrole('Admin')) {
-            $user = User::whereHas('warga_kurang_mampu', function ($query) {
-                $query->where('id', '>', 0);
-            })->paginate(10);
-        }elseif (auth()->user()->hasrole('Ketua RT')) {
-            
-            $id = RT::find(auth()->user()->rt->id)->id;
-            
-            $user = User::whereHas('warga_kurang_mampu', function ($query) use ($id){
-                $query->where('id', '>', 0);
-            })->whereHas('nik', function ($query) use ($id){
-                $query->where('rukun_tetangga_id', $id);
-            })->paginate(10);
-        }
-        
-		return view('dashboard.penduduk.kurang-mampu',['user' => $user]);
+        if($request->filter == 'All') {
+            return redirect()->route('penduduk');
+        }else {
+            if (auth()->user()->hasrole('Admin')) {
+                $user = User::whereHas('warga_kurang_mampu', function ($query) {
+                    $query->where('id', '>', 0);
+                })->paginate(10);
+            }elseif (auth()->user()->hasrole('Ketua RT')) {
+
+                $id = RT::find(auth()->user()->rt->id)->id;
+
+                $user = User::whereHas('warga_kurang_mampu', function ($query) use ($id){
+                    $query->where('id', '>', 0);
+                })->whereHas('nik', function ($query) use ($id){
+                    $query->where('rukun_tetangga_id', $id);
+                })->paginate(10);
+            }
+
+            return view('dashboard.penduduk-kurang-mampu',['user' => $user]);
+        }  
 	}
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

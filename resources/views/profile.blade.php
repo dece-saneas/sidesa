@@ -1,6 +1,6 @@
 @extends('layouts.master-frontend')
 
-@section('title') {{ $glo['data'][0]->F }} - Profil @endsection
+@section('title') Profil @endsection
 
 @section('content')
 <div class="inner-banner">

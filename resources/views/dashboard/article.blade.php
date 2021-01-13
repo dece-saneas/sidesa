@@ -24,15 +24,17 @@
                 <div class="col-md-2">
 					<div class="card">
 						<div class="card-body text-center">
-							<a class="btn btn-success btn-block" href="{{ route('article.create') }}"><i class="fas fa-plus mr-2"></i>Create New</a>
-							<a class="btn btn-default btn-block" href=""><i class="fas fa-sync-alt mr-2"></i>Refresh</a>
+                            @can('article-create')
+							<a class="btn btn-success btn-block" href="{{ route('article.create') }}">Create New</a>
+                            @endcan
+							<a class="btn btn-default btn-block" href="">Refresh</a>
 						</div>
                 	</div>
 				</div>
 				<div class="col-md-10">
 					<div class="card">
 						<div class="card-body table-responsive">
-							<table class="table table-striped">
+							<table class="table table-sm table-hover">
 								<thead>
 									<tr>
 										<th style="width: 5%" class="text-center">No</th>
@@ -72,11 +74,11 @@
 			</div>
 			@if(auth()->user()->can('article-create'))
 			<div class="row justify-content-center">
-				<a href="{{ route('article.create') }}" class="btn btn-success"><i class="fas fa-plus mr-2"></i>Create New</a>
+				<a href="{{ route('article.create') }}" class="btn btn-success">Create New</a>
 			</div>
 			@else
 			<div class="row justify-content-center mt-2">
-				<a href="" class="btn btn-default"><i class="fas fa-sync-alt mr-2"></i>Refresh</a>
+				<a href="" class="btn btn-default">Refresh</a>
 			</div>
 			@endif			
 			@endif

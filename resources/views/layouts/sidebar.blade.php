@@ -21,21 +21,21 @@
 				</li>
                 @can('surat')
 				<li class="nav-item">
-					<a href="{{ route('surat') }}" class="nav-link">
+					<a href="{{ route('surat') }}" class="nav-link {{ set_active(['surat']) }}">
 						<i class="nav-icon fas fa-copy mr-2"></i><p>Permintaan Surat</p>
 					</a>
 				</li>
                 @endcan
                 @can('anggaran')
 				<li class="nav-item">
-					<a href="{{ route('anggaran') }}" class="nav-link">
+					<a href="{{ route('anggaran') }}" class="nav-link {{ set_active(['anggaran']) }}">
 						<i class="nav-icon fas fa-chart-bar mr-2"></i><p>Laporan Keuangan</p>
 					</a>
 				</li>
                 @endcan
                 @can('aspirasi')
 				<li class="nav-item">
-					<a href="{{ route('aspiration') }}" class="nav-link">
+					<a href="{{ route('aspiration') }}" class="nav-link {{ set_active(['aspiration']) }}">
 						<i class="nav-icon fas fa-bullhorn mr-2"></i><p>Aspirasi</p>
 					</a>
 				</li>
@@ -47,7 +47,7 @@
 					</a>
 				</li>
                 @endhasanyrole
-                @hasanyrole('Admin|Kepala Dusun|Ketua RW|Ketua RT')
+                @hasanyrole('Admin|Kepala Dusun')
 				<li class="nav-item">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-users mr-2"></i><p>Kependudukan<i class="right fas fa-angle-left"></i></p>
@@ -84,6 +84,23 @@
 					</ul>
 				</li>
                 @endhasanyrole
+                
+                
+                @hasrole('Ketua RW')
+				<li class="nav-item">
+					<a href="{{ route('rt') }}" class="nav-link {{ set_active(['penduduk']) }}">
+						<i class="nav-icon fas fa-user-tie mr-2"></i><p>Rukun Tetangga</p>
+					</a>
+				</li>                
+                @endhasrole
+                
+                @hasrole('Ketua RT')
+				<li class="nav-item">
+					<a href="{{ route('penduduk') }}" class="nav-link {{ set_active(['penduduk']) }}">
+						<i class="nav-icon fas fa-users mr-2"></i><p>Penduduk</p>
+					</a>
+				</li>                
+                @endhasrole
                 
                 @hasrole('Jurnalis')
 				<li class="nav-item">

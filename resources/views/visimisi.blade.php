@@ -1,6 +1,6 @@
 @extends('layouts.master-frontend')
 
-@section('title') {{ $glo['data'][0]->F }} - Visi & Misi @endsection
+@section('title') Visi & Misi @endsection
 
 @section('content')
 <div class="inner-banner">

@@ -24,8 +24,10 @@
                 <div class="col-md-2">
 					<div class="card">
 						<div class="card-body text-center">
-							<a class="btn btn-success btn-block" href="{{ route('aspiration.create') }}"><i class="fas fa-plus mr-2"></i>Create New</a>
-							<a class="btn btn-default btn-block" href=""><i class="fas fa-sync-alt mr-2"></i>Refresh</a>
+                            @can('aspirasi-create')
+							<a class="btn btn-success btn-block" href="{{ route('aspiration.create') }}">Create New</a>
+                            @endcan
+							<a class="btn btn-default btn-block" href="">Refresh</a>
 						</div>
                 	</div>
 				</div>
@@ -55,14 +57,16 @@
 											<a href="#" data-container="body" data-toggle="popover" data-placement="top" data-content="Aspirasi kamu berhasil dikirim."><span class="badge badge-primary">Terkirim</span></a>
 											@elseif($a->status == 'Sudah Diterima')
 											<a href="#" data-container="body" data-toggle="popover" data-placement="top" data-content="Aspirasi kamu sudah di terima."><span class="badge badge-success">Sudah Diterima</span></a>
-											@else
-											<a href="#" data-container="body" data-toggle="popover" data-placement="top" data-content="Surat kamu sudah bisa di ambil di kantor."><span class="badge badge-dark">Selesai</span></a>
 											@endif
 										</td>
 										<td class="align-middle text-center">
 											<div class="btn-group" role="group">
 												@can('aspirasi-confirm')
-												<a href="{{ route('aspiration.process', $a->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-check"></i></a>
+                                                @if($a->status == 'Terkirim')
+												<a href="{{ route('aspiration.process', $a->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-user-check"></i></a>
+                                                @elseif($a->status == 'Sudah Diterima')
+                                                <button class="btn btn-sm btn-primary" disabled><i class="fas fa-user-check"></i></button>
+                                                @endif
 												@endcan
 												@can('aspirasi-destroy')
 												<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-delete" data-title="Hapus Aspirasi" data-note="Proses tidak dapat dibatalkan." data-url="{{ route('aspiration.destroy', $a->id) }}"><i class="fas fa-trash"></i></button>
@@ -84,11 +88,11 @@
 			</div>
 			@if(auth()->user()->can('aspirasi-create'))
 			<div class="row justify-content-center">
-				<a href="{{ route('aspiration.create') }}" class="btn btn-success"><i class="fas fa-plus mr-2"></i>Create New</a>
+				<a href="{{ route('aspiration.create') }}" class="btn btn-success">Create New</a>
 			</div>
 			@else
 			<div class="row justify-content-center mt-2">
-				<a href="" class="btn btn-default"><i class="fas fa-sync-alt mr-2"></i>Refresh</a>
+				<a href="" class="btn btn-default">Refresh</a>
 			</div>
 			@endif
 			@endif

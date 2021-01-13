@@ -1,6 +1,6 @@
 @extends('layouts.master-frontend')
 
-@section('title') {{ $glo['data'][0]->F }} @endsection
+@section('title') Home @endsection
 
 @section('content')
 <!-- main-slider -->
@@ -107,7 +107,7 @@
                         @foreach ($article as $no => $a)
                         @if($a->id%2 == 0)
                         <div class="img-block mb-4">
-                            <a href="{{ route('article.show', $a->id) }}">
+                            <a href="{{ route('site.article.show', $a->id) }}">
                                 <img src="{{ asset('img/article/'.$a->image) }}" class="img-fluid radius-image-full" alt="image" />
                                 <span class="title">{{ $a->title }}</span>
                             </a>
@@ -119,7 +119,7 @@
                         @foreach ($article as $no => $a)
                         @if($a->id%2 == 1)
                         <div class="img-block mb-4">
-                            <a href="{{ route('article.show', $a->id) }}">
+                            <a href="{{ route('site.article.show', $a->id) }}">
                                 <img src="{{ asset('img/article/'.$a->image) }}" class="img-fluid radius-image-full" alt="image" />
                                 <span class="title">{{ $a->title }}</span>
                             </a>
