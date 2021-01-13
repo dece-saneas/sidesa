@@ -51,6 +51,30 @@ class UserController extends Controller
         return response()->json($rt);
     }
     
+    
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- PENDUDUK
+    
+    public function profile()
+	{
+        return view('dashboard.profile');
+	}
+    
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function profile_update(Request $request, $id)
+    {
+        
+		$user = User::find($id);
+		
+        $this->validate($request,[
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+		$user->password = Hash::make($request->password);
+		$user->save();
+		
+        return redirect()->back()->with('success', 'Password berhasil di ubah!');
+	}
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- PENDUDUK
     
     public function penduduk()

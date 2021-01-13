@@ -6,10 +6,10 @@
 	<div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('img/user/placeholder.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                <a href="{{ route('profile') }}"><img src="{{ asset('img/user/placeholder.jpg') }}" class="img-circle elevation-2" alt="User Image"></a>
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                <a href="{{ route('profile') }}" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 		<nav class="mt-2">
@@ -123,7 +123,7 @@
 						</li>
 						<li class="nav-item">
 							<a href="{{ route('info') }}" class="nav-link">
-								<i class="fas fa-bullhorn nav-icon mr-2"></i><p>Info</p>
+								<i class="fas fa-info-circle nav-icon mr-2"></i><p>Info</p>
 							</a>
 						</li>
 						<li class="nav-item">

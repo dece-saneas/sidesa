@@ -140,3 +140,10 @@ Route::get('/dashboard/profil-desa', 'SettingController@profile')->name('profile
 Route::put('/dashboard/profil-desa', 'SettingController@profile_update')->name('profile-desa.update');
 
 Route::get('/dashboard/fasilitas', 'SettingController@fasilitas')->name('facilities');
+Route::post('/dashboard/fasilitas/create', 'SettingController@fasilitas_store')->name('facilities.store');
+Route::delete('/dashboard/fasilitas/{id}', 'SettingController@fasilitas_destroy')->name('facilities.destroy');
+
+Route::post('/dashboard/fasilitas/filter', 'SettingController@fasilitas_filter')->name('facilities.filter');
+
+Route::get('/dashboard/profil', 'UserController@profile')->name('profile');
+Route::put('/dashboard/profil/{id}', 'UserController@profile_update')->name('profile.update');

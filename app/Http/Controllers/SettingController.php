@@ -58,7 +58,7 @@ class SettingController extends Controller
 	
 	public function fasilitas()
 	{        
-        $fasilitas = Fasilitas::paginate(10);
+        $fasilitas = Fasilitas::orderBy('type', 'asc')->paginate(10);
         
 		return view('dashboard.fasilitas', ['fasilitas'=> $fasilitas]);
 	}
@@ -100,6 +100,24 @@ class SettingController extends Controller
         ]);
         
         return redirect()->route('visimisi')->with('success', 'Misi berhasil ditambahkan!');
+	}
+    
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function fasilitas_store(Request $request)
+    {
+        
+        $this->validate($request,[
+            'name' => 'required',
+            'category' => 'required',
+        ]);
+        
+        $fasilitas = Fasilitas::create([
+            'type' => $request->category,
+            'name' => $request->name,
+        ]);
+        
+        return redirect()->route('facilities')->with('success', 'Fasilitas berhasil ditambahkan!');
 	}
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -375,6 +393,28 @@ class SettingController extends Controller
         }
         
 	}
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function fasilitas_destroy($id)
+    {
+        $fasilitas = Fasilitas::find($id);
+        $fasilitas->delete();
+        
+        return redirect()->back()->with('success', 'Fasilitas berhasil dihapus!');
+        
+	}
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public function fasilitas_filter(Request $request)
+	{
+        $this->validate($request,[
+            'filter' => 'required',
+        ]);
+        
+        $fasilitas = Fasilitas::where('type', $request->filter)->paginate(10);
+        
+        return view('dashboard.fasilitas', ['fasilitas'=> $fasilitas]);
+	}
     
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -396,7 +436,7 @@ class SettingController extends Controller
         File::delete('img/aparatur/'.$aparatur->image);
         $aparatur->delete();
         
-        return redirect()->back()->with('success', 'Aparatur berhasil dihapus!');
+        return redirect()->route('facilities')->with('success', 'Aparatur berhasil dihapus!');
         
 	}
 }
